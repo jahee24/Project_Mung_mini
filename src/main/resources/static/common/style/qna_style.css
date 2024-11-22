@@ -1,0 +1,209 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    display: flex;
+}
+
+/* 왼쪽 배너 스타일 */
+.sidebar {
+    width: 200px;
+    background: #ffffff;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+}
+
+.sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.sidebar .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar .menu li {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.sidebar .menu li:last-child {
+    border-bottom: none;
+}
+
+.sidebar .menu li a {
+    display: block;
+    text-decoration: none;
+    color: #5cb85c;
+    font-size: 16px;
+    text-align: left;
+}
+
+.sidebar .menu li a:hover {
+    color: #4cae4c;
+}
+
+/* 메인 콘텐츠 스타일 */
+.main-content {
+    margin-left: 220px;
+    padding: 20px;
+    flex: 1;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+}
+
+.add-btn {
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background-color: #4cae4c;
+}
+
+.board {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.question-list {
+    list-style: none;
+    padding: 0;
+}
+
+.question-list li {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.question-list li .title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #5cb85c;
+    cursor: pointer;
+}
+
+.question-list li .content {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+    display: none;
+}
+
+.question-list li .actions {
+    margin-top: 10px;
+}
+
+.question-list li .actions button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.question-list li .actions .edit {
+    background-color: #ffa500;
+    color: white;
+}
+
+.question-list li .actions .delete {
+    background-color: #ff6347;
+    color: white;
+}
+
+.question-list li .actions .comment {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.question-list li:hover .title {
+    color: #4cae4c;
+}
+
+/* 팝업 스타일 */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    width: calc(100% - 40px); /* 화면 크기에 맞게 조정 */
+    max-width: 400px; /* 최대 너비 제한 */
+    box-sizing: border-box; /* 패딩 포함 */
+}
+
+.popup h2 {
+    margin-top: 0;
+}
+
+.popup input,
+.popup textarea,
+.popup button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.popup button {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.popup button:hover {
+    background-color: #4cae4c;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
