@@ -15,4 +15,8 @@ public class IndexController {
         return "menu/resv";
     }
 
+    @GetMapping("/support/qna")
+    public String support() {
+        return "menu/qna";
+    }
 }
