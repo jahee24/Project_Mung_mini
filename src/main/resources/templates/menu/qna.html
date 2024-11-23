@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/mainLayout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,42 +23,43 @@
 </head>
 <body>
     <!-- header- part -->
-    <th:block th:replace="include/header-part :: header-part"></th:block>
+    <div layout:fragment="content">
 
-    <!-- 왼쪽 배너 -->
-    <div class="sidebar">
-        <h2>Support</h2>
-        <ul class="menu">
-            <li><a href="#notice">Notice</a></li>
-            <li><a href="#faq">QnA</a></li>
-            <li><a href="#community">Community</a></li>
-        </ul>
-    </div>
+        <!-- 왼쪽 배너 -->
+        <div class="sidebar">
+            <h2>Support</h2>
+            <ul class="menu">
+                <li><a href="#notice">Notice</a></li>
+                <li><a href="#faq">QnA</a></li>
+                <li><a href="#community">Community</a></li>
+            </ul>
+        </div>
 
-    <!-- 메인 콘텐츠 -->
-    <div class="main-content">
-        <div class="container" id="faq">
-            <div class="header">
-                <h1>자주묻는 질문</h1>
-                <button class="add-btn" id="openPopup">글 작성하기</button>
-            </div>
-            <div class="board">
-                <ul class="question-list" id="questionList">
-                    <!-- 질문 목록 -->
-                </ul>
+        <!-- 메인 콘텐츠 -->
+        <div class="main-content">
+            <div class="container" id="faq">
+                <div class="header">
+                    <h1>자주묻는 질문</h1>
+                    <button class="add-btn" id="openPopup">글 작성하기</button>
+                </div>
+                <div class="board">
+                    <ul class="question-list" id="questionList">
+                        <!-- 질문 목록 -->
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- 팝업 -->
-    <div class="overlay" id="overlay"></div>
-    <div class="popup" id="popup">
-        <h2>질문 등록</h2>
-        <input type="text" id="title" placeholder="제목을 입력하세요" required/>
-        <textarea id="content" rows="5" placeholder="내용을 입력하세요" required></textarea>
-        <button id="submitBtn">등록하기</button>
-    </div>
+        <!-- 팝업 -->
+        <div class="overlay" id="overlay"></div>
+        <div class="popup" id="popup">
+            <h2>질문 등록</h2>
+            <input type="text" id="title" placeholder="제목을 입력하세요" required/>
+            <textarea id="content" rows="5" placeholder="내용을 입력하세요" required></textarea>
+            <button id="submitBtn">등록하기</button>
+        </div>
 
+    </div>
 
 
 </body>

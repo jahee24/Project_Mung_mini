@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
     @GetMapping("/")
     public String index() {
-        return "layout/mainLayout";
+        return "layout/mainPage";
     }
 
     @GetMapping("/resv")
@@ -19,4 +19,17 @@ public class IndexController {
     public String support() {
         return "menu/qna";
     }
+    @GetMapping("/support/notice")
+    public String myPage() {
+        return "menu/mypage";
+    }
+    @GetMapping("/dog/register")
+    public String myPageDogPro() {
+        return "menu/dogRegister";
+    }
+    @GetMapping("/dog/profile")
+    public String myPageDogReg() {
+        return "menu/dogProfile";
+    }
+
 }
