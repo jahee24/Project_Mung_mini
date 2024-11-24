@@ -1,0 +1,235 @@
+/* 기본 변수는 style.css와 동일하게 유지 */
+:root {
+    --primary-green: #4CAF50;
+    --light-green: #8BC34A;
+    --grass-green: #66BB6A;
+    --white: #ffffff;
+    --light-gray: #f5f7f5;
+}
+
+body {
+    background-color: var(--light-gray);
+    padding-top: 90px;
+    font-family: Arial, sans-serif;
+}
+
+.square5_mypage_container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.square5_mypage_welcome {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.square5_mypage_welcome h1 {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.square5_mypage_welcome h2 {
+    color: var(--primary-green);
+    font-size: 1.8rem;
+}
+
+.square5_mypage_content > div {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.square5_mypage_content h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.square5_mypage_content h2 i {
+    color: var(--primary-green);
+}
+
+/* 예약 카드 스타일 */
+.square5_reservation_card {
+    background: var(--light-gray);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.square5_reservation_info p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.square5_reservation_info i {
+    color: var(--primary-green);
+    width: 25px;
+}
+
+.square5_no_reservation {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.square5_no_reservation i {
+    font-size: 3rem;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+/* 반려견 그리드 스타일 */
+.square5_dogs_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.square5_dog_card {
+    background: var(--light-gray);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.square5_dog_image {
+    aspect-ratio: 1;
+    overflow: hidden;
+}
+
+.square5_dog_name {
+    padding: 15px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.square5_add_dog_card {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    transition: all 0.3s ease;
+}
+
+.square5_add_dog_card:hover {
+    border-color: var(--primary-green);
+    background: var(--light-gray);
+}
+
+.square5_add_dog_card a {
+    text-align: center;
+    color: #666;
+    text-decoration: none;
+}
+
+.square5_add_dog_card i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* 리뷰 그리드 스타일 */
+.square5_reviews_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.square5_review_card {
+    background: var(--light-gray);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.square5_review_card:hover {
+    transform: translateY(-5px);
+}
+
+.square5_review_image {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.square5_review_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.square5_review_date {
+    padding: 15px;
+    text-align: center;
+    margin: 0;
+    color: #666;
+}
+
+.square5_add_review_card {
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.square5_add_review_card:hover {
+    border-color: var(--primary-green);
+    background: var(--light-gray);
+}
+
+.square5_add_review_card a {
+    text-align: center;
+    color: #666;
+    text-decoration: none;
+}
+
+.square5_mypage_actions {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-primary {
+    background-color: var(--primary-green);
+    border-color: var(--grass-green);
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--grass-green);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .square5_mypage_container {
+        padding: 0 15px;
+    }
+
+    .square5_mypage_welcome h1 {
+        font-size: 2rem;
+    }
+
+    .square5_mypage_welcome h2 {
+        font-size: 1.5rem;
+    }
+
+    .square5_mypage_content > div {
+        padding: 20px;
+    }
+
+    .square5_dogs_grid, .square5_reviews_grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+} 
