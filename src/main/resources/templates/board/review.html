@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f1f1f1;
+    }
+
+    /* 헤더 스타일 */
+    .square-header {
+      background-color: #fff;
+      border-bottom: 3px solid #4CAF50;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .square-logo img {
+      height: 50px;
+    }
+    .square-main-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+    .square-main-nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    .square-main-nav ul li a:hover {
+      color: #4CAF50;
+    }
+
+    /* 공지사항 스타일 */
+    .notice-section {
+      width: 80%;
+      margin: 2rem auto;
+      background-color: #e8f5e9;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .notice-section h2 {
+      color: #388e3c;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    /* 리뷰 스타일 */
+    .review-section {
+      width: 80%;
+      margin: 2rem auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .review-section h2 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .gallery-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      text-align: center;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .gallery-text {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<header class="square-header">
+  <div class="square-logo">
+    <a href="/">
+      <img src="/images/logo.png" alt="멍 스퀘어 로고">
+    </a>
+  </div>
+  <nav class="square-main-nav">
+    <ul>
+      <li><a href="/about">About</a></li>
+      <li><a href="/mung/resv">Reservation</a></li>
+      <li><a href="/mung/support/notice">Notice</a></li>
+      <li><a href="/signup" class="signup-btn">Sign in</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- 공지사항 섹션 -->
+<div class="notice-section">
+  <h2>공지사항 (관리자 전용 추후 이름 변경)</h2>
+  <ul>
+    <li><a href="#" onclick="openDetailWindow('공지사항 제목 1')">공지사항 제목 112323213213</a></li>
+    <li><a href="#" onclick="openDetailWindow('공지사항 제목 2')">공지사항 제목 2ㅇㄹㅇㄴㄹㅇㄴㄹㅇㄴ</a></li>
+    <li><a href="#" onclick="openDetailWindow('공지사항 제목 3')">공지사항 제목 3ㄹㅇㄴㄹㅇㄴㄹㅇㄴㄹㅇㄴㅇ</a></li>
+  </ul>
+</div>
+
+<!-- 리뷰 섹션 -->
+<div class="review-section">
+  <h2>리뷰 갤러리</h2>
+  <div class="gallery-section">
+    <div class="gallery-item">
+      <img src="/images/notice/image1.jpg" alt="리뷰 1">
+      <div class="gallery-text">리뷰 1</div>
+    </div>
+    <div class="gallery-item">
+      <img src="/images/notice/image2.jpg" alt="리뷰 2">
+      <div class="gallery-text">리뷰 2</div>
+    </div>
+    <div class="gallery-item">
+      <img src="/images/notice/image3.jpg" alt="리뷰 3">
+      <div class="gallery-text">리뷰 3</div>
+    </div>
+    <div class="gallery-item">
+      <img src="/images/notice/image4.jpg" alt="리뷰 4">
+      <div class="gallery-text">리뷰 4</div>
+    </div>
+    <div class="gallery-item">
+      <img src="/images/notice/image5.jpg" alt="리뷰 5">
+      <div class="gallery-text">리뷰 5</div>
+    </div>
+    <div class="gallery-item">
+      <img src="/images/notice/image6.jpg" alt="리뷰 6">
+      <div class="gallery-text">리뷰 6</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openDetailWindow(title) {
+    const url = `/board/detail.html?title=${encodeURIComponent(title)}`;
+    window.open(url, '_blank', 'width=800,height=600');
+  }
+</script>
+</body>
+</html>
