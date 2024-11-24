@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,13 +20,13 @@
 
 <body>
     <!--header fragment-->
-    <div><th:block th:replace="/include/header-part :: header-part"></th:block></div>
+    <th:block th:replace="/include/header-part :: header-part"></th:block>
 
     <!--layout: Content-->
-    <div><th:block layout:fragment="content"></th:block></div>
+    <th:block th:replace="/include/mainContent :: main-content"></th:block>
 
     <!--footer-fragment-->
-    <div><th:block th:replace="/include/footer-part :: footer-part"></th:block></div>
+    <th:block th:replace="/include/footer-part :: footer-part"></th:block>
 
 </body>
 
