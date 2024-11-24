@@ -19,5 +19,4 @@ public class IndexController {
     public String support() {
         return "menu/qna";
     }
-
 }
