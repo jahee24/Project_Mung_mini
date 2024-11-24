@@ -19,17 +19,5 @@ public class IndexController {
     public String support() {
         return "menu/qna";
     }
-    @GetMapping("/support/notice")
-    public String myPage() {
-        return "menu/mypage";
-    }
-    @GetMapping("/dog/register")
-    public String myPageDogPro() {
-        return "menu/dogRegister";
-    }
-    @GetMapping("/dog/profile")
-    public String myPageDogReg() {
-        return "menu/dogProfile";
-    }
 
 }

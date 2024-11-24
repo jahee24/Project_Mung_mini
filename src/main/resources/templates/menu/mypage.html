@@ -20,7 +20,7 @@
         <div class="square5_mypage_container">
             <div class="square5_mypage_welcome">
                 <h1>마이페이지</h1>
-                <h2>안녕하세요, <!--<span th:text="${doglist.dogname}">견주</span>-->님!</h2>
+                <h2>안녕하세요, <span th:each="dog:${dog}"><span th:text="${dog.name}">견주</span></span>님!</h2>
             </div>
 
             <div class="square5_mypage_content">
