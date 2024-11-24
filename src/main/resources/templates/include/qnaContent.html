@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/mainLayout}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,16 +15,11 @@
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=60afe906424b612470250c46b5008b53"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
-    <script src="/mung/common/script/qna_script.js"></script>
     <script src="/mung/common/script/main_script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <link rel="stylesheet" href="/mung/common/style/qna_style.css">
 </head>
 <body>
-    <!-- header- part -->
     <div layout:fragment="content">
-
         <!-- 왼쪽 배너 -->
         <div class="sidebar">
             <h2>Support</h2>
@@ -58,9 +53,6 @@
             <textarea id="content" rows="5" placeholder="내용을 입력하세요" required></textarea>
             <button id="submitBtn">등록하기</button>
         </div>
-
     </div>
-
-
 </body>
 </html>

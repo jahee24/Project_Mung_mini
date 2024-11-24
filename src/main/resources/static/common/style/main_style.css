@@ -42,8 +42,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    z-index: 1000;
+    width: calc(100% - 10px);
+    z-index: 998;
     height: 80px;
     background-color: #ffffff;
 }
@@ -157,21 +157,7 @@
     color: #007bff;
 }
 
-.square-banner {
-    width: 100%;
-    padding: 0 20px;
-    box-sizing: border-box;
-    margin: 0 auto;
-    overflow: hidden;
-    position: relative;
-}
 
-.square-carousel {
-    width: 100%;
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-}
 
 .square-carousel-inner {
     width: 100%;
@@ -252,10 +238,12 @@
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     padding-top: 90px;
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    height: 100%;
+    position: relative;
+    overflow-y: visible;
 }
 
 .square-slogan-container {
@@ -382,6 +370,7 @@ html, body {
     max-height: 80vh; /* 뷰포트 높이의 80%로 제한 */
     margin-bottom: 20px;
     overflow: hidden;
+    margin-top: 80px;
 }
 
 .carousel-inner {
@@ -995,4 +984,23 @@ html, body {
     .social-links {
         justify-content: center;
     }
+}
+
+/* 스크롤바 스타일 추가 */
+::-webkit-scrollbar {
+    width: 10px;
+    z-index: 999;  /* 스크롤바의 z-index 값을 높게 설정 */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--grass-green);
 }
