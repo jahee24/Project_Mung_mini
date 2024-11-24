@@ -18,11 +18,11 @@
 
     <script src="/mung/common/script/main_script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
 </head>
-
 <body>
-    <div layout:fragment="content">
-
+    <div th:fragment="main-content">
         <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
@@ -126,69 +126,34 @@
                             <div class="comnotice-item">
                                 <figure><img src="/mung/images/comnotice/image_1.png" alt="반려견 관리"></figure>
                                 <h3>반려견 관리</h3>
-                                <p>반려견에게서 눈을 떼지 말고<br>항상 곁에서 지켜봐 주세요</p>
+                                <p>반려견에게서<br>눈을 떼지 말고<br>항상 곁에서<br>지켜봐 주세요</p>
                             </div>
                         </li>
                         <li>
                             <div class="comnotice-item">
                                 <figure><img src="/mung/images/comnotice/image_2.png" alt="배변 처리"></figure>
                                 <h3>배변 처리</h3>
-                                <p>깨끗한 환경을 위해<br>배변 처리는 바로 해주세요</p>
+                                <p>깨끗한 환경을 위해<br>배변 처리는<br>바로 해주세요</p>
                             </div>
                         </li>
                         <li>
                             <div class="comnotice-item">
                                 <figure><img src="/mung/images/comnotice/image_3.png" alt="음식물 제한"></figure>
                                 <h3>음식물 제한</h3>
-                                <p>운동장 내 간식/음식물<br>섭취를 제한합니다</p>
+                                <p>운동장 내<br>간식/음식물 섭취를<br>제한합니다</p>
                             </div>
                         </li>
                         <li>
                             <div class="comnotice-item">
                                 <figure><img src="/mung/images/comnotice/image_4.png" alt="시설 보호"></figure>
                                 <h3>시설 보호</h3>
-                                <p>시설물을 소중히 사용하여<br>모두가 편히 이용하세요</p>
+                                <p>시설물을<br>소중히 사용해 주세요</p>
                             </div>
                         </li>
                     </ul>
                 </div>
             </section>
         </div>
-
-        <div class="square-footer-container">
-            <footer class="square-footer"></footer>
-            <div class="footer-content">
-                <div class="footer-section">
-                    <img src="/mung/images/logo.png" alt="멍스퀘어 로고" class="footer-logo">
-                    <h3>멍스퀘어 (Mung-Square)</h3>
-                </div>
-                <div class="footer-section">
-                    <h4>회사 정보</h4>
-                    <p>사업자등록번호: 123-45-67890</p>
-                    <p>대표: 홍길동</p>
-                    <p>주소: 서울특별시 강남구 테헤란로 123</p>
-                </div>
-                <div class="footer-section">
-                    <h4>고객 지원</h4>
-                    <p>이메일: support@mung-square.com</p>
-                    <p>전화: 02-1234-5678</p>
-                    <p>운영시간: 평일 09:00 - 18:00</p>
-                </div>
-                <div class="footer-section">
-                    <h4>SNS</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 멍스퀘어. All rights reserved.</p>
-            </div>
-            </footer>
-        </div>
-
         <script>
             var mapContainer = document.getElementById('kakaoMap'),
                 mapOption = {
@@ -326,8 +291,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </body>
-
 </html>

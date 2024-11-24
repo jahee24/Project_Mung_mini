@@ -7,16 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
     @GetMapping("/")
     public String index() {
-        return "layout/mainPage";
+        return "layout/indexLayout";
     }
 
-    @GetMapping("/resv")
-    public String resv() {
-        return "menu/resv";
-    }
-
-    @GetMapping("/support/qna")
-    public String support() {
-        return "menu/qna";
+    @GetMapping("/about")
+    public String about() {
+        return "include/aboutContent";
     }
 }
