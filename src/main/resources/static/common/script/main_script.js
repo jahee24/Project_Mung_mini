@@ -19,8 +19,10 @@ function init() {
 }
 
 function initCarousel() {
-    const carousel = document.querySelector('.carousel');
-    const items = carousel.querySelectorAll('.carousel-item');
+    const carousel = document.querySelector('.square-carousel');
+    if (!carousel) return; // carousel이 없으면 함수 종료
+
+    const items = carousel.querySelectorAll('.square-carousel-item');
     const prevBtn = carousel.querySelector('.prev');
     const nextBtn = carousel.querySelector('.next');
     const dots = carousel.querySelectorAll('.dot');
@@ -28,7 +30,7 @@ function initCarousel() {
 
     // 이미지 전환 함수
     function showImage(index, direction = 'next') {
-        const currentItem = carousel.querySelector('.carousel-item.active');
+        const currentItem = carousel.querySelector('.square-carousel-item.active');
         const newItem = items[index];
         
         // 현재 활성 아이템에서 active 클래스 제거
@@ -91,18 +93,30 @@ function initCarousel() {
 }
 
 function initSlidingText() {
-    const slidingText = document.querySelector('.sliding-text');
-    const textWidth = slidingText.offsetWidth;
-    const containerWidth = document.querySelector('.slogan-container').offsetWidth;
-    
-    // 컨테이너를 채우기 위해 필요한 만큼 span 요소 복제
-    const spans = slidingText.querySelectorAll('span');
-    const spansNeeded = Math.ceil((containerWidth * 2) / textWidth);
-    
-    // 이미 2개의 span이 있으므로, 필요한 만큼만 추가
-    for (let i = 2; i < spansNeeded; i++) {
-        const clone = spans[0].cloneNode(true);
-        slidingText.appendChild(clone);
+    const container = document.querySelector('.square-sliding-text');
+    if (!container) return; // 컨테이너가 없으면 함수 종료
+
+    // 원본 텍스트 요소들 가져오기
+    const textElements = container.querySelectorAll('span');
+    if (!textElements.length) return; // 텍스트 요소가 없으면 종료
+
+    try {
+        // 컨테이너의 너비 계산
+        const containerWidth = container.offsetWidth;
+        if (!containerWidth) return; // 너비가 0이면 종료
+
+        // 텍스트 복제 및 애니메이션 설정
+        const originalContent = container.innerHTML;
+        container.innerHTML = originalContent + originalContent; // 텍스트 복제
+
+        // 애니메이션 속도 계산 (텍스트 길이에 따라 조정)
+        const totalWidth = container.scrollWidth;
+        const duration = Math.max(20, totalWidth / 50); // 최소 20초, 텍스트 길이에 따라 증가
+
+        // 애니메이션 스타일 설정
+        container.style.animation = `slide ${duration}s linear infinite`;
+    } catch (error) {
+        console.warn('Sliding text initialization failed:', error);
     }
 }
 
@@ -171,12 +185,14 @@ function initNavigation() {
 }
 
 // 유틸리티 함수들
-const utils = {
-    // 예시 함수
-    formatDate: (date) => {
-        return date.toLocaleDateString();
-    }
-};
+if (typeof utils === 'undefined') {
+    const utils = {
+        // 예시 함수
+        formatDate: (date) => {
+            return date.toLocaleDateString();
+        }
+    };
+}
 
 // 로그인/회원가입 폼 초기화
 function initAuthForms() {

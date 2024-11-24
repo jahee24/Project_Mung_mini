@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,8 +13,8 @@
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=60afe906424b612470250c46b5008b53"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
-    <script src="/mung/common/script/main_script.js" defer></script>
-    <th:block layout:fragment="script"></th:block>
+
+    <script src="/mung/common/script/main_script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" as="style" crossorigin
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
@@ -23,13 +22,13 @@
 
 <body>
     <!--header fragment-->
-    <div><th:block th:replace="/include/header-part :: header-part"></th:block></div>
+    <th:block th:replace="/include/header-part :: header-part"></th:block>
 
     <!--layout: Content-->
-    <div><th:block layout:fragment="content"></th:block></div>
+    <th:block th:replace="/include/mainContent :: main-content"></th:block>
 
     <!--footer-fragment-->
-    <div><th:block th:replace="/include/footer-part :: footer-part"></th:block></div>
+    <th:block th:replace="/include/footer-part :: footer-part"></th:block>
 
 </body>
 
