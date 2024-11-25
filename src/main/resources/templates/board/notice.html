@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자 공지사항 & 리뷰</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    /* 헤더 스타일 */
+    .square-header {
+      background-color: #fff;
+      border-bottom: 3px solid #4CAF50;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .square-logo img {
+      height: 50px;
+    }
+    .square-main-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+    .square-main-nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    .square-main-nav ul li a:hover {
+      color: #4CAF50;
+    }
+
+    /* 공지사항 및 리뷰 섹션 */
+    .section-container {
+      width: 80%;
+      margin: 2rem auto;
+    }
+    .notice-section {
+      background-color: #e8f5e9;
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .review-section {
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .section-header {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #333;
+      margin-bottom: 2rem;
+    }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      padding: 1.5rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+    }
+    .card img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 1rem;
+    }
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+    .card-description {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+    .card-author {
+      font-size: 0.8rem;
+      color: #999;
+    }
+
+    /* 검색바 스타일 */
+    .search-bar {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .search-bar input {
+      padding: 0.5rem;
+      width: 70%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 0.5rem;
+    }
+    .search-bar button {
+      padding: 0.5rem 1rem;
+      background-color: #4CAF50;
+      border: none;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .search-bar button:hover {
+      background-color: #388E3C;
+    }
+
+    /* 페이징 스타일 */
+    .pagination {
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .pagination button {
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      padding: 0.5rem 1rem;
+      margin: 0 0.3rem;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .pagination button.active {
+      background-color: #388E3C;
+      font-weight: bold;
+    }
+    .pagination button:hover {
+      background-color: #66BB6A;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<header class="square-header">
+  <div class="square-logo">
+    <a href="/">
+      <img src="/images/logo.png" alt="멍 스퀘어 로고">
+    </a>
+  </div>
+  <nav class="square-main-nav">
+    <ul>
+      <li><a href="/about">About</a></li>
+      <li><a href="/mung/resv">Reservation</a></li>
+      <li><a href="/mung/support/notice">Notice</a></li>
+      <li><a href="/signup" class="signup-btn">Sign in</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- 공지사항 섹션 -->
+<div class="section-container">
+  <div class="notice-section">
+    <div class="section-header">관리자 공지사항</div>
+    <div class="card-container">
+      <div class="card" onclick="openDetailWindow('공지사항 제목 1')">
+        <img src="/images/icons/notice-icon.png" alt="공지사항 아이콘">
+        <div class="card-title">공지사항 제목 1</div>
+        <div class="card-description">공지사항 요약 설명 1</div>
+      </div>
+      <div class="card" onclick="openDetailWindow('공지사항 제목 2')">
+        <img src="/images/icons/notice-icon.png" alt="공지사항 아이콘">
+        <div class="card-title">공지사항 제목 2</div>
+        <div class="card-description">공지사항 요약 설명 2</div>
+      </div>
+      <div class="card" onclick="openDetailWindow('공지사항 제목 3')">
+        <img src="/images/icons/notice-icon.png" alt="공지사항 아이콘">
+        <div class="card-title">공지사항 제목 3</div>
+        <div class="card-description">공지사항 요약 설명 3</div>
+      </div>
+      <div class="card" onclick="openDetailWindow('공지사항 제목 4')">
+        <img src="/images/icons/notice-icon.png" alt="공지사항 아이콘">
+        <div class="card-title">공지사항 제목 4</div>
+        <div class="card-description">공지사항 요약 설명 4</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 리뷰 갤러리 섹션 -->
+<div class="section-container">
+  <div class="review-section">
+    <div class="section-header">리뷰 갤러리</div>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="검색어를 입력하세요">
+      <button onclick="searchReviews()">검색</button>
+    </div>
+    <div id="review-container" class="card-container">
+      <!-- 리뷰 내용은 JavaScript로 동적으로 추가 -->
+    </div>
+    <div class="pagination" id="pagination"></div>
+  </div>
+</div>
+
+<script>
+  function openDetailWindow(title) {
+    const url = `/board/detail.html?title=${encodeURIComponent(title)}`;
+    window.open(url, '_blank', 'width=800,height=600');
+  }
+
+  function openReviewWindow(review) {
+    const url = `/board/review_detail.html?review=${encodeURIComponent(review)}`;
+    window.open(url, '_blank', 'width=800,height=600');
+  }
+
+  const reviews = Array.from({ length: 20 }, (_, i) => ({
+    title: `리뷰 ${i + 1}`,
+    description: `리뷰 요약 설명 ${i + 1}`,
+    author: `작성자 ${i + 1}`,
+    image: `/images/notice/image${(i % 6) + 1}.jpg`
+  }));
+
+  const reviewsPerPage = 8;
+  let currentPage = 1;
+
+  function renderReviews(page) {
+    currentPage = page;
+    const startIndex = (page - 1) * reviewsPerPage;
+    const endIndex = startIndex + reviewsPerPage;
+    const paginatedReviews = reviews.slice(startIndex, endIndex);
+
+    const reviewContainer = document.getElementById('review-container');
+    reviewContainer.innerHTML = '';
+    paginatedReviews.forEach(review => {
+      const card = `
+                <div class="card" onclick="openReviewWindow('${review.title}')">
+                    <img src="${review.image}" alt="${review.title}">
+                    <div class="card-title">${review.title}</div>
+                    <div class="card-description">${review.description}</div>
+                    <div class="card-author">작성자: ${review.author}</div>
+                </div>
+            `;
+      reviewContainer.innerHTML += card;
+    });
+
+    renderPagination();
+  }
+
+  function renderPagination() {
+    const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+    const pagination = document.getElementById('pagination');
+    pagination.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+      const button = document.createElement('button');
+      button.textContent = i;
+      button.className = i === currentPage ? 'active' : '';
+      button.onclick = () => renderReviews(i);
+      pagination.appendChild(button);
+    }
+  }
+
+  function searchReviews() {
+    const searchTerm = document.getElementById('search-input').value.toLowerCase();
+    const filteredReviews = reviews.filter(review =>
+            review.title.toLowerCase().includes(searchTerm) ||
+            review.description.toLowerCase().includes(searchTerm) ||
+            review.author.toLowerCase().includes(searchTerm)
+    );
+    renderFilteredReviews(filteredReviews);
+  }
+
+  function renderFilteredReviews(filteredReviews) {
+    const reviewContainer = document.getElementById('review-container');
+    reviewContainer.innerHTML = '';
+    filteredReviews.forEach(review => {
+      const card = `
+                <div class="card" onclick="openReviewWindow('${review.title}')">
+                    <img src="${review.image}" alt="${review.title}">
+                    <div class="card-title">${review.title}</div>
+                    <div class="card-description">${review.description}</div>
+                    <div class="card-author">작성자: ${review.author}</div>
+                </div>
+            `;
+      reviewContainer.innerHTML += card;
+    });
+  }
+
+  renderReviews(1);
+</script>
+</body>
+</html>

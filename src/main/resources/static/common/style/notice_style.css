@@ -1,0 +1,67 @@
+/* 공통 헤더 스타일 */
+header {
+    background-color: #4CAF50; /* 초록색 배경 */
+    color: white; /* 텍스트 흰색 */
+    padding: 1rem; /* 내부 여백 */
+    display: flex; /* 플렉스 레이아웃 */
+    justify-content: space-between; /* 로고와 메뉴를 양쪽 끝으로 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+header .logo {
+    font-size: 1.5rem; /* 로고 크기 */
+    font-weight: bold; /* 글씨 두께 */
+    text-decoration: none; /* 밑줄 제거 */
+    color: white; /* 로고 텍스트 색상 */
+}
+
+header nav ul {
+    list-style: none; /* 불릿 포인트 제거 */
+    margin: 0; /* 외부 여백 제거 */
+    padding: 0; /* 내부 여백 제거 */
+    display: flex; /* 플렉스 레이아웃 */
+    gap: 1rem; /* 메뉴 간 간격 */
+}
+
+header nav ul li a {
+    text-decoration: none; /* 링크 밑줄 제거 */
+    color: white; /* 텍스트 흰색 */
+    font-size: 1rem; /* 텍스트 크기 */
+}
+
+header nav ul li a:hover {
+    color: #FFD700; /* 호버 시 색상 변경 */
+}
+
+/* 메인 콘텐츠 스타일 */
+main {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+main h1 {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+}
+
+main p {
+    font-size: 1.2rem;
+    color: #555;
+    text-align: center;
+}
+
+/* 푸터 스타일 */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #f1f1f1;
+    color: #777;
+    margin-top: 2rem;
+}

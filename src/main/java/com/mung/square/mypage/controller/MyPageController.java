@@ -17,13 +17,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MyPageController {
     private final MyPageService service;
-    @GetMapping("/support/notice")
+    @GetMapping("/mypage")
     public String myPage(Model model,String id) {
         UserDTO user = service.getUser(id);
         List<DogDTO> dog = service.getDog(id);
         model.addAttribute("user", user);
         model.addAttribute("dog", dog);
-        return "menu/mypage";
+        return "include/mypageContent";
     }
     @GetMapping("/dog/register")
     public String myPageDogPro() {
