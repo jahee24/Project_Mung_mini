@@ -5,7 +5,6 @@ import com.mung.square.dto.UserDTO;
 import com.mung.square.mypage.dao.MyPageDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -18,6 +17,4 @@ public class MyPageServiceImpl implements MyPageService {
     public List<DogDTO> getDog(String id){
         return myPageDAO.getDog(id);
     };
-
-
 }

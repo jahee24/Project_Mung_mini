@@ -22,6 +22,4 @@ public class MyPageDAOImple implements MyPageDAO {
     public List<DogDTO> getDog(String id) {
         return mapper.getdog(id);
     }
-
-
 }
