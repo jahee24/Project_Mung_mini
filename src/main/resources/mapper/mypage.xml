@@ -10,6 +10,5 @@
     </select>
     <select id="getdog" parameterType="String" resultType="dog">
         select * from dog where user_id = #{id}
-
     </select>
 </mapper>

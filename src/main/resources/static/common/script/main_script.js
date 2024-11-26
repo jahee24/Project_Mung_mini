@@ -236,7 +236,6 @@ function setActiveTab(activeTab, inactiveTab) {
 }
 
 function handleFormSubmit(e) {
-    e.preventDefault();
     // TODO: 실제 폼 제출 로직 구현
     console.log('Form submitted:', e.target.id);
 }
