@@ -19,6 +19,7 @@ public class MapController {
         List<MapDTO> branchlist = mapservice.maplist();
         model.addAttribute("branchlist", branchlist);
         System.out.println(branchlist);
+        model.addAttribute("branchlist", branchlist);
         return "redirect:/";
     }
 }
