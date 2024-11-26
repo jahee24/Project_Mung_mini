@@ -43,11 +43,11 @@
                                 <li><a href="/mung/support/qna">Q&A</a></li>
                             </ul>
                         </li>
-                        <!--<li><a href="/signup" class="signup-btn" data-bs-toggle="offcanvas"
+                        <li><a href="/signup" class="signup-btn" data-bs-toggle="offcanvas"
                                data-bs-target="#offcanvasRight"
-                               aria-controls="offcanvasRight">Sign in</a></li>-->
-                        <li class="square-has-submenu"><a href="/">Logout</a></li>
-                        <li><a href="/mung/mypage" class="signup-btn">My page</a></li>
+                               aria-controls="offcanvasRight"  th:if="${session.user==null}">Sign in</a></li>
+                        <li class="square-has-submenu" th:unless="${session.user==null}"><a href="/mung/logout">Logout</a></li>
+                        <li th:unless="${session.user==null}"><a href="/mung/mypage" class="signup-btn">My page</a></li>
                     </ul>
                 </nav>
             </header>
@@ -73,16 +73,16 @@
                 <!-- Pills content -->
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                        <form>
+                        <form name="login" action="/mung/login" method="post" >
                             <!-- Email input -->
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="email" id="loginName" class="form-control"/>
+                                <input type="email" name="email" id="loginName" class="form-control"/>
                                 <label class="form-label" for="loginName">Email or username</label>
                             </div>
 
                             <!-- Password input -->
                             <div data-mdb-input-init class="form-outline mb-4">
-                                <input type="password" id="loginPassword" class="form-control"/>
+                                <input type="password" name="password" id="loginPassword" class="form-control"/>
                                 <label class="form-label" for="loginPassword">Password</label>
                             </div>
 
@@ -115,7 +115,7 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                        <form>
+                        <form name="register" action="/mung/register" method="post">
                             <!-- Name input -->
                             <div data-mdb-input-init class="form-outline mb-4">
                                 <input type="text" id="registerName" class="form-control"/>
