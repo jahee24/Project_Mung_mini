@@ -410,50 +410,47 @@ html, body {
     align-items: center;
 }
 
-/* 모달 크기 조정을 위한 스타일 */
-.modal-xl {
-    max-width: 60vw !important;
+.modal-content custom-modal{
+    width: 80vw;
+    height: 50vh;
 }
 
-.custom-modal {
-    height: 60vh;
+.modal-header {
+    background-color: var(--light-gray);
+    border-bottom: 1px solid var(--grass-green);
 }
 
-/* 모바일 대응을 위한 미디어 쿼리 */
-@media (max-width: 768px) {
-    .modal-xl {
-        max-width: 90vw !important;
-    }
+.modal-title {
+    font-size: 1.8rem;
+    font-weight: bold;
 }
 
-/* 모달 내부 스타일링 */
+.modal-body {
+    padding: 20px;
+    background-color: var(--white);
+}
+
 .location-info-container {
     display: flex;
-    gap: 20px;
+    gap: 50px;
     padding: 15px;
 }
 
-.location-image {
-    flex: 0 0 40%;
-    max-width: 40%;
-}
-
-.location-image img {
-    width: 100%;
+.location-image img{
+    width: 300px;
     height: 300px;
     object-fit: cover;
     border-radius: 8px;
 }
 
-.location-details {
-    flex: 1;
-    padding: 10px;
+.location-details{
+    align-content: center;
 }
 
 .location-details h5 {
     margin-bottom: 20px;
     font-size: 1.5rem;
-    color: #333;
+    color: var(--primary-green);
 }
 
 .location-details p {
@@ -465,26 +462,22 @@ html, body {
 .modal-footer {
     justify-content: flex-end;
     padding: 15px;
+    background-color: var(--light-gray);
 }
 
 .modal-footer .btn-primary {
     padding: 10px 20px;
     font-size: 1.1rem;
+    background-color: var(--primary-green);
+    border-color: var(--grass-green);
+    transition: all 0.3s ease;
 }
 
-/* 모달 반응형 스타일 */
-@media (max-width: 768px) {
-    .location-info-container {
-        flex-direction: column;
-    }
-
-    .location-image {
-        max-width: 100%;
-    }
-
-    .location-image img {
-        height: 200px;
-    }
+.modal-footer .btn-primary:hover {
+    background-color: var(--grass-green);
+    border-color: lightgreen;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
 }
 
 .square-content-block img {
