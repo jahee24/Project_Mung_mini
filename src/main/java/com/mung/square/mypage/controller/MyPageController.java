@@ -7,29 +7,30 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
 
 @Controller
-//@RequestMapping("/mypage")
+@RequestMapping("/mypage")
 @RequiredArgsConstructor
+@SessionAttributes({"user", "dog"})
 public class MyPageController {
     private final MyPageService service;
-    @GetMapping("/support/notice")
-    public String myPage(Model model,String id) {
-        UserDTO user = service.getUser(id);
-        List<DogDTO> dog = service.getDog(id);
-        model.addAttribute("user", user);
+    @GetMapping("/")
+    public String myPage(@ModelAttribute("user") UserDTO user,Model model) {
+        List<DogDTO> dog = service.getDog(user.getEmail());
         model.addAttribute("dog", dog);
-        return "menu/mypage";
+        return "include/mypageContent";
     }
-    @GetMapping("/dog/register")
+    @GetMapping("/dogRegister")
     public String myPageDogPro() {
         return "menu/dogRegister";
     }
-    @GetMapping("/dog/profile")
+    @GetMapping("/dogProfile")
     public String myPageDogReg() {
         return "menu/dogProfile";
     }

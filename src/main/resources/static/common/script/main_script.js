@@ -93,31 +93,28 @@ function initCarousel() {
 }
 
 function initSlidingText() {
-    const container = document.querySelector('.square-sliding-text');
-    if (!container) return; // 컨테이너가 없으면 함수 종료
+    const containers = document.querySelectorAll('.square-sliding-text');
+    containers.forEach(container => {
+        if (!container) return;
 
-    // 원본 텍스트 요소들 가져오기
-    const textElements = container.querySelectorAll('span');
-    if (!textElements.length) return; // 텍스트 요소가 없으면 종료
+        const textElements = container.querySelectorAll('span');
+        if (!textElements.length) return;
 
-    try {
-        // 컨테이너의 너비 계산
-        const containerWidth = container.offsetWidth;
-        if (!containerWidth) return; // 너비가 0이면 종료
+        try {
+            const containerWidth = container.offsetWidth;
+            if (!containerWidth) return;
 
-        // 텍스트 복제 및 애니메이션 설정
-        const originalContent = container.innerHTML;
-        container.innerHTML = originalContent + originalContent; // 텍스트 복제
+            const originalContent = container.innerHTML;
+            container.innerHTML = originalContent + originalContent;
 
-        // 애니메이션 속도 계산 (텍스트 길이에 따라 조정)
-        const totalWidth = container.scrollWidth;
-        const duration = Math.max(20, totalWidth / 50); // 최소 20초, 텍스트 길이에 따라 증가
+            const totalWidth = container.scrollWidth;
+            const duration = Math.max(20, totalWidth / 50);
 
-        // 애니메이션 스타일 설정
-        container.style.animation = `slide ${duration}s linear infinite`;
-    } catch (error) {
-        console.warn('Sliding text initialization failed:', error);
-    }
+            container.style.animation = `slide ${duration}s linear infinite`;
+        } catch (error) {
+            console.warn('Sliding text initialization failed:', error);
+        }
+    });
 }
 
 function initScrollAnimation() {
@@ -239,7 +236,6 @@ function setActiveTab(activeTab, inactiveTab) {
 }
 
 function handleFormSubmit(e) {
-    e.preventDefault();
     // TODO: 실제 폼 제출 로직 구현
     console.log('Form submitted:', e.target.id);
 }
