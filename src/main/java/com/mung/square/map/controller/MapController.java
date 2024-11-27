@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -15,11 +16,10 @@ public class MapController {
     private final MapService mapservice;
 
     @GetMapping("/map")
-    public String branchlist(Model model) {
+    @ResponseBody
+    public List<MapDTO> branchlist() {
         List<MapDTO> branchlist = mapservice.maplist();
-        model.addAttribute("branchlist", branchlist);
         System.out.println(branchlist);
-        model.addAttribute("branchlist", branchlist);
-        return "redirect:/";
+        return branchlist;
     }
 }
