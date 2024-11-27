@@ -1,67 +1,161 @@
-/* 공통 헤더 스타일 */
-header {
-    background-color: #4CAF50; /* 초록색 배경 */
-    color: white; /* 텍스트 흰색 */
-    padding: 1rem; /* 내부 여백 */
-    display: flex; /* 플렉스 레이아웃 */
-    justify-content: space-between; /* 로고와 메뉴를 양쪽 끝으로 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
+/* 기본 설정 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+/*헤더 파트 높이 간격*/
+.notice-section-container {
+    margin-top: 100px; /* 헤더의 높이만큼 여백 추가 */
 }
 
-header .logo {
-    font-size: 1.5rem; /* 로고 크기 */
-    font-weight: bold; /* 글씨 두께 */
-    text-decoration: none; /* 밑줄 제거 */
-    color: white; /* 로고 텍스트 색상 */
+/* 카드 컨테이너 배치 */
+.notice-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 250px;
+    justify-content: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+
 }
 
-header nav ul {
-    list-style: none; /* 불릿 포인트 제거 */
-    margin: 0; /* 외부 여백 제거 */
-    padding: 0; /* 내부 여백 제거 */
-    display: flex; /* 플렉스 레이아웃 */
-    gap: 1rem; /* 메뉴 간 간격 */
+/* 카드 기본 스타일 */
+.notice-container-wrapper {
+    position: relative;
+    width: 220px;
+    height: 310px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    transform-style: preserve-3d; /* 3D 회전 효과 */
+    perspective: 1500px; /* 입체감 */
 }
 
-header nav ul li a {
-    text-decoration: none; /* 링크 밑줄 제거 */
-    color: white; /* 텍스트 흰색 */
-    font-size: 1rem; /* 텍스트 크기 */
+/* 마우스 오버 시 확대 */
+.notice-container-wrapper:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
-header nav ul li a:hover {
-    color: #FFD700; /* 호버 시 색상 변경 */
+
+/* 오버레이 스타일 */
+.notice-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.4) 10%, /* 중심부 밝기 */
+            rgba(255, 219, 112, 0.2) 30%, /* 부드러운 노란빛 */
+            transparent 70% /* 바깥은 투명 */
+    );
+    opacity: 0; /* 기본적으로 숨김 */
+    pointer-events: none; /* 마우스 이벤트 방해하지 않음 */
+    transition: opacity 0.4s ease-in-out;
 }
 
-/* 메인 콘텐츠 스타일 */
-main {
+
+/* 마우스 오버 시 오버레이 활성화 */
+.notice-container-wrapper:hover .notice-overlay {
+    opacity: 1;
+
+}
+
+/* 카드 본문 스타일 */
+.notice-card {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-size: cover; /* 카드 크기에 비율을 유지하며 채우기 */
+    background-position: center; /* 이미지의 중심을 카드 중심에 맞춤 */
+    background-repeat: no-repeat; /* 반복 방지 */
+}
+
+/*카드 이펙트*/
+.notice-container-wrapper {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.6s ease-in-out, box-shadow 0.6s ease-in-out;
+    transform-style: preserve-3d; /* 3D 회전 효과 */
+    perspective: 1500px; /* 입체감 */
+    will-change: transform; /* GPU 가속 */
+}
+
+
+
+/*동적 사이즈 조절*/
+@media (max-width: 768px) {
+    .notice-container-wrapper {
+        width: 200px; /* 작은 화면에서 크기를 줄임 */
+        height: 280px;
+    }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+/* 검색바 스타일 */
+.notice-search-bar {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.notice-search-bar input {
+    padding: 0.5rem;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+}
+
+.notice-search-bar button {
+    padding: 0.5rem 1rem;
+    background-color: #4CAF50;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.notice-search-bar button:hover {
+    background-color: #388E3C;
+}
+
+/* 페이지네이션 스타일 */
+.notice-pagination {
+    text-align: center;
     margin-top: 2rem;
-    padding: 2rem;
-    background: white;
-    border-radius: 8px;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-main h1 {
-    font-size: 2rem;
-    color: #333;
-    text-align: center;
+.notice-pagination button {
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.5rem 1rem;
+    margin: 0 0.3rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9rem;
 }
 
-main p {
-    font-size: 1.2rem;
-    color: #555;
-    text-align: center;
+.notice-pagination button.active {
+    background-color: #388E3C;
+    font-weight: bold;
 }
 
-/* 푸터 스타일 */
-footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #f1f1f1;
-    color: #777;
-    margin-top: 2rem;
+.notice-pagination button:hover {
+    background-color: #66BB6A;
 }
