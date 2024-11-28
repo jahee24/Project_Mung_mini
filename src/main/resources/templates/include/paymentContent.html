@@ -1,66 +1,57 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/mainLayout}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>멍 스퀘어</title>
-    <link rel="icon" href="/mung/images/logo.png">
-    <link rel="stylesheet" href="/mung/common/style/main_style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
-    <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=60afe906424b612470250c46b5008b53">
-        <script src="/mung/common/script/main_script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" as="style" crossorigin
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/mung/common/style/payment_style.css">
+  <title>결제/주문 정보</title>
 </head>
 <body>
-    <div th:fragment="content">
-        <div>
-            <h2>카카오페이연습</h2>
-            <form id="payInfo">
-                <input type="text" name="ordId" value="20240210">
-                <input type="text" name="userId" value="한장">
-                <input type="text" name="itemNm" value="휴지">
-                <input type="text" name="quantity" value="3">
-                <input type="text" name="itemAmt" value="1004">
-                <input type="text" name="freeAmt" value="0">
-                <button id="submitBtn" type="button">결제</button>
-            </form>
-        </div>
 
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-        <!-- jQuery -->
-
-        <script>
-            $(document).ready(function () {
-                $("#submitBtn").click(function () {
-                    var formData = $("#payInfo").serialize();
-
-                    $.ajax({
-                        url: "/mung/payment/kakaopay",
-                        data: formData,
-                        dataType: "json",
-                        type: "POST",
-                        success: function (result) {
-                            window.open(result.next_redirect_pc_url, "kakaopay_popup", "width=500, height=600", top=100, left=100)
-                        },
-                        error: function (error) {
-                            console.log("결제 실패");
-                            console.log(error);
-                        },
-                        complete: function (xhr, status) {
-                            console.log("Request completed with status: " + status)
-                        }
-                    })
-                })
-            })
-        </script>
+<div class="order-content-container" layout:fragment="content">
+  <h2 class="order-title">주문 정보 확인</h2>
+  <div class="order-info-card">
+    <div class="order-info-item">
+      <span class="order-info-label">주문번호:</span>
+      <span class="order-info-value">123456789</span>
     </div>
+    <div class="order-info-item">
+      <span class="order-info-label">회원 이름:</span>
+      <span class="order-info-value">김철수</span>
+    </div>
+    <div class="order-info-item">
+      <span class="order-info-label">예약자:</span>
+      <span class="order-info-value">박영희</span>
+    </div>
+    <div class="order-info-item">
+      <span class="order-info-label">예약자 번호:</span>
+      <span class="order-info-value">010-1234-5678</span>
+    </div>
+    <div class="order-info-item">
+      <span class="order-info-label">Branch 이름:</span>
+      <span class="order-info-value">강남점</span>
+    </div>
+    <div class="order-info-item">
+      <span class="order-info-label">금액:</span>
+      <span class="order-info-value">₩150,000</span>
+    </div>
+    <div class="order-info-item">
+      <span class="order-info-label">예약 날짜:</span>
+      <span class="order-info-value">2024년 12월 25일</span>
+    </div>
+    <div class="order-info-item">
+      <span class="order-info-label">예약 받은 시작 시간:</span>
+      <span class="order-info-value">14:00</span>
+    </div>
+    <div class="order-info-item">
+      <span class="order-info-label">예약 받은 종료 시간:</span>
+      <span class="order-info-value">16:00</span>
+    </div>
+  </div>
+  <button class="btn-primary confirm-button">결제하기</button>
+</div>
 </body>
 </html>
