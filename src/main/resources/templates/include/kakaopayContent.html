@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{include/mainLayout}">
+      layout:decorate="~{layout/mainLayout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +20,7 @@
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
 </head>
 <body>
+<div layout:fragment="content">
     <div>
         <h2>카카오페이연습</h2>
         <button type="button" id="btn-pay-ready" value="카카오페이 결제"></button>
@@ -32,7 +33,7 @@
         $(document).ready(function () {
             $("#btn-pay-ready").click(function () {
                 let data = {
-                    name : "상품명",
+                    name: "상품명",
                     totalPrice: 10000
                 };
 
@@ -48,6 +49,6 @@
             });
         });
     </script>
-
+</div>
 </body>
 </html>
