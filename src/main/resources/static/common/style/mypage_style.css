@@ -210,7 +210,69 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
 }
+/* 모달 공통 스타일 */
+.modal-dialog.modal-lg {
+    max-width: 800px;
+}
 
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.modal-header {
+    border-bottom: none;
+    padding: 20px 30px;
+    background-color: #f8f9fa;
+    border-radius: 15px 15px 0 0;
+}
+
+.modal-header h2 {
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+/* 프로필 모달 스타일 */
+#dogProfileModal .square5_dog_profile_content {
+    padding: 0;
+    margin: 0;
+}
+
+#dogProfileModal .square5_profile_actions {
+    display: none;
+}
+
+/* 등록 모달 스타일 */
+#dogRegisterModal .square5_dog_register_content {
+    padding: 0;
+    margin: 0;
+}
+
+#dogRegisterModal .square5_form_actions {
+    display: none;
+}
+
+/* 모달 내 버튼 스타일 */
+.modal-footer {
+    border-top: none;
+    padding: 20px 30px;
+}
+
+.modal .btn-primary {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+.modal .btn-primary:hover {
+    background-color: #449d44;
+    border-color: #398439;
+}
 /* 반응형 스타일 */
 @media (max-width: 768px) {
     .square5_mypage_container {

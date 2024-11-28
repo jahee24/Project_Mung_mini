@@ -19,7 +19,13 @@ public class MyPageDAOImple implements MyPageDAO {
     }
 
     @Override
-    public List<DogDTO> getDog(String id) {
-        return mapper.getdog(id);
+    public List<DogDTO> getDogList(String id) {
+        return mapper.getdoglist(id);
+    }
+
+    @Override
+    public DogDTO getDogById(String id) {
+        System.out.println("DAO"+id);
+        return mapper.getdogbyid(id);
     }
 }

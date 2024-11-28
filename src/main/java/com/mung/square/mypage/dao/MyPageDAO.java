@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface MyPageDAO {
     UserDTO getUser(String id);
-    List<DogDTO> getDog(String id);
+    List<DogDTO> getDogList(String id);
+    DogDTO getDogById(String id);
 }

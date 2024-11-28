@@ -12,9 +12,20 @@ import java.util.List;
 public class MyPageServiceImpl implements MyPageService {
     private final MyPageDAO myPageDAO;
     public UserDTO getUser(String id){
+        System.out.println("service,getUser");
         return myPageDAO.getUser(id);
     };
-    public List<DogDTO> getDog(String id){
-        return myPageDAO.getDog(id);
-    };
+    public List<DogDTO> getDogList(String id){
+        System.out.println("service,getDogList");
+        return myPageDAO.getDogList(id);
+
+    }
+
+    @Override
+    public DogDTO getDogById(String id) {
+        System.out.println(id);
+        return myPageDAO.getDogById(id);
+    }
+
+    ;
 }
