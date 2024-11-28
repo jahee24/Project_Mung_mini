@@ -8,7 +8,10 @@
         select * from user where id = #{id}
 
     </select>
-    <select id="getdog" parameterType="String" resultType="dog">
+    <select id="getdoglist" parameterType="String" resultType="dog">
         select * from dog where user_id = #{id}
+    </select>
+    <select id="getdogbyid" parameterType="String" resultType="dog">
+        select * from dog where id = #{id}
     </select>
 </mapper>

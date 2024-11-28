@@ -15,10 +15,11 @@ import java.sql.Date;
 public class DogDTO {
 	String id;
 	String name;
-	Date birth_date;
-	String dog_type;
+	Date birthDate;
+	int age;
+	String breed;
 	float weight;
-	String sex;
-	String user_id;
-
+	String gender;
+	String userId;
+	String imageUrl;
 }

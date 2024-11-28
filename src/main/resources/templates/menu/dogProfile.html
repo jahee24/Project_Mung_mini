@@ -16,7 +16,7 @@
             <a href="/dog/edit" class="square5_edit_btn"><i class="fas fa-edit"></i> 프로필 수정</a>
         </div>
 
-        <div class="square5_dog_profile_content">
+        <div class="square5_dog_profile_content" id="dogProfileModal22">
             <div class="square5_dog_image">
                 <img th:src="${dog.imageUrl}" alt="반려견 이미지" class="square5_profile_img">
             </div>
@@ -25,7 +25,7 @@
                 <div class="square5_info_item">
                     <i class="fas fa-id-card"></i>
                     <label>이름</label>
-                    <span th:text="${dog.dogName}">반려견 이름</span>
+                    <span th:text="${dog.name}">반려견 이름</span>
                 </div>
 
                 <div class="square5_info_item">

@@ -9,5 +9,6 @@ import java.util.List;
 @Mapper
 public interface MyPageMapper {
     UserDTO getuser(String id);
-    List<DogDTO> getdog(String id);
+    List<DogDTO> getdoglist(String id);
+    DogDTO getdogbyid(String id);
 }
