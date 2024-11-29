@@ -1,32 +1,68 @@
 /* 기본 설정 */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
+    font-family: Arial, sans-serif; /* 기본 폰트 */
+    margin: 0; /* 페이지 여백 제거 */
+    padding: 0; /* 페이지 내부 여백 제거 */
+    background-color: #f9f9f9; /* 배경색 */
+    position: relative; /* body를 애니메이션 영역으로 설정 */
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+    min-height: 150vh; /* 최소 높이를 화면 크기로 설정 */
 }
-/*헤더 파트 높이 간격*/
+
+/*리뷰 헤더 파트 높이 간격*/
+.notice-section-review-container {
+    display: flex; /* Flexbox로 설정 */
+    flex-direction: column; /* 세로 정렬 */
+    justify-content: center; /* 세로 방향 중앙 정렬 */
+    align-items: center; /* 가로 방향 중앙 정렬 */
+    min-height: calc(100vh - 120px); /* 화면 높이에서 헤더 높이 제외 */
+    padding: 10px; /* 내부 여백 */
+    background-color: #e6f5e6; /* 기존 배경색 유지 */
+}
+/*리뷰 섹션 타이틀 */
+.notice-section-review-title {
+        font-family: 'Jua', sans-serif; /* 주아 폰트 적용 */
+        font-size: 3rem; /* 폰트 크기 */
+        color: #388E3C; /* 글자 색상 */
+        text-align: center; /* 중앙 정렬 */
+        font-weight: normal; /* 기본 굵기 */
+        letter-spacing: 2px; /* 글자 간격 */
+        margin-bottom: 20px; /* 아래 여백 */
+    padding: 100px;
+}
+/*공지 사항 헤더 파트 높이 간격*/
 .notice-section-container {
-    margin-top: 100px; /* 헤더의 높이만큼 여백 추가 */
+    background-color: #e6f5e6;
+    padding: 10px;
+}
+/*공지 섹션 타이틀 */
+.notice-section-title {
+    font-size: 2.5rem; /* 글자 크기 */
+    font-family: 'Roboto', sans-serif; /* 구글 폰트 예제 */
+    color: #388E3C; /* 글자 색상 */
+    font-weight: 700; /* 굵은 글꼴 */
+    text-align: center; /* 중앙 정렬 */
+    margin-bottom: 20px; /* 타이틀과 아래 컨텐츠 사이 간격 */
+    text-transform: uppercase; /* 글자를 대문자로 변경 */
+    letter-spacing: 2px; /* 글자 간격 */
 }
 
 /* 카드 컨테이너 배치 */
 .notice-card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 250px;
-    justify-content: center;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    display: flex; /* Flexbox로 전환 */
+    flex-wrap: wrap; /* 줄바꿈 허용 */
+    justify-content: center; /* 가로 방향 중앙 정렬 */
+    align-items: center; /* 세로 방향 중앙 정렬 */
+    gap: 20px; /* 카드 간 간격 */
+    min-height: 400px; /* 컨테이너 최소 높이 */
 
 }
 
 /* 카드 기본 스타일 */
 .notice-container-wrapper {
     position: relative;
-    width: 220px;
-    height: 310px;
+    width: 250px;
+    height: 350px;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -100,13 +136,21 @@ body {
         height: 280px;
     }
 }
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
+.notice-new {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
 }
+
+.notice-new:hover {
+    background-color: #388E3C;
+}
+
+
 /* 검색바 스타일 */
 .notice-search-bar {
     text-align: center;
@@ -133,14 +177,29 @@ body {
 .notice-search-bar button:hover {
     background-color: #388E3C;
 }
+/*게시판 테이블 스타일*/
+.notice-table {
+    width: 100%; /* 테이블 너비 */
+    border-collapse: collapse; /* 테두리 중첩 제거 */
+    margin: 20px auto; /* 중앙 정렬 */
+    background-color: #fff; /* 테이블 배경색 */
+    table-layout: fixed; /* 고정 레이아웃 */
+}
 
+.notice-table th, .notice-table td {
+    padding: 10px; /* 셀 내부 여백 */
+    border: 1px solid #ddd; /* 테두리 색상 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
 /* 페이지네이션 스타일 */
 .notice-pagination {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 1rem; /* 기존 2rem에서 줄임 */
+    margin-bottom: 1rem; /* 추가 여백 */
 }
-
+/*비활성 색상*/
 .notice-pagination button {
+    display: inline-block;
     border: none;
     background-color: #4CAF50;
     color: white;
@@ -150,6 +209,11 @@ body {
     border-radius: 4px;
     font-size: 0.9rem;
 }
+/*활성화 색상*/
+.notice-pagination button.active {
+    background-color: #388E3C; /* 활성화된 버튼 색상 */
+    font-weight: bold; /* 활성화된 버튼 강조 */
+}
 
 .notice-pagination button.active {
     background-color: #388E3C;
@@ -158,4 +222,52 @@ body {
 
 .notice-pagination button:hover {
     background-color: #66BB6A;
+}
+/*페이징 반응형 버튼*/
+@media (max-width: 768px) {
+    .notice-pagination button {
+        padding: 0.4rem 0.8rem; /* 내부 여백 감소 */
+        font-size: 0.8rem; /* 텍스트 크기 감소 */
+    }
+}
+
+/*개효과*/
+.animated-dog {
+    position: absolute;
+    width: 80px; /* 기본 크기 */
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: move-dog 5s infinite; /* 움직임 애니메이션 */
+    transition: transform 0.5s, width 0.5s; /* 부드러운 크기 및 위치 변경 */
+}
+
+/* 강아지 움직임 경로 애니메이션 */
+@keyframes move-dog {
+    0% {
+        top: 20%;
+        left: 10%;
+        transform: rotate(0deg);
+    }
+    25% {
+        top: 30%;
+        left: 80%;
+        transform: rotate(45deg);
+    }
+    50% {
+        top: 70%;
+        left: 50%;
+        transform: rotate(90deg);
+    }
+    75% {
+        top: 50%;
+        left: 20%;
+        transform: rotate(135deg);
+    }
+    100% {
+        top: 20%;
+        left: 10%;
+        transform: rotate(180deg);
+    }
 }
