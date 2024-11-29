@@ -1,80 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/mainLayout}">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/mung/common/style/main_style.css">
-  <link rel="stylesheet" href="/mung/common/style/notice_style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/mung/common/style/main_style.css">
+    <link rel="stylesheet" href="/mung/common/style/notice_style.css">
 
-  <!-- 외부 라이브러리 (Bootstrap, FontAwesome) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <!--구글 폰트 -->
-  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <!-- 외부 라이브러리 (Bootstrap, FontAwesome) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!--구글 폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
-  <!-- JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-  <script src="/mung/common/script/main_script.js" defer></script>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="/mung/common/script/main_script.js" defer></script>
 
-  <title>공지사항 & 이달의 회원</title>
+    <title>공지사항 & 이달의 회원</title>
 </head>
 <body>
-<img src="/mung/images/notice/dog.png" class="animated-dog" alt="">
 
-<!--헤더 파트 참조-->
-<div th:replace="include/header-part.html :: header-part"></div>
+    <div layout:fragment="content">
 
-<!-- 리뷰 카드 섹션 -->
-<div class="notice-section-review-container">
-  <h2 class="notice-section-review-title">이달의 회원!!</h2>
-  <div id="notice-container" class="notice-card-container">
-    <!-- JavaScript로 카드 동적 렌더링 -->
-  </div>
-</div>
+        <img src="/mung/images/notice/dog.png" class="animated-dog" alt="">
 
 
+        <!-- 리뷰 카드 섹션 -->
+        <div class="notice-section-review-container">
+            <h2 class="notice-section-review-title">이달의 회원!!</h2>
+            <div id="notice-container" class="notice-card-container">
+                <!-- JavaScript로 카드 동적 렌더링 -->
+            </div>
+        </div>
 
-<!-- 공지사항 섹션 -->
-<div class="notice-section-container">
-  <h2 class="notice-section-title">공지&게시판</h2>
-  <div class="notice-review-section">
-    <!-- 검색 영역 -->
-    <div class="notice-search-bar">
-      <button id="testNotice-openDetailWindow" class="notice-new"
-              onclick="openDetailWindow('/mung/newPost', '새 글 작성')">새 글 쓰기</button>
-      <input type="text" id="notice-search-input" placeholder="검색어를 입력하세요">
-      <button onclick="searchNotices()">검색</button>
+
+        <!-- 공지사항 섹션 -->
+        <div class="notice-section-container">
+            <h2 class="notice-section-title">공지&게시판</h2>
+            <div class="notice-review-section">
+                <!-- 검색 영역 -->
+                <div class="notice-search-bar">
+                    <button id="testNotice-openDetailWindow" class="notice-new"
+                            onclick="openDetailWindow('/mung/newPost', '새 글 작성')">새 글 쓰기
+                    </button>
+                    <input type="text" id="notice-search-input" placeholder="검색어를 입력하세요">
+                    <button onclick="searchNotices()">검색</button>
+                </div>
+                <!-- 공지사항 테이블 -->
+                <table class="notice-table">
+                    <!-- 열 크기 설정 -->
+                    <colgroup>
+                        <col style="width: 5%;"> <!-- 순번 열 -->
+                        <col style="width: 80%;"> <!-- 제목 열 -->
+                        <col style="width: 10%;"> <!-- 등록자명 열 -->
+                        <col style="width: 5%;"> <!-- 조회수 열 -->
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>순번</th>
+                        <th>제목</th>
+                        <th>등록자명</th>
+                        <th>조회수</th>
+                    </tr>
+                    </thead>
+                    <tbody id="notice-table-body">
+                    <!-- JavaScript로 데이터 동적 추가 -->
+                    </tbody>
+                </table>
+                <!-- 페이지네이션 -->
+                <div id="testNotice-pagination" class="notice-pagination"></div>
+            </div>
+        </div>
+        <script src="/mung/common/script/notice_script.js" defer></script>
     </div>
-    <!-- 공지사항 테이블 -->
-    <table class="notice-table" >
-      <!-- 열 크기 설정 -->
-      <colgroup>
-        <col style="width: 5%;"> <!-- 순번 열 -->
-        <col style="width: 80%;"> <!-- 제목 열 -->
-        <col style="width: 10%;"> <!-- 등록자명 열 -->
-        <col style="width: 5%;"> <!-- 조회수 열 -->
-      </colgroup>
-      <thead>
-      <tr>
-        <th>순번</th>
-        <th>제목</th>
-        <th>등록자명</th>
-        <th>조회수</th>
-      </tr>
-      </thead>
-      <tbody id="notice-table-body">
-      <!-- JavaScript로 데이터 동적 추가 -->
-      </tbody>
-    </table>
-    <!-- 페이지네이션 -->
-    <div id="testNotice-pagination" class="notice-pagination"></div>
-  </div>
-    </div>
-
-  </div>
-</div>
-<script src="/mung/common/script/notice_script.js" defer></script>
-
 </body>
 </html>
 
