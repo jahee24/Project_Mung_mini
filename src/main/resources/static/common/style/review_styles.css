@@ -1,0 +1,90 @@
+/*
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+!* 헤더 스타일 *!
+.notice-square-header {
+    background-color: #fff;
+    border-bottom: 3px solid #4CAF50;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.notice-square-logo img {
+    height: 50px;
+}
+.notice-square-main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+.notice-square-main-nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+.notice-square-main-nav ul li a:hover {
+    color: #4CAF50;
+}
+
+!* 공지사항 스타일 *!
+.notice-section {
+    width: 80%;
+    margin: 2rem auto;
+    background-color: #e8f5e9;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.notice-section h2 {
+    color: #388e3c;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+!* 리뷰 스타일 *!
+.notice-review-section {
+    width: 80%;
+    margin: 2rem auto;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.notice-review-section h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.notice-gallery-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+.notice-gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    text-align: center;
+}
+.notice-gallery-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.notice-gallery-text {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #555;
+}*/

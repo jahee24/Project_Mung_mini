@@ -21,6 +21,7 @@ public class LoginController {
     public String login(LoginDTO login, Model model) {
         System.out.println("스프링이 제공하는 로그인---------------------------------------");
         UserDTO user = loginService.login(login);
+/*
         String view = "";
         if (user != null) {
             view = "/include/mypageContent";
@@ -30,8 +31,9 @@ public class LoginController {
             view = "redirect:/";
             System.out.println("로그인 실패");
         }
+*/
         model.addAttribute("user", user);
-        return view;
+        return "redirect:/";
     }
 
     @GetMapping("/logout")
