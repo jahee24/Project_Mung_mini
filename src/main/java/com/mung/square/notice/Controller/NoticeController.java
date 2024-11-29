@@ -1,4 +1,4 @@
-package com.mung.square.notice;
+package com.mung.square.notice.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,16 +17,16 @@ public class NoticeController {
     public String adminNotice() {
         return "board/admin_notice"; // templates/board/admin_notice.html 반환
     }
-
-    // 리뷰 페이지
-    @GetMapping("/review")
-    public String review() {
-        return "board/review"; // templates/board/review.html 반환
+    //새글작성
+    @GetMapping("/newPost")
+    public String newPost() {
+        return "board/NewPost"; // templates/board/NewPost.html 반환
+    }
+    //글 상세 보기
+    @GetMapping("/viewPost")
+    public String viewPost() {
+        return "board/viewPost"; // templates/board/viewPost.html 반환
     }
 
-    // 공지사항 상세 페이지
-    @GetMapping("/board/detail")
-    public String detail() {
-        return "board/detail"; // templates/board/detail.html 반환
-    }
+
 }

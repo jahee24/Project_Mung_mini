@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글 보기</title>
+  <link rel="stylesheet" href="/mung/common/style/viewpost_style.css">
+
+</head>
+<body>
+<div class="viewpost-container">
+  <h1 class="viewpost-title">게시글 제목</h1>
+  <div class="viewpost-content">
+    게시글 내용이 여기에 표시됩니다.
+  </div>
+  <div class="viewpost-actions">
+    <button id="edit-post" class="viewpost-action-button">수정</button>
+    <button id="delete-post" class="viewpost-action-button">삭제</button>
+  </div>
+  <div class="viewpost-comments">
+    <h2 class="viewpost-comments-title">댓글</h2>
+    <ul id="comment-list" class="viewpost-comment-list">
+      <!-- 댓글 리스트 -->
+    </ul>
+    <div class="viewpost-new-comment">
+      <textarea id="new-comment" class="viewpost-comment-input" placeholder="댓글을 입력하세요"></textarea>
+      <button id="submit-comment" class="viewpost-comment-button">댓글 작성</button>
+    </div>
+  </div>
+</div>
+<script src="/mung/viewpost/viewpost_script.js"></script>
+</body>
+</html>

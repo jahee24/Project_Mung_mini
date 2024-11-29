@@ -1,10 +1,13 @@
 package com.mung.square.payment.controller;
 
 import com.mung.square.dto.ApproveResponse;
+import com.mung.square.dto.CancelResponse;
 import com.mung.square.dto.OrderCreateForm;
 import com.mung.square.dto.ReadyResponse;
 import com.mung.square.payment.service.KakaoPayService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +22,7 @@ public class kakaopayController {
 
     private final KakaoPayService kakaoPayService;
 
-    @PostMapping("ready")
+    @PostMapping("/ready")
     @ResponseBody
     public ReadyResponse payReady(@RequestBody OrderCreateForm orderCreateForm) {
         String name = orderCreateForm.getName();
@@ -41,6 +44,21 @@ public class kakaopayController {
         ApproveResponse approveResponse = kakaoPayService.payApprove(tid, pgToken);
         System.out.println(approveResponse);
         return "/include/kakaopaySuccess";
+    }
+
+    @PostMapping("/refund")
+    public ResponseEntity<CancelResponse> refund() {
+        String tid = SessionUtils.getStringAttributeValue("tid");
+        System.out.println(tid);
+        CancelResponse kakaocancelResponse = kakaoPayService.payCancel(tid);
+        ResponseEntity<CancelResponse> response = new ResponseEntity<>(kakaocancelResponse, HttpStatus.OK);
+        System.out.println(kakaocancelResponse);
+        return response;
+    }
+
+    @GetMapping("/cancel")
+    public String payCancel() {
+        return "/include/kakaopayRefundTest";
     }
 }
 
