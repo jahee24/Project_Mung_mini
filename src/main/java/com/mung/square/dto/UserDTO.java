@@ -13,10 +13,10 @@ import java.sql.Date;
 @NoArgsConstructor
 @Alias("user")
 public class UserDTO {
-	String email;
-	String password;
-	String name;
-	String phoneNumber;
-	String memberNo;
-
+	private String userId;
+	private String email;
+	private String password;
+	private String name;
+	private String phoneNumber;
+	private String memberNo;
 }

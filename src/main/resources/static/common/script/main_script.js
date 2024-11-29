@@ -32,20 +32,20 @@ function initCarousel() {
     function showImage(index, direction = 'next') {
         const currentItem = carousel.querySelector('.square-carousel-item.active');
         const newItem = items[index];
-        
+
         // 현재 활성 아이템에서 active 클래스 제거
         currentItem.classList.remove('active');
-        
+
         // 새 아이템 초기 위치 설정
         if (direction === 'next') {
             newItem.style.transform = 'translateX(100%)';
         } else {
             newItem.style.transform = 'translateX(-100%)';
         }
-        
+
         // 강제 리플로우
         newItem.offsetHeight;
-        
+
         // 트랜지션 적용
         requestAnimationFrame(() => {
             // 현재 아이템 이동
@@ -54,12 +54,12 @@ function initCarousel() {
             } else {
                 currentItem.style.transform = 'translateX(100%)';
             }
-            
+
             // 새 아이템을 현재 위치로
             newItem.classList.add('active');
             newItem.style.transform = 'translateX(0)';
         });
-        
+
         // dots 업데이트
         dots.forEach(dot => dot.classList.remove('active'));
         dots[index].classList.add('active');
@@ -119,7 +119,7 @@ function initSlidingText() {
 
 function initScrollAnimation() {
     const blocks = document.querySelectorAll('.content-block, .content2-block');
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -138,10 +138,10 @@ function initScrollAnimation() {
 // 네비게이션 메뉴 관련 기능 추가
 function initNavigation() {
     const navItems = document.querySelectorAll('.square-has-submenu');
-    
+
     // 모바일 디바이스 체크
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    
+
     if (isMobile) {
         navItems.forEach(item => {
             item.addEventListener('click', function(e) {
@@ -152,14 +152,14 @@ function initNavigation() {
             });
         });
     }
-    
+
     // 스크롤 시 헤더 스타일 변경
     let lastScroll = 0;
     const header = document.querySelector('.square-header-container');
-    
+
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
-        
+
         if (currentScroll > lastScroll && currentScroll > 80) {
             // 스크롤 다운
             header.style.transform = 'translateY(-100%)';
@@ -167,7 +167,7 @@ function initNavigation() {
             // 스크롤 업
             header.style.transform = 'translateY(0)';
         }
-        
+
         // 스크롤 위치에 따른 헤더 스타일
         if (currentScroll > 50) {
             header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
@@ -176,7 +176,7 @@ function initNavigation() {
             header.style.backgroundColor = 'white';
             header.style.boxShadow = 'none';
         }
-        
+
         lastScroll = currentScroll;
     });
 }
@@ -245,15 +245,99 @@ function handleInputFocus(e) {
 }
 
 function handleInputBlur(e) {
-    if (!e.target.value) {
-        e.target.closest('.form-outline').classList.remove('focused');
+    const input = e.target;
+    const inputId = input.id;
+    const inputEmail = input.email;
+    const inputPass = input.password;
+
+    const inputValue = input.value.trim(); // 공백을 제거한 입력 값
+
+    // 입력 값이 비어 있으면 'not null' 메시지를 표시
+    if (!inputValue) {
+        // 'focused' 클래스를 제거
+        input.closest('.form-outline').classList.remove('focused');
+
+        // 오류 메시지가 이미 있는지 확인하고 없으면 추가
+        let errorElement = input.closest('.form-outline').querySelector('.error-message');
+        if (!errorElement) {
+            errorElement = document.createElement("span");
+            errorElement.classList.add("error-message");
+            errorElement.style.color = "red"; // 빨간색 오류 메시지
+            errorElement.textContent = "not null";  // 오류 메시지 내용
+            input.closest('.form-outline').appendChild(errorElement);
+        }
+    } else {
+        // 입력 값이 있으면 'focused' 클래스를 추가
+        input.closest('.form-outline').classList.add('focused');
+
+        // 기존 오류 메시지가 있으면 제거
+        const existingError = input.closest('.form-outline').querySelector('.error-message');
+        if (existingError) {
+            existingError.remove();
+        }
+    }
+
+    // 아이디 중복 체크
+    if (inputId === "userId") {
+        const queryData = { "userId": inputValue };
+        $.ajax({
+            url: "/user/signup/idck",
+            type: "get",
+            data: queryData,
+            success: function(response) {
+                if (response.exists) {
+                    // 아이디가 중복되면 오류 메시지 표시
+                    $("#userIdError").text("이미 사용 중인 아이디입니다.").show();
+                } else {
+                    // 아이디가 중복되지 않으면 오류 메시지 숨기기
+                    $("#userIdError").hide();
+                }
+            },
+            error: function(error) {
+                console.error("아이디 중복 체크 실패:", error);
+            }
+        });
+    }
+
+    // 이메일 중복 체크
+    if (inputEmail === "email") {
+        const queryData = { "email": inputValue };
+        $.ajax({
+            url: "/user/signup/emailck",
+            type: "get",
+            data: queryData,
+            success: function(response) {
+                if (response.exists) {
+                    // 이메일이 중복되면 오류 메시지 표시
+                    $("#emailError").text("이미 사용 중인 이메일입니다.").show();
+                } else {
+                    // 이메일이 중복되지 않으면 오류 메시지 숨기기
+                    $("#emailError").hide();
+                }
+            },
+            error: function(error) {
+                console.error("이메일 중복 체크 실패:", error);
+            }
+        });
+    }
+
+    // 비밀번호 재입력 매칭 체크
+    if (inputPass === "registerRepeatPassword") {
+        const password = $("#registerPassword").val();
+        const repeatPassword = inputValue;
+        if (password !== repeatPassword) {
+            // 비밀번호가 일치하지 않으면 오류 메시지 표시
+            $("#passwordError").text("비밀번호가 일치하지 않습니다.").show();
+        } else {
+            // 비밀번호가 일치하면 오류 메시지 숨기기
+            $("#passwordError").hide();
+        }
     }
 }
-
 // 공지사항 섹션 초기화 함수
 function initComnotice() {
     const comnoticeItems = document.querySelectorAll('.comnotice-item');
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
@@ -280,7 +364,7 @@ function initComnotice() {
 function initFooter() {
     // 스크롤 시 footer 페이드인 효과
     const footer = document.querySelector('.square-footer-container');
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -291,10 +375,10 @@ function initFooter() {
     }, {
         threshold: 0.1
     });
-    
+
     footer.style.opacity = '0';
     footer.style.transform = 'translateY(20px)';
     footer.style.transition = 'all 0.5s ease';
-    
+
     observer.observe(footer);
 }
