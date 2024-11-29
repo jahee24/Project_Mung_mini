@@ -1,6 +1,7 @@
 package com.mung.square.payment.service;
 
 import com.mung.square.dto.ApproveResponse;
+import com.mung.square.dto.CancelResponse;
 import com.mung.square.dto.ReadyResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -69,5 +70,21 @@ public class KakaoPayService {
         ApproveResponse approveResponse = template.postForObject(url, requestEntity, ApproveResponse.class);
 
         return approveResponse;
+    }
+
+    public CancelResponse payCancel(String tid) {
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("cid", "TC0ONETIME");
+        parameters.put("tid", tid);
+        parameters.put("cancel_amount", "19800");
+        parameters.put("cancel_tax_free_amount", "200");
+
+        HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
+
+        RestTemplate template = new RestTemplate();
+        String url = "https://open-api.kakaopay.com/online/v1/payment/cancel";
+        CancelResponse cancelResponse = template.postForObject(url, requestEntity, CancelResponse.class);
+
+        return cancelResponse;
     }
 }

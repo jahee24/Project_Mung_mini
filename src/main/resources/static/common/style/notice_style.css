@@ -6,7 +6,7 @@ body {
     background-color: #f9f9f9; /* 배경색 */
     position: relative; /* body를 애니메이션 영역으로 설정 */
     overflow-x: hidden; /* 가로 스크롤 방지 */
-    min-height: 150vh; /* 최소 높이를 화면 크기로 설정 */
+
 }
 
 /*리뷰 헤더 파트 높이 간격*/
