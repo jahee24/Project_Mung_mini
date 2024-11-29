@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button class="btn-primary confirm-button" id="btn-pay-ready">결제하기</button>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        // 카카오페이 결제 팝업창 연결
+        $(document).ready(function() {
+            $("#btn-pay-ready").click(function() {
+                // 아래 데이터 외에도 필요한 데이터를 원하는 대로 담고, Controller에서 @RequestBody로 받으면 됨
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/mung/kakaopay/refund',
+                    data: JSON.stringify({
+                        "cancel_amount": 20000,
+                        "cancel_tax_free_amount": 0,
+                        "cancel_vat_amount": 0
+                    }),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        location.href = response.redirectUrl;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
