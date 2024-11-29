@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" as="style" crossorigin
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
+
 </head>
 <body>
     <div class="order-content-container" layout:fragment="content">
@@ -26,14 +27,17 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"
                 integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-        <script type="text/javascript">
+        <script type="text/javascript" th:inline="javascript">
             // 카카오페이 결제 팝업창 연결
             $(document).ready(function() {
                 $("#btn-pay-ready").click(function() {
+                    let reservationData = [[${resv}]];
+
                     // 아래 데이터 외에도 필요한 데이터를 원하는 대로 담고, Controller에서 @RequestBody로 받으면 됨
                     let data = {
-                        name: '상품명',    // 카카오페이에 보낼 대표 상품명
-                        totalPrice: 20000 // 총 결제금액
+                        resvNum: [[${resv.resvNum}]],
+                        name: [[${resv.branchName}]],    // 카카오페이에 보낼 대표 상품명
+                        totalPrice: [[${resv.barcount*5000}]] // 총 결제금액
                     };
 
                     $.ajax({
@@ -42,7 +46,7 @@
                         data: JSON.stringify(data),
                         contentType: 'application/json',
                         success: function(response) {
-                            window.open(response.next_redirect_pc_url, "_blank", "width=500, height=500, top=100, left=200, location=no, toolbar=no, menubar=no, scrollbars=no, resizable=no, status=no");
+                            window.open(response.next_redirect_pc_url, "_blank", "width=500, height=600, top=100, left=200, location=no, toolbar=no, menubar=no, scrollbars=no, resizable=no, status=no");
                         }
                     });
                 });
@@ -53,55 +57,35 @@
         <div class="order-info-card">
             <div class="order-info-item">
                 <span class="order-info-label">주문번호:</span>
-                <!--<span class="order-info-value">123456789</span>-->
+                <span th:text="${resv.resvNum}"></span>
             </div>
             <div class="order-info-item">
                 <span class="order-info-label">회원 이름:</span>
-                <!--
-                      <span class="order-info-value">김철수</span>
-                -->
+                <span th:text="${resv.name}"></span>
             </div>
             <div class="order-info-item">
-                <span class="order-info-label">예약자:</span>
-                <!--
-                      <span class="order-info-value">박영희</span>
-                -->
+                <span class="order-info-label">회원 번호:</span>
+                <span th:text="${resv.phoneNumber}"></span>
             </div>
             <div class="order-info-item">
-                <span class="order-info-label">예약자 번호:</span>
-                <!--
-                      <span class="order-info-value">010-1234-5678</span>
-                -->
+                <span class="order-info-label">지점 이름:</span>
+                <span th:text="${resv.branchName}"></span>
             </div>
             <div class="order-info-item">
-                <span class="order-info-label">Branch 이름:</span>
-                <!--
-                      <span class="order-info-value">강남점</span>
-                -->
-            </div>
-            <div class="order-info-item">
-                <span class="order-info-label">금액:</span>
-                <!--
-                      <span class="order-info-value">₩150,000</span>
-                -->
+                <span class="order-info-label">결제 금액:</span>
+                <span th:text="${resv.barcount*5000}"></span>
             </div>
             <div class="order-info-item">
                 <span class="order-info-label">예약 날짜:</span>
-                <!--
-                      <span class="order-info-value">2024년 12월 25일</span>
-                -->
+                <span th:text="${resv.resvDate}"></span>
             </div>
             <div class="order-info-item">
                 <span class="order-info-label">예약 받은 시작 시간:</span>
-                <!--
-                      <span class="order-info-value">14:00</span>
-                -->
+                <span th:text="${resv.startTime}"></span>
             </div>
             <div class="order-info-item">
                 <span class="order-info-label">예약 받은 종료 시간:</span>
-                <!--
-                      <span class="order-info-value">16:00</span>
-                -->
+                <span th:text="${resv.endTime}"></span>
             </div>
         </div>
         <button class="btn-primary confirm-button" id="btn-pay-ready">결제하기</button>

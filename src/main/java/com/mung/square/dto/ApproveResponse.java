@@ -20,4 +20,17 @@ public class ApproveResponse {
     private String created_at;          // 결제 준비 요청 시각
     private String approved_at;         // 결제 승인 시각
     private String payload;             // 결제 승인 요청에 대해 저장한 값, 요청 시 전달된 내용
+    private Amount amount;
+
+    @Getter
+    @Setter
+    @ToString
+    public static class Amount {
+        private int total; // 총 결제 금액
+        private int tax_free; // 비과세 금액
+        private int tax; // 부가세 금액
+        private int point; // 사용한 포인트
+        private int discount; // 할인금액
+        private int green_deposit; // 컵 보증금
+    }
 }

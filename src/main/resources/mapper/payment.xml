@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mung.square.payment.mapper.PaymentMapper">
+
+    <!-- Insert a new payment -->
+    <insert id="insertPayment" parameterType="payment">
+        INSERT INTO payment (tid, user_id, item_name, total_price, status)
+        VALUES (#{tid}, #{userId}, #{itemName}, #{totalPrice}, #{status})
+    </insert>
+
+</mapper>

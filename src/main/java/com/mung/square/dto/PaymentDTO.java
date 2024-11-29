@@ -1,23 +1,18 @@
 package com.mung.square.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
 
-import java.sql.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Alias("user")
-public class UserDTO {
-	String userId;
-	String email;
-	String password;
-	String name;
-	String phoneNumber;
-	String memberNo;
-
+@Alias("payment")
+public class PaymentDTO {
+    private String tid;
+    private String userId;
+    private String itemName;
+    private int totalPrice;
+    private int status;
 }
