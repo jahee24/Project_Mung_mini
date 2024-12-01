@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/mainLayout}">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,38 +17,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" as="style" crossorigin
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector(".close-button").onclick = function() {
+                window.opener.location.href = "/mung/mypage"; // 부모 창을 mypage로 이동
+                window.close(); // 현재 창 닫기
+            };
+        });
+    </script>
 </head>
 <body>
-    <div layout:fragment="content">
-        <div class="main-content">
-            <div class="payment-success-content">
-                <h2 class="payment-success-title">결제 완료</h2>
-                <p class="payment-success-message">주문이 성공적으로 완료되었습니다. 이용해 주셔서 감사합니다!</p>
-                <div class="order-summary">
-                    <div class="order-summary-item">
-                        <span class="order-summary-label">주문번호:</span>
-                        <!--<span class="order-summary-value">123456789</span>-->
-                    </div>
-                    <div class="order-summary-item">
-                        <span class="order-summary-label">결제 금액:</span>
-<!--
-                        <span class="order-summary-value">₩150,000</span>
--->
-                    </div>
-                    <div class="order-summary-item">
-                        <span class="order-summary-label">예약 날짜:</span>
-<!--
-                        <span class="order-summary-value">2024년 12월 25일</span>
--->
-                    </div>
-                    <div class="order-summary-item">
-                        <span class="order-summary-label">예약 시간:</span>
-<!--
-                        <span class="order-summary-value">14:00 - 16:00</span>
--->
-                    </div>
+    <div class="main-content">
+        <div class="payment-success-content">
+            <h2 class="payment-success-title">결제 완료</h2>
+            <p class="payment-success-message">주문이 성공적으로 완료되었습니다.<br/>이용해 주셔서 감사합니다!</p>
+            <div class="order-summary">
+                <div class="order-summary-item">
+                    <span class="order-summary-label">주문번호:</span>
+                    <span th:text="${approveResponse.partner_order_id}"></span>
+                </div>
+                <div class="order-summary-item">
+                    <span class="order-summary-label">결제 상품:</span>
+                    <span th:text="${approveResponse.item_name}"></span>
+                </div>
+                <div class="order-summary-item">
+                    <span class="order-summary-label">결제 금액:</span>
+                    <span th:text="${approveResponse.amount.total}"></span>
                 </div>
             </div>
+            <!-- 닫기 버튼 추가 -->
+            <button class="close-button">닫기</button>
         </div>
     </div>
 </body>
