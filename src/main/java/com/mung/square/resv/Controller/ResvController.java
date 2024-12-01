@@ -1,4 +1,4 @@
-package com.mung.square.resv;
+package com.mung.square.resv.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
