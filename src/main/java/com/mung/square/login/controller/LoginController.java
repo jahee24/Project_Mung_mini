@@ -3,6 +3,7 @@ package com.mung.square.login.controller;
 import com.mung.square.dto.LoginDTO;
 import com.mung.square.dto.UserDTO;
 import com.mung.square.login.service.LoginService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +19,7 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping("/login")
-    public String login(LoginDTO login, Model model) {
+    public String login(LoginDTO login, Model model, HttpSession session) {
         System.out.println("스프링이 제공하는 로그인---------------------------------------");
         UserDTO user = loginService.login(login);
 /*
@@ -32,6 +33,8 @@ public class LoginController {
             System.out.println("로그인 실패");
         }
 */
+        session.setAttribute("userId", user.getUserId());
+
         model.addAttribute("user", user);
         return "redirect:/";
     }

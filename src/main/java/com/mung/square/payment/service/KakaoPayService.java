@@ -24,15 +24,15 @@ public class KakaoPayService {
     }
 
     // 카카오페이 결제창 연결
-    public ReadyResponse payReady(String name, int totalPrice) {
+    public ReadyResponse payReady(int resvNum, String name, int totalPrice) {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("cid", "TC0ONETIME");                                    // 가맹점 코드(테스트용)
-        parameters.put("partner_order_id", "partner_order_id");                       // 주문번호
+        parameters.put("partner_order_id", String.valueOf(resvNum));                       // 주문번호
         parameters.put("partner_user_id", "partner_user_id");                          // 회원 아이디
         parameters.put("item_name", name);                                      // 상품명
         parameters.put("quantity", "1");                                        // 상품 수량
         parameters.put("total_amount", String.valueOf(totalPrice));             // 상품 총액
-        parameters.put("tax_free_amount", "200");                                 // 상품 비과세 금액
+        parameters.put("tax_free_amount", "0");                                 // 상품 비과세 금액
         parameters.put("approval_url", "http://127.0.0.1:5000/mung/kakaopay/completed"); // 결제 성공 시 URL
         parameters.put("cancel_url", "http://127.0.0.1:5000/mung/kakaopay/cancel");      // 결제 취소 시 URL
         parameters.put("fail_url", "http://127.0.0.1:5000/mung/kakaopay/fail");          // 결제 실패 시 URL
@@ -55,11 +55,11 @@ public class KakaoPayService {
     // 카카오페이 결제 승인
     // 사용자가 결제 수단을 선택하고 비밀번호를 입력해 결제 인증을 완료한 뒤,
     // 최종적으로 결제 완료 처리를 하는 단계
-    public ApproveResponse payApprove(String tid, String pgToken) {
+    public ApproveResponse payApprove(String tid, String pgToken, String partner_order_id) {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("cid", "TC0ONETIME");
         parameters.put("tid", tid);
-        parameters.put("partner_order_id", "partner_order_id");
+        parameters.put("partner_order_id", partner_order_id);
         parameters.put("partner_user_id", "partner_user_id");
         parameters.put("pg_token", pgToken);
 
