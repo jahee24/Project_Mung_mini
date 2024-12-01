@@ -10,7 +10,7 @@ import org.apache.ibatis.type.Alias;
 @NoArgsConstructor
 @Alias("login")
 public class LoginDTO {
-    String email;
-    String password;
+    private String userId;
+    private String password;
 
 }

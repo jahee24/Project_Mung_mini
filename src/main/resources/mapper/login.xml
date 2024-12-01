@@ -6,7 +6,7 @@
     <!--id로 user, dog찾기-->
     <select id="login" resultType="user" parameterType="login">
         select u.* from user u
-        where email=#{email} and password=#{password}
+        where user_id=#{userId} and password=#{password}
 
     </select>
 </mapper>

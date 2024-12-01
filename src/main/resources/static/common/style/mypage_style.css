@@ -97,6 +97,9 @@ body {
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease;
+    width: 100%; /* 카드가 부모의 너비를 채우도록 */
+    height: 300px; /* 카드의 높이 설정 */
+
 }
 
 .square5_dog_image {
