@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
-
 import java.sql.Time;
 import java.sql.Timestamp;
 
@@ -22,5 +21,4 @@ public class ReservationForMypageDTO {
     private String status;
     private Timestamp createdAt;
     private Integer barcount;
-
 }

@@ -37,8 +37,12 @@ public class MyPageDAOImple implements MyPageDAO {
     }
 
     @Override
+    public List<ReservationForMypageDTO> getResv(String id) {
+        return mapper.getresv(id);
+    }
+
+    @Override
     public void insertDog(DogDTO dog) {
         mapper.insertdog(dog);
     }
-
 }

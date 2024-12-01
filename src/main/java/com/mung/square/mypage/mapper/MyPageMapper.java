@@ -13,6 +13,7 @@ public interface MyPageMapper {
     List<DogDTO> getdoglist(String id);
     List<ReservationForMypageDTO> getresv(String id);
     DogDTO getdogbyid(String id);
+    List<ReservationForMypageDTO> getresv(String id);
     void insertdog(DogDTO dog);
 }
 
