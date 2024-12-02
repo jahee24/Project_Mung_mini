@@ -10,7 +10,6 @@ public interface MyPageDAO {
     UserDTO getUser(String id);
     List<DogDTO> getDogList(String id);
     DogDTO getDogById(String id);
-
     List<ReservationForMypageDTO> getResv(String id);
     void insertDog(DogDTO dog);
     ReservationForMypageDTO getResvByNum(String id);
