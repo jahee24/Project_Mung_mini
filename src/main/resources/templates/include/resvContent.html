@@ -19,15 +19,13 @@
     <link rel="stylesheet" href="/mung/common/style/qna_style.css">
 </head>
 <body>
-    <div layout:fragment="content">
+    <div class="resv_wrap" layout:fragment="content">
 
-        <div class="container">
+        <div class="resv_container">
             <div class="wrap">
                 <div>
-                    <h1>예약</h1>
+                    <h2 class="resv_title">Reservation</h2>
                 </div>
-                <!--    <h1> &lt;!&ndash;style="position: fixed; left: 50%; transform: translateX(-50%);"&ndash;&gt;예약</h1>-->
-                <!-- 지점 선택 폼 -->
                 <div class="contents">
                     <div class="location-container">
                         <h3 style="text-align: start;">지점 선택</h3>
@@ -40,7 +38,7 @@
                                 <option value="일산">일산</option>
                             </select>
                         </form>
-                        <img alt="로고 이미지" id="location-image" src="/mung/images/logo/logo.png">
+                        <img alt="로고 이미지" id="location-image" src="/mung/images/logo.png">
                     </div>
                     <!-- 예약 폼 -->
                     <div class="form-container">
@@ -67,7 +65,7 @@
                                 <button type="button" class="time-move time-right">→</button>
                             </div>
 
-                            <button type="submit">예약하기</button>
+                            <button class="resv_submitbutton" type="submit">예약하기</button>
                         </form>
                     </div>
                 </div>
@@ -97,6 +95,7 @@
                     // success
                     // -> post mapping 컨트롤러 작동
                     // 컨트롤러에서 insert 문 작동되도록 하고
+
 
                     location.href = "/mung/kakaopay";
 
@@ -346,8 +345,6 @@
                 indexRange[1]--;
                 renderTimeList(...indexRange);
             })
-
-
 
         </script>
         <!-- 날짜 달력기능 스크립트 -->
