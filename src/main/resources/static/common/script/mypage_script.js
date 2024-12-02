@@ -175,11 +175,33 @@ function loadDogInfo(dogId) {
                 dogProfileImage.src = imageUrl ? '/uploads/' + imageUrl : '/default-image.png';
             }
 
+
+            let today = new Date();
+            let year = today.getFullYear(); // 년도
+            let month = today.getMonth() + 1;  // 월
+            let date = today.getDate();  // 날짜
+            let sysDate = new Date(`${year}/${month}/${date}`);
+
+            let targetDate = new Date(dog.birthDate);
+
+            let yearsDifference = sysDate.getFullYear() - targetDate.getFullYear();
+
+            console.log(`년도 차이: ${yearsDifference}`); // 원하는 결과 출력
+
+            // 프로필 데이터 업데이트
             document.getElementById('dog-name').textContent = dog.name;
+            document.getElementById('dog-age').textContent = yearsDifference+"세";
             document.getElementById('dog-gender').textContent = dog.gender;
             document.getElementById('dog-breed').textContent = dog.breed;
             document.getElementById('dog-birthDate').textContent = dog.birthDate;
             document.getElementById('dog-weight').textContent = dog.weight + 'kg';
+
+
+
+
+
+
+
 
             document.getElementById('test').textContent = dog.imageUrl;
 

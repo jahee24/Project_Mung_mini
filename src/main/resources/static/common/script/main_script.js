@@ -195,8 +195,10 @@ if (typeof utils === 'undefined') {
 function initAuthForms() {
     const loginTab = document.getElementById('tab-login');
     const registerTab = document.getElementById('tab-register');
+    const registerSubTab = document.getElementById('tab-register-sub');
     const loginPane = document.getElementById('pills-login');
     const registerPane = document.getElementById('pills-register');
+    const registerSubPane = document.getElementById('pills-register');
 
     // 탭 전환 이벤트
     loginTab.addEventListener('click', (e) => {
@@ -206,6 +208,12 @@ function initAuthForms() {
     });
 
     registerTab.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPane(registerPane, loginPane);
+        setActiveTab(registerTab, loginTab);
+    });
+
+    registerSubTab.addEventListener('click', (e) => {
         e.preventDefault();
         showPane(registerPane, loginPane);
         setActiveTab(registerTab, loginTab);

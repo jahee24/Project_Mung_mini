@@ -31,61 +31,6 @@
             </div>
 
             <div class="square5_mypage_content">
-                <div class="square5_mypage_reservation">
-                    <div class="square5_no_reservation" th:unless="${reservationlist != null}">
-                        <i class="far fa-calendar-times"></i>
-                        <p>현재 예약 내역이 없습니다.</p>
-                        <a href="/mung/resv" class="btn btn-primary">예약하러 가기</a>
-                    </div>
-                    <div class="square5_reservated">
-                        <h2>예약내역</h2>
-                        <div class="square5_reservated_table"></div>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th><i class="fas fa-ticket-alt"></i> 예약 번호</th>
-                                <th><i class="fas fa-map-marker-alt"></i> 예약 장소</th>
-                                <th><i class="far fa-clock"></i> 예약 일시</th>
-                                <th><i class="fas fa-check-circle"></i> 예약 상태</th>
-                                <th> 버튼</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="resv:${reservationlist}">
-                                <td th:text="${resv.resvNum}"></td>
-                                <td th:text="${resv.branchName}"></td>
-                                <td th:text="${resv.formattedResvDate}+' '+${resv.formattedStartTime}+' '+${resv.formattedEndTime}"></td>
-                                <td th:text="${resv.status}">상태</td>
-                                <!-- 조건에 따라 버튼 표시 -->
-                                <td>
-                                    <button class="btn btn-danger"
-                                            th:attr="data-resv-date=${resv.formattedResvDate},data-resv-num=${resv.resvNum}">
-                                        취소
-                                    </button>
-
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div>
-                    <h2><i class="fas fa-calendar-check"></i> 예약 상세</h2>
-                    <div class="square5_reservation_card">
-                        <div class="square5_reservation_info">
-                            <p><i class="fas fa-ticket-alt"></i> 예약번호:
-                            <p id="currentResvNum"></p>
-                            </p>
-                            <p><i class="fas fa-map-marker-alt"></i> 예약장소:
-                            <p id="currentResvBranchName"></p>
-                            </p>
-                            <p><i class="far fa-clock"></i> 예약일시:
-                            <p id="currentResvDateNTime"></p>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="square5_mypage_dogs">
                     <h2><i class="fas fa-paw"></i> 나의 반려견</h2>
                     <div class="square5_dogs_grid">
@@ -341,6 +286,46 @@
                     </div>
                 </div>
 
+
+                <div class="square5_mypage_reservation">
+                    <div class="square5_no_reservation" th:unless="${reservationlist != null}">
+                        <i class="far fa-calendar-times"></i>
+                        <p>현재 예약 내역이 없습니다.</p>
+                        <a href="/mung/resv" class="btn btn-primary">예약하러 가기</a>
+                    </div>
+                    <div class="square5_reservated">
+                        <h2>예약내역</h2>
+                        <div class="square5_reservated_table"></div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th><i class="fas fa-ticket-alt"></i> 예약 번호</th>
+                                <th><i class="fas fa-map-marker-alt"></i> 예약 장소</th>
+                                <th><i class="far fa-clock"></i> 예약 일시</th>
+                                <th><i class="fas fa-check-circle"></i> 예약 상태</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="resv:${reservationlist}">
+                                <td class="tdcontent" th:text="${resv.resvNum}"></td>
+                                <td class="tdcontent" th:text="${resv.branchName}"></td>
+                                <td class="tdcontent"
+                                    th:text="${resv.formattedResvDate}+' '+${resv.formattedStartTime}+' '+${resv.formattedEndTime}"></td>
+                                <td class="tdcontent" th:text="${resv.status}">상태</td>
+                                <!-- 조건에 따라 버튼 표시 -->
+                                <td>
+                                    <button class="btn btn-danger"
+                                            th:attr="data-resv-date=${resv.formattedResvDate},data-resv-num=${resv.resvNum}">
+                                        예약 취소
+                                    </button>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
                 <div class="square5_mypage_reviews">
                     <h2><i class="fas fa-star"></i>
