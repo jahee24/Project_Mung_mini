@@ -2,8 +2,9 @@ package com.mung.square.payment.controller;
 
 import com.mung.square.dto.*;
 import com.mung.square.payment.dao.PaymentDAO;
-import com.mung.square.payment.service.KakaoPayService;
-import com.mung.square.payment.service.OrderService;
+import com.mung.square.payment.dao.RefundDAO;
+import com.mung.square.payment.dao.UpdateDAO;
+import com.mung.square.payment.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +15,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/kakaopay")
 public class kakaopayController {
     private final OrderService orderService;
-    private final PaymentDAO paymentDAO;
+    private final PaymentService paymentService;
+    private final RefundService refundService;
+    private final UpdateService updateService;
 
     @GetMapping
     public String kakaopay(HttpSession session, Model model) {
@@ -44,7 +48,7 @@ public class kakaopayController {
         SessionUtils.addAttribute("totalPrice", totalPrice);
 
         // 카카오 결제 준비하기
-        ReadyResponse readyResponse = kakaoPayService.payReady(resvNum , name, totalPrice);
+        ReadyResponse readyResponse = kakaoPayService.payReady(resvNum, name, totalPrice);
         // 세션에 결제 고유번호(tid) 저장
         SessionUtils.addAttribute("tid", readyResponse.getTid());
         System.out.println(readyResponse);
@@ -70,10 +74,11 @@ public class kakaopayController {
         paymentDTO.setItemName(approveResponse.getItem_name());
         paymentDTO.setTotalPrice(Integer.parseInt(SessionUtils.getStringAttributeValue("totalPrice")));
         paymentDTO.setStatus(1);
+        paymentDTO.setOrderNum(Integer.parseInt(approveResponse.getPartner_order_id()));
 
         System.out.println(paymentDTO);
 
-        paymentDAO.insertPayment(paymentDTO);
+        paymentService.insertPayment(paymentDTO);
 
 
         return "/include/kakaopaySuccess";
@@ -81,22 +86,20 @@ public class kakaopayController {
 
 
     @PostMapping("/refund")
-    public ResponseEntity<CancelResponse> refund() {
-        // tid 값을 Session 에 저장된 user_id 에 따라 데이터베이스에서 조회해서 연결시켜야하고
-        // 연결된 tid 값에 따라 취소가 되면
-        // status 해당 row 에 status 값을 0으로 업데이트
+    public ResponseEntity<CancelResponse> refund(@RequestBody Map<String, Integer> request) {
 
-        String tid = SessionUtils.getStringAttributeValue("tid");
-        System.out.println(tid);
-        CancelResponse kakaocancelResponse = kakaoPayService.payCancel(tid);
+        int orderNum = request.get("orderNum");
+
+        RefundDTO refundDTO = refundService.getRefund(orderNum);
+
+        String tid = refundDTO.getTid();
+        int totalPrice = refundDTO.getTotalPrice();
+
+        updateService.updateStatus(orderNum);
+
+        CancelResponse kakaocancelResponse = kakaoPayService.payCancel(tid, totalPrice);
         ResponseEntity<CancelResponse> response = new ResponseEntity<>(kakaocancelResponse, HttpStatus.OK);
         System.out.println(kakaocancelResponse);
         return response;
     }
-
-    @GetMapping("/cancel")
-    public String payCancel() {
-        return "/include/kakaopayRefundTest";
-    }
 }
-

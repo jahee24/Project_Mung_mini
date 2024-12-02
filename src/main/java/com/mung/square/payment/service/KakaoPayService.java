@@ -72,12 +72,12 @@ public class KakaoPayService {
         return approveResponse;
     }
 
-    public CancelResponse payCancel(String tid) {
+    public CancelResponse payCancel(String tid, int totalPrice) {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("cid", "TC0ONETIME");
         parameters.put("tid", tid);
-        parameters.put("cancel_amount", "19800");
-        parameters.put("cancel_tax_free_amount", "200");
+        parameters.put("cancel_amount", String.valueOf(totalPrice));
+        parameters.put("cancel_tax_free_amount", "0");
 
         HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(parameters, this.getHeaders());
 

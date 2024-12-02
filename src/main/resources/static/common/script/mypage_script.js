@@ -9,15 +9,21 @@ $(document).ready(function () {
                 if (confirm("예약을 취소하시겠습니까?")) {
                     const resvNum = button.getAttribute("data-resv-num");
                     // 예약 취소 API 호출
-                    fetch(`/reservation/cancel/${resvNum}`, {
+                    fetch(`/mung/kakaopay/refund`, {
                         method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            orderNum: resvNum
+                        })
                     })
                         .then(response => {
                             if (response.ok) {
-                                alert("예약이 취소되었습니다.");
+                                alert("환불이 완료되었습니다.");
                                 location.reload();
                             } else {
-                                alert("예약 취소에 실패했습니다.");
+                                alert("환불 처리에 실패했습니다.");
                             }
                         })
                         .catch(err => alert("오류가 발생했습니다: " + err));
