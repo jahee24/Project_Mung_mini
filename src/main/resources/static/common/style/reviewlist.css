@@ -1,0 +1,188 @@
+/* 기본 설정 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white; /* 흰색 배경 */
+    color: #333;
+}
+
+/* 헤더 */
+header {
+    background-color: #64c869; /* 연두색 */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 3px solid #50af56;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 네비게이션 메뉴 */
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #64c869;
+}
+
+nav ul li {
+    padding: 10px 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #e0ffe1; /* 밝은 연두색 호버 효과 */
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    background-color: white; /* 흰색 배경 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #64c869; /* 연두색 */
+    color: white;
+    font-weight: bold;
+}
+
+td a {
+    color: #64c869;
+    text-decoration: none;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+/* 검색 및 카테고리 */
+form {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    gap: 10px;
+}
+
+form select, form input[type="text"], form input[type="submit"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+form input[type="submit"] {
+    background-color: #64c869;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form input[type="submit"]:hover {
+    background-color: #50af56;
+}
+
+/* 글쓰기 버튼 */
+.navbar-right li a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #64c869;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.navbar-right li a:hover {
+    background-color: #50af56;
+}
+
+/* 푸터 */
+footer {
+    background-color: white; /* 흰색 배경 */
+    color: #333;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    border-top: 3px solid #64c869;
+}
+
+footer .footer-section {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 50px;
+    align-items: center;
+}
+
+footer .footer-section div {
+    flex: 1;
+    text-align: center;
+}
+
+footer .footer-section div h3 {
+    color: #64c869;
+    margin-bottom: 10px;
+}
+/* 구분 섹션 스타일 */
+#category-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9; /* 연한 배경색 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#category-section label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+    color: #333;
+}
+
+#category-section select {
+    width: 200px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+#category-section select:hover {
+    border-color: #64c869;
+}
+
+
+#category-section select:focus {
+    outline: none;
+    border-color: #50af56;
+    box-shadow: 0 0 5px rgba(80, 175, 86, 0.5);
+}
+
