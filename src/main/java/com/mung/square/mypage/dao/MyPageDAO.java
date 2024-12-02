@@ -11,6 +11,5 @@ public interface MyPageDAO {
     List<DogDTO> getDogList(String id);
     List<ReservationForMypageDTO> getResv(String id);
     DogDTO getDogById(String id);
-    List<ReservationForMypageDTO> getResv(String id);
     void insertDog(DogDTO dog);
 }

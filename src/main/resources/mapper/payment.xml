@@ -7,8 +7,7 @@
 
     <!-- Insert a new payment -->
     <insert id="insertPayment" parameterType="payment">
-        INSERT INTO payment (tid, user_id, item_name, total_price, status)
-        VALUES (#{tid}, #{userId}, #{itemName}, #{totalPrice}, #{status})
+        INSERT INTO payment (tid, user_id, item_name, total_price, status, order_num)
+        VALUES (#{tid}, #{userId}, #{itemName}, #{totalPrice}, #{status}, #{orderNum})
     </insert>
-
 </mapper>

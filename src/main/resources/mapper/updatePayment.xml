@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mung.square.payment.mapper.UpdateMapper">
+    <update id="updatePaymentStatus" parameterType="int">
+        UPDATE payment
+        SET status = 0
+        WHERE status = 1 AND order_num = #{orderNum}
+    </update>
+</mapper>
