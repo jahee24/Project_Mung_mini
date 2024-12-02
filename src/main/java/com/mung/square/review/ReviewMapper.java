@@ -20,6 +20,7 @@ public interface ReviewMapper {
     List<ReviewDTO> dynamicsearch(Map<String,String> map);
     ReviewDTO read(String reviewNo);
     int update(ReviewDTO review);
+    int delete(String review_no);
     //파일insert
     int fileinsert(List<ReviewFileDTO> reviewFileDTOList);
 

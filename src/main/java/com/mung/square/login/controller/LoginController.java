@@ -18,6 +18,11 @@ import org.springframework.web.bind.support.SessionStatus;
 public class LoginController {
     private final LoginService loginService;
 
+    @GetMapping("/login")
+    public String showLoginPage() {
+        // 로그인 페이지 렌더링
+        return "redirect:/"; // login.html 템플릿을 반환
+    }
     @PostMapping("/login")
     public String login(LoginDTO login, Model model, HttpSession session) {
         System.out.println("스프링이 제공하는 로그인---------------------------------------");

@@ -21,5 +21,5 @@ public class ReviewDTO {
 	String title;
 	String content;
 	String category;
-	List<MultipartFile> files;
+	List<ReviewFileDTO> files;
 }
