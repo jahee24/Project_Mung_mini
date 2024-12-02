@@ -18,4 +18,3 @@ public interface MyPageMapper {
     void profileupdate(UserDTO user);
     void updatedog(DogDTO dog);
 }
-
