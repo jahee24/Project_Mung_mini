@@ -27,8 +27,8 @@ public class ReviewDAOImpl implements ReviewDAO {
     }
 
     @Override
-    public ReviewDTO read(String review) {
-        return mapper.read(review);
+    public ReviewDTO read(String review_no) {
+        return mapper.read(review_no);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class ReviewDAOImpl implements ReviewDAO {
     }
 
     @Override
-    public int delete(String review) {
-        return 0;
+    public int delete(String review_no) {
+        return mapper.delete(review_no); // 매퍼 호출
     }
 
     @Override

@@ -52,7 +52,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public int delete(String review_no) {
-        return 0;
+        return reviewDAO.delete(review_no); // DAO 계층 호출
     }
 
     @Override
@@ -62,6 +62,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public List<ReviewDTO> search(String tag, String data) {
+
         return reviewDAO.search(tag, data);
     }
 

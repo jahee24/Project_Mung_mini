@@ -38,11 +38,15 @@ public class FileUploadService {
                 //transferTo메소드는 지정된 경로의 파일명으로 파일객체를 생성
                 multipartFile.transferTo(new File(getUploadpath(storeFilename)));
                 //업로드되는 정보를 dto로 만들어서 List에 add
+                String fileUrl = "/uploads/" + storeFilename;
                 fileDTOList.add(new ReviewFileDTO(UUID.randomUUID().toString(),
-                        null,originalFilename,storeFilename));
+                        null,originalFilename,storeFilename, fileUrl));
             }
         }
         return fileDTOList;
+    }
+    public String getUploadPath(String filename) {
+        return uploadpath + filename; // uploadPath는 설정 파일에서 읽음
     }
     //저장되는 파일명을 리턴하는 메소드 - UUID를 이용해서 파일명을 생성
     //원본파일을 받아서 저장되는 파일명을 만들어서 리턴

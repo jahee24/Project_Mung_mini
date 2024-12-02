@@ -8,7 +8,7 @@
     -->
     <!--게시글 insert-->
     <insert id="insert" parameterType="review">
-        insert into tbboard
+        insert into tbreview
         values(null,#{id},sysdate(),#{title},#{content},#{category})
     </insert>
     <!--첨부파일이 여러 개가 insert
@@ -29,28 +29,28 @@
 
     </insert>
     <select id="selectall" resultType="review">
-        select * from tbboard
+        select * from tbreview
     </select>
     <select id="categorySelect" parameterType="String" resultType="review">
-        select * from tbboard where category = #{category}
+        select * from tbreview where category = #{category}
     </select>
     <!--where절이 동적으로 생성
         where절이 만들어지지 않는 상황이면 where이 추가되지 않는다.
         -->
     <select id="dynamicsearch" resultType="review" parameterType="Map">
-        select * from tbboard
+        select * from tbreview
 
         <where>
-            <if test="tag=='id' and data!=''">
+            <if test="tag.equals('id') and data!=''">
 
                 <!--조건이 만족하면 실행할 sql문을 정의-->
                 id like concat('%',#{data},'%')
             </if>
-            <if test="tag=='title' and data!=''">
+            <if test="tag.equals('title') and data!=''">
                 <!--조건이 만족하면 실행할 sql문을 정의-->
                 id like concat('%',#{data},'%')
             </if>
-            <if test="tag=='content' and data!=''">
+            <if test="tag.equals('content') and data!=''">
             <!--조건이 만족하면 실행할 sql문을 정의-->
             id like concat('%',#{data},'%')
             </if>
@@ -70,11 +70,15 @@
         </where>
     </select>
     <select id="read" resultType="review" parameterType="String">
-            select * from tbboard where review_no = #{review_no}
+            select * from tbreview where review_no = #{review_no}
     </select>
     <update id="update" parameterType="review">
-        update tbboard
+        update tbreview
         set title = #{title},content=#{content},category=#{category}
         where review_no=#{reviewNo}
     </update>
+    <delete id="delete" parameterType="String">
+        DELETE FROM tbreview WHERE review_no = #{reviewNo}
+    </delete>
+
 </mapper>

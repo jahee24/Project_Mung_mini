@@ -38,7 +38,7 @@
                 //선택한 값을 컨트롤러를 요청하면서 파라미터로 전송
                 //자바스크립트에서 주소표시줄에 입력하는 것과 같은 작업을 할 수 있다.
                 //get방식으로 요청
-                location.href = "/mung/review/list?category=" + $(this).val();
+                location.href = "/mung/support/review/list?category=" + $(this).val();
             })
         });
 
@@ -46,7 +46,8 @@
 </head>
 <body>
     <div layout:fragment="content">
-        <div id="category-section">
+        <div id="review-page">
+            <div id="category-section">
             <label for="category">구분:</label>
             <select name="category" id="category">
                 <option value="all">전체게시물</option>
@@ -55,35 +56,9 @@
                 <option value="게시판">게시판</option>
             </select>
             </form>
-        </div>
-        <div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>등록일</th>
-                    <th>삭제</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="review:${reviewlist}">
-                    <td th:text="${review.reviewNo}"></td>
-                    <td>
-                        <a th:href="@{/review/read(reviewNo=${review.reviewNo},action=READ)}"><span
-                                th:text="${review.title}"></span></a>
-                    </td>
-                    <td th:text="${review.id}"></td>
-                    <td th:text="${review.writeDate}"></td>
-                    <td>
-                        <a href="/mung/review/delete">삭제</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <form action="/mung/review/search" method="post">
+         </div>
+         <div id="review-table-container">
+            <form action="/mung/support/review/search" method="post">
             <select name="tag">
                 <option value="id">작성자</option>
                 <option value="title">제목</option>
@@ -91,9 +66,45 @@
                 <option value="write_date">작성일</option>
             </select> <input type="text" name="search"/> <input type="submit" value="검색">
             <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
-                <li><a href="/mung/support/review/write" style="text-align: right;">글쓰기</a></li>
+                <li><a id="write-button" href="/mung/support/review/write" style="text-align: right;">글쓰기</a></li>
             </ul>
-        </form>
+            </form>
+             <table class="table">
+                 <thead>
+                 <tr>
+                     <th>번호</th>
+                     <th>리뷰사진</th>
+                     <th>제목</th>
+                     <th>작성자</th>
+                     <th>등록일</th>
+                     <th>삭제</th>
+                 </tr>
+                 </thead>
+                 <tbody>
+                 <tr th:each="review : ${reviewlist}">
+                     <td th:text="${review.reviewNo}"></td>
+                     <td>
+                         <img th:if="${!#lists.isEmpty(review.files)}"
+                              th:src="@{${review.files[0].fileUrl}}"
+                              alt="미리보기 이미지" style="width: 100px; height: 100px;"/>
+                     </td>
+                     <td>
+                         <a th:href="@{/support/review/read(reviewNo=${review.reviewNo},action=READ)}"><span
+                                 th:text="${review.title}"></span></a>
+                     </td>
+                     <td th:text="${review.id}"></td>
+                     <td th:text="${review.writeDate}"></td>
+                     <td>
+                         <form th:action="@{/support/review/delete}" method="post">
+                             <input type="hidden" name="reviewNo" th:value="${review.reviewNo}">
+                             <button type="submit" class="btn btn-sm btn-danger">삭제</button>
+                         </form>
+                     </td>
+                 </tr>
+                 </tbody>
+             </table>
+         </div>
+        </div>
     </div>
 </body>
 </html>
