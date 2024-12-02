@@ -43,6 +43,7 @@ public class MyPageServiceImpl implements MyPageService {
 
         return storeFileName;
     }
+
     public String getUploadpath(String filename) {
         // 파일 저장 경로 설정
         return uploadDir.endsWith("/") ? uploadDir + filename : uploadDir + "/" + filename;
@@ -70,6 +71,10 @@ public class MyPageServiceImpl implements MyPageService {
         System.out.println("service,getResv========================>>>>>>>>>>>>>>>>>>>>");
         return myPageDAO.getResv(id);
     }
+    public ReservationForMypageDTO getResvByNum(String id) {
+        System.out.println(id);
+        return myPageDAO.getResvByNum(id);
+    }
 
     @Override
     public DogDTO getDogById(String id) {
@@ -86,6 +91,15 @@ public class MyPageServiceImpl implements MyPageService {
         myPageDAO.insertDog(dog);
     }
 
+    @Override
+    public void profileupdate(UserDTO user) {
+        myPageDAO.profileupdate(user);
+    }
+
+    @Override
+    public void updateDog(DogDTO dog) {
+        myPageDAO.updateDog(dog);
+    }
 
 
 }

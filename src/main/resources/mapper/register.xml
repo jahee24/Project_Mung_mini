@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mung.square.register.mapper.RegisterMapper">
+    <insert id="register" parameterType="user">
+        insert into user(user_id,email,password,name,phone_number,member_no)
+        values(#{userId},#{email},#{password},#{name},#{phoneNumber},concat('user',#{userId}))
+    </insert>
+
+</mapper>
+        <!--
+            insert into test(testno,name)
+            select null,concat('testtest',count(board_no) +1)
+            from tbboard
+            where id='0111022kim';
+            concat('u',count(user_id) +1)
+            select u.*, d.* from user u, dog d
+            where email=#{email} and password=#{password} and u.email = d.user_id
+        -->
