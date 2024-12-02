@@ -16,4 +16,6 @@ public interface MyPageMapper {
     ReservationForMypageDTO getresvbyid(String id);
     void profileupdate(UserDTO user);
     void updatedog(DogDTO dog);
+
+    List<ReservationForMypageDTO> getresv(String id);
 }

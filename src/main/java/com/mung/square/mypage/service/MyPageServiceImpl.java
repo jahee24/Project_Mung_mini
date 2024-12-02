@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -27,6 +28,7 @@ public class MyPageServiceImpl implements MyPageService {
         System.out.println("service,getUser");
         return myPageDAO.getUser(id);
     }
+
     public String uploadImage(MultipartFile file) throws IOException {
         // 업로드 디렉토리 생성
         File dir = new File(uploadDir);
@@ -71,6 +73,7 @@ public class MyPageServiceImpl implements MyPageService {
         System.out.println("service,getResv========================>>>>>>>>>>>>>>>>>>>>");
         return myPageDAO.getResv(id);
     }
+
     public ReservationForMypageDTO getResvByNum(String id) {
         System.out.println(id);
         return myPageDAO.getResvByNum(id);
@@ -87,7 +90,7 @@ public class MyPageServiceImpl implements MyPageService {
         dog.generateId();
         log.debug("Inserting data: {}", dog);
         log.debug("Inserting Dog in Service Layer: {}", dog);
-        System.out.println("service,insertDog"+dog);
+        System.out.println("service,insertDog" + dog);
         myPageDAO.insertDog(dog);
     }
 
@@ -97,9 +100,22 @@ public class MyPageServiceImpl implements MyPageService {
     }
 
     @Override
-    public void updateDog(DogDTO dog) {
-        myPageDAO.updateDog(dog);
+    public boolean updateDog(String dogId, DogDTO updatedDog) {
+        DogDTO existingDog = myPageDAO.getDogById(dogId);
+        if (existingDog != null) {
+            existingDog.setName(updatedDog.getName());
+            existingDog.setBreed(updatedDog.getBreed());
+            existingDog.setGender(updatedDog.getGender());
+            existingDog.setBirthDate(updatedDog.getBirthDate());
+            existingDog.setWeight(updatedDog.getWeight());
+            existingDog.setImageUrl(updatedDog.getImageUrl()); // 이미지 URL 업데이트
+
+            myPageDAO.updateDog(existingDog); // 수정된 정보 저장
+            return true;
+        }
+        System.out.println("false");
+        return false; // 해당 ID의 반려견이 없을 경우
     }
 
-
 }
+
