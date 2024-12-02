@@ -15,5 +15,8 @@ public interface MyPageMapper {
     DogDTO getdogbyid(String id);
     List<ReservationForMypageDTO> getresv(String id);
     void insertdog(DogDTO dog);
+    ReservationForMypageDTO getresvbyid(String id);
+    void profileupdate(UserDTO user);
+    void updatedog(DogDTO dog);
 }
 

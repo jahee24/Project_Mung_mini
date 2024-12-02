@@ -14,6 +14,7 @@ import java.util.List;
 public class MyPageDAOImple implements MyPageDAO {
     private final MyPageMapper mapper;
 
+
     @Override
     public UserDTO getUser(String id) {
         return mapper.getuser(id);
@@ -32,7 +33,7 @@ public class MyPageDAOImple implements MyPageDAO {
 
     @Override
     public DogDTO getDogById(String id) {
-        System.out.println("DAO"+id);
+        System.out.println("DAO" + id);
         return mapper.getdogbyid(id);
     }
 
@@ -42,7 +43,24 @@ public class MyPageDAOImple implements MyPageDAO {
     }
 
     @Override
+    public ReservationForMypageDTO getResvByNum(String id) {
+        return mapper.getresvbyid(id);
+    }
+
+
+    @Override
     public void insertDog(DogDTO dog) {
         mapper.insertdog(dog);
     }
+
+    @Override
+    public void profileupdate(UserDTO user) {
+        mapper.profileupdate(user);
+    }
+
+    @Override
+    public void updateDog(DogDTO dog) {
+        mapper.updatedog(dog);
+    }
+
 }
