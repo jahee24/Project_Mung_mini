@@ -25,11 +25,6 @@ public class MyPageDAOImple implements MyPageDAO {
         return mapper.getdoglist(id);
     }
 
-    @Override
-    public List<ReservationForMypageDTO> getResv(String id) {
-        return mapper.getresv(id);
-    }
-
 
     @Override
     public DogDTO getDogById(String id) {
