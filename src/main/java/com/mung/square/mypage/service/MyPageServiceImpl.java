@@ -1,24 +1,74 @@
 package com.mung.square.mypage.service;
 
 import com.mung.square.dto.DogDTO;
+import com.mung.square.dto.ReservationForMypageDTO;
 import com.mung.square.dto.UserDTO;
 import com.mung.square.mypage.dao.MyPageDAO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MyPageServiceImpl implements MyPageService {
     private final MyPageDAO myPageDAO;
-    public UserDTO getUser(String id){
+    @Value("${mypage.upload.dir}")
+    private String uploadDir;
+
+    public UserDTO getUser(String id) {
         System.out.println("service,getUser");
         return myPageDAO.getUser(id);
-    };
-    public List<DogDTO> getDogList(String id){
-        System.out.println("service,getDogList");
-        return myPageDAO.getDogList(id);
+    }
+    public String uploadImage(MultipartFile file) throws IOException {
+        // 업로드 디렉토리 생성
+        File dir = new File(uploadDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        //원본파일명을 추출
+        String originalFilename = file.getOriginalFilename();
+        //저장파일명생성
+        String storeFileName = createStoreFilename(originalFilename);
 
+        //transferTo 메소드는 지정된 경로의 파일명으로 파일객체를 생성
+        file.transferTo(new File(getUploadpath(storeFileName)));
+
+        return storeFileName;
+    }
+    public String getUploadpath(String filename) {
+        // 파일 저장 경로 설정
+        return uploadDir.endsWith("/") ? uploadDir + filename : uploadDir + "/" + filename;
+    }
+
+    private String createStoreFilename(String originalFilename) {
+        //확장자를 추출
+        int position = originalFilename.lastIndexOf(".");//.부터
+        String ext = "";
+        if (position != -1) { // 확장자가 있을 경우
+            ext = originalFilename.substring(position + 1).toLowerCase(); // 확장자를 소문자로 변환
+        }
+        String uuid = UUID.randomUUID().toString();
+        return ext.isEmpty() ? uuid : uuid + "." + ext;//ext가 없으면 그냥 uuid만 return
+
+    }
+
+
+    public List<DogDTO> getDogList(String id) {
+        return myPageDAO.getDogList(id);
+    }
+
+    @Override
+    public List<ReservationForMypageDTO> getResv(String id) {
+        System.out.println("service,getResv========================>>>>>>>>>>>>>>>>>>>>");
+        return myPageDAO.getResv(id);
     }
 
     @Override
@@ -27,5 +77,15 @@ public class MyPageServiceImpl implements MyPageService {
         return myPageDAO.getDogById(id);
     }
 
-    ;
+    @Override
+    public void insertDog(DogDTO dog) {
+        dog.generateId();
+        log.debug("Inserting data: {}", dog);
+        log.debug("Inserting Dog in Service Layer: {}", dog);
+        System.out.println("service,insertDog"+dog);
+        myPageDAO.insertDog(dog);
+    }
+
+
+
 }

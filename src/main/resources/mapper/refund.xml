@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mung.square.payment.mapper.RefundMapper">
+
+    <select id="selectRefundDetails" parameterType="int" resultType="refund">
+        SELECT p.tid, p.total_price
+        FROM payment p
+        WHERE p.order_num = #{orderNum}
+    </select>
+
+</mapper>

@@ -8,9 +8,8 @@ import org.apache.ibatis.type.Alias;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Alias("login")
-public class LoginDTO {
-    private String userId;
-    private String password;
-
+@Alias("refund")
+public class RefundDTO {
+    private String tid;
+    private int totalPrice;
 }

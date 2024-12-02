@@ -15,4 +15,5 @@ public class PaymentDTO {
     private String itemName;
     private int totalPrice;
     private int status;
+    private int orderNum;
 }

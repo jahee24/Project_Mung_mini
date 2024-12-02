@@ -8,45 +8,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>멍 스퀘어</title>
     <link rel="icon" href="/mung/images/logo.png">
-    <link rel="stylesheet" href="/mung/common/style/main_style.css">
     <link rel="stylesheet" href="/mung/common/style/mypage_style.css">
     <link rel="stylesheet" href="/mung/common/style/dogprofile_style.css">
     <link rel="stylesheet" href="/mung/common/style/dogregister_style.css">
-    <link rel="stylesheet" href="/mung/common/style/modal.css">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" as="style" crossorigin
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
-   <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/mung/common/script/mypage_script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
--->
-</head>
-<body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/mung/common/script/mypage_script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+</head>
+<body>
     <div layout:fragment="content">
 
         <div class="square5_mypage_container">
             <div class="square5_mypage_welcome">
                 <h1>마이페이지</h1>
-                <h2>안녕하세요, <span th:each="dog:${dog}"><span th:text="${dog.name}+' '"></span></span>견주님!</h2>
+                <h2>안녕하세요, <span th:each="dog:${doglist}"><span th:text="${dog.name}+' '"></span></span>견주님!</h2>
             </div>
 
             <div class="square5_mypage_content">
                 <div class="square5_mypage_reservation">
-                    <h2><i class="fas fa-calendar-check"></i> 나의 예약 현황</h2>
+                    <h2><i class="fas fa-calendar-check"></i> 나의 오늘 예약 현황</h2>
                     <div class="square5_reservation_card">
                         <div class="square5_reservation_info">
                             <p><i class="fas fa-ticket-alt"></i> 예약번호:
+                            <p id="currentResvNum"></p>
                             </p>
                             <p><i class="fas fa-map-marker-alt"></i> 예약장소:
+                            <p id="currentResvBranchName"></p>
                             </p>
                             <p><i class="far fa-clock"></i> 예약일시:
+                            <p id="currentResvDateNTime"></p>
                             </p>
                         </div>
                     </div>
@@ -55,24 +51,64 @@
                         <p>현재 예약 내역이 없습니다.</p>
                         <a href="/mung/resv" class="btn btn-primary">예약하러 가기</a>
                     </div>
+                    <div class="square5_reservated">
+                        <h2>예약내역</h2>
+                        <div class="square5_reservated_table"></div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th><i class="fas fa-ticket-alt"></i> 예약 번호</th>
+                                <th><i class="fas fa-map-marker-alt"></i> 예약 장소</th>
+                                <th><i class="far fa-clock"></i> 예약 일시</th>
+                                <th><i class="fas fa-check-circle"></i> 예약 상태</th>
+                                <th> 버튼</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="resv:${reservationlist}">
+                                <td th:text="${resv.resvNum}"></td>
+                                <td th:text="${resv.branchName}"></td>
+                                <td th:text="${resv.formattedResvDate}+' '+${resv.formattedStartTime}+' '+${resv.formattedEndTime}"></td>
+                                <td th:text="${resv.status}">상태</td>
+                                <!-- 조건에 따라 버튼 표시 -->
+                                <td>
+<!--                                    <button th:if="${#dates.parse('yyyy-MM-dd', resv.formattedResvDate).after(#dates.createNow())}"-->
+<!--                                            class="btn btn-danger"-->
+<!--                                            th:onclick="'confirmCancel('+${resv.resvNum}+')'">-->
+<!--                                        취소-->
+<!--                                    </button>-->
+                                    <button class="btn btn-danger"
+                                            th:attr="data-resv-date=${resv.formattedResvDate},data-resv-num=${resv.resvNum}">
+                                        취소
+                                    </button>
+
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
 
                 <div class="square5_mypage_dogs">
                     <h2><i class="fas fa-paw"></i> 나의 반려견</h2>
-                    <div class="square5_dogs_grid" th:each="dog:${dog}">
+                    <div class="square5_dogs_grid">
+                        <div th:each="dog:${doglist}">
 
-                        <div class="square5_dog_card">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#dogProfileModal"
-                               th:data-dog-id="${dog.id}"
-                               onclick="loadDogProfile(this.getAttribute('data-dog-id'))">
-
-                                <div class="square5_dog_image">
-                                    <img th:src="@{/mypage/}+${dog.imageUrl}" th:alt="${dog.name}">
-                                </div>
-                                <div class="square5_dog_name">
-                                    <span th:text="${dog.name}">반려견명</span>
-                                </div>
-                            </a>
+                            <div class="square5_dog_card">
+                                <a href="#" id="modalbtn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                   th:data-dog-id="${dog.id}"
+                                   th:onclick="loadDogInfo(this.getAttribute('data-dog-id'))">
+                                    <!--                                this.getAttribute('data-dog-id')-->
+                                    <div class="square5_dog_image">
+                                        <img th:alt="${dog.name}">
+                                    </div>
+                                    <div class="square5_dog_name">
+                                        <span th:text="${dog.name}">반려견명</span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                         <div class="square5_add_dog_card">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#dogRegisterModal">
@@ -80,11 +116,162 @@
                                 <p>반려견 추가하기</p>
                             </a>
                         </div>
+
+                    </div>
+
+                </div>
+                <!-- 반려견 프로필 모달 -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title fs-5" id="exampleModalLabel"><i class="fas fa-paw"></i> 반려견 프로필
+                                </h2>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                <a href="/dog/edit" class="square5_edit_btn"><i class="fas fa-edit"></i> 프로필 수정</a>
+                            </div>
+                            <div class="modal-body">
+                                <div class="square5_dog_image">
+                                    <img alt="반려견 이미지" class="square5_profile_img">
+                                </div>
+                                <!--th:src="@{/mypage/}+${dog.imageUrl}"-->
+                                <div class="square5_dog_info">
+                                    <div class="square5_info_item">
+                                        <i class="fas fa-id-card"></i>
+                                        <label>이름</label>
+                                        <span id="dog-name">반려견 이름</span>
+                                    </div>
+
+                                    <div class="square5_info_item">
+                                        <i class="fas fa-birthday-cake"></i>
+                                        <label>나이</label>
+                                        <span id="dog-age">반려견 나이</span>
+                                    </div>
+
+                                    <div class="square5_info_item">
+                                        <i class="fas fa-venus-mars"></i>
+                                        <label>성별</label>
+                                        <span id="dog-gender">반려견 성별</span>
+                                    </div>
+
+                                    <div class="square5_info_item">
+                                        <i class="fas fa-dog"></i>
+                                        <label>견종</label>
+                                        <span id="dog-breed">견종</span>
+                                    </div>
+
+                                    <div class="square5_info_item">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <label>만난 날</label>
+                                        <span id="dog-birthDate">만난 날</span>
+                                    </div>
+
+                                    <div class="square5_info_item">
+                                        <i class="fas fa-heart"></i>
+                                        <label>무게</label>
+                                        <span id="dog-weight">반려견 무게</span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- 반려견 등록 -->
+                <div class="modal fade" id="dogRegisterModal" tabindex="-1" aria-labelledby="dogRegisterModallabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form class="square5_dog_register_form" action="/mung/mypage/dogRegister" method="POST"
+                                  enctype="multipart/form-data">
+
+                                <div class="modal-header">
+                                    <h2 class="modal-title fs-5" id="dogRegisterModallabel"><i class="fas fa-paw"></i>
+                                        반려견
+                                        프로필
+                                    </h2>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    dogRegisterModal
+                                    <div class="square5_dog_register_content">
+                                        <div class="square5_dog_image_upload">
+                                            <div class="square5_image_preview">
+                                                <img id="preview" src="/images/logo.png"
+                                                     alt="반려견 이미지 미리보기">
+                                            </div>
+                                            <label for="dogImage" class="square5_upload_btn">
+                                                <i class="fas fa-camera"></i> 사진 업로드
+                                            </label>
+                                            <input type="file" id="dogImage" name="dogProfileImage" accept="image/*"
+                                                   hidden>
+
+                                        </div>
+                                        <!-- 세션의 userId 값을 숨겨진 입력 필드로 전달 -->
+                                        <input type="hidden" name="userId" th:value="${session.user.userId}">
+
+
+                                        <div class="square5_form_group">
+                                            <label for="name">이름</label>
+                                            <input type="text" id="name" name="name" required>
+                                        </div>
+
+                                        <div class="square5_form_group">
+                                            <label>성별</label>
+                                            <div class="square5_radio_group">
+                                                <input type="radio" id="male" name="gender" value="M" required>
+                                                <label for="male">남아</label>
+                                                <input type="radio" id="female" name="gender" value="F">
+                                                <label for="female">여아</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="square5_form_group">
+                                            <label for="breed">견종</label>
+                                            <select id="breed" name="breed" required>
+                                            </select>
+                                        </div>
+
+                                        <div class="square5_form_group">
+                                            <label for="birthDate">만난 날</label>
+                                            <input type="date" id="birthDate" name="birthDate" required>
+                                        </div>
+
+                                        <div class="square5_form_group">
+                                            <label for="weight">몸무게</label>
+                                            <select id="weight" name="weight" required>
+                                                <option value="" disabled selected>Select weight</option>
+                                                <!-- 기본값으로 선택 불가 옵션 -->
+                                                <!-- 옵션은 JavaScript에서 동적으로 추가됩니다 -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">등록하기</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                </div>
+                            </form>
+
+                        </div>
+
                     </div>
                 </div>
 
                 <div class="square5_mypage_reviews">
-                    <h2 th:each="dog:${dog}"><i class="fas fa-star"></i> <span th:text="${dog.name}+' '"></span>와 함꼐한
+                    <h2><i class="fas fa-star"></i>
+                        <span th:each="dog:${doglist}"> <span th:text="${dog.name}+' '"></span></span>와
+                        함께한
                         순간들</h2>
                     <div class="square5_reviews_grid">
                         <div class="square5_review_card">
@@ -106,71 +293,6 @@
             <div class="square5_mypage_actions">
                 <a href="/profile/edit" class="btn btn-primary"><i class="fas fa-user-edit"></i> 프로필 수정</a>
             </div>
-        </div>
-    </div>
-
-    <!-- 반려견 프로필 모달 -->
-    <div class="modal fade" id="dogProfileModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2><i class="fas fa-paw"></i> 반려견 프로필</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    <a href="/dog/edit" class="square5_edit_btn"><i class="fas fa-edit"></i> 프로필 수정</a>
-                </div>
-                <div class="modal-body">
-                    <div class="square5_dog_image">
-                        <img th:src="@{/mypage/}+${dog.imageUrl}" alt="반려견 이미지" class="square5_profile_img">
-                    </div>
-
-                    <div class="square5_dog_info">
-                        <div class="square5_info_item">
-                            <i class="fas fa-id-card"></i>
-                            <label>이름</label>
-                            <span id="dog-name">반려견 이름</span>
-                        </div>
-
-                        <div class="square5_info_item">
-                            <i class="fas fa-birthday-cake"></i>
-                            <label>나이</label>
-                            <span id="dog-age">반려견 나이</span>
-                        </div>
-
-                        <div class="square5_info_item">
-                            <i class="fas fa-venus-mars"></i>
-                            <label>성별</label>
-                            <span id="dog-gender">반려견 성별</span>
-                        </div>
-
-                        <div class="square5_info_item">
-                            <i class="fas fa-dog"></i>
-                            <label>견종</label>
-                            <span id="dog-breed">견종</span>
-                        </div>
-
-                        <div class="square5_info_item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <label>만난 날</label>
-                            <span id="dog-birthDate">만난 날</span>
-                        </div>
-
-                        <div class="square5_info_item">
-                            <i class="fas fa-heart"></i>
-                            <label>무게</label>
-                            <span id="dog-weight">반려견 무게</span>
-                        </div>
-                    </div>
-
-
-                    <div class="square5_profile_actions">
-                        <a href="/mypage" class="btn btn-secondary">돌아가기</a>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-
         </div>
     </div>
 
