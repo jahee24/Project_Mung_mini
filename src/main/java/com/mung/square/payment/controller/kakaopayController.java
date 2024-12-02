@@ -96,6 +96,7 @@ public class kakaopayController {
         int totalPrice = refundDTO.getTotalPrice();
 
         updateService.updateStatus(orderNum);
+        updateService.updateReservationStatus(orderNum);
 
         CancelResponse kakaocancelResponse = kakaoPayService.payCancel(tid, totalPrice);
         ResponseEntity<CancelResponse> response = new ResponseEntity<>(kakaocancelResponse, HttpStatus.OK);
