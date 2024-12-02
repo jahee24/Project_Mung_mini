@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,34 +29,56 @@ public class MyPageController {
     public String myPage(@ModelAttribute("user") UserDTO user, Model model) {
         List<DogDTO> dog = service.getDogList(user.getUserId());
         List<ReservationForMypageDTO> reservationList = service.getResv(user.getUserId());
+        if (reservationList == null) {
+            reservationList = new ArrayList<>(); // 빈 리스트로 초기화
+        }
+
         model.addAttribute("doglist", dog);
         model.addAttribute("reservationlist", reservationList);
         return "include/mypageContent";
     }
 
-    @GetMapping("/dogRegister")
+    @GetMapping("/profile/edit")
     public String myPageDogPro() {
-        return "menu/dogRegister";
+        return "include/mypageupdateContent";
     }
 
-    @GetMapping("/dogProfile")
-    public String myPageDogReg() {
-        return "menu/dogProfile";
+    @PostMapping("/profile/edit")
+    public String myPageEdit(@ModelAttribute("user") UserDTO user, Model model) {
+        service.profileupdate(user);
+        model.addAttribute("user", user);
+        return "redirect:/mypage";
     }
+
+    @PostMapping("/dog/edit")
+    public String myPageEditDog(@ModelAttribute("dog") DogDTO dog, Model model, @RequestParam("dogProfileImage") MultipartFile file) {
+        try {
+            String storedFileName = service.uploadImage(file);
+            //업로드 된 파일을 DogDTO에 저장
+            dog.setImageUrl(storedFileName);
+            service.updateDog(dog);
+            System.out.println("파일업로드 성공::::" + service.uploadImage(file));
+
+        } catch (IOException e) {
+            System.out.println("파일 업로드 실패:::" + e.getMessage());
+        }
+        return "redirect:/mypage";
+    }
+
     @PostMapping("dogRegister")
-    public String myPageDogReg(DogDTO dog,@RequestParam("dogProfileImage") MultipartFile file){
+    public String myPageDogReg(DogDTO dog, @RequestParam("dogProfileImage") MultipartFile file) {
         System.out.println(dog.toString());
         try {
             String storedFileName = service.uploadImage(file);
             //업로드 된 파일을 DogDTO에 저장
             dog.setImageUrl(storedFileName);
             service.insertDog(dog);
-            System.out.println( "파일업로드 성공::::"+service.uploadImage(file));
+            System.out.println("파일업로드 성공::::" + service.uploadImage(file));
 
         } catch (IOException e) {
-            System.out.println( "파일 업로드 실패:::"+e.getMessage());
+            System.out.println("파일 업로드 실패:::" + e.getMessage());
         }
-        System.out.println("controller=============================="+dog);
+        System.out.println("controller==============================" + dog);
         return "redirect:/mypage";
     }
 

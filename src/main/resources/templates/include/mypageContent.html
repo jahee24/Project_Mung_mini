@@ -32,21 +32,7 @@
 
             <div class="square5_mypage_content">
                 <div class="square5_mypage_reservation">
-                    <h2><i class="fas fa-calendar-check"></i> 나의 오늘 예약 현황</h2>
-                    <div class="square5_reservation_card">
-                        <div class="square5_reservation_info">
-                            <p><i class="fas fa-ticket-alt"></i> 예약번호:
-                            <p id="currentResvNum"></p>
-                            </p>
-                            <p><i class="fas fa-map-marker-alt"></i> 예약장소:
-                            <p id="currentResvBranchName"></p>
-                            </p>
-                            <p><i class="far fa-clock"></i> 예약일시:
-                            <p id="currentResvDateNTime"></p>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="square5_no_reservation"><!--th:unless="${reservation != null}"-->
+                    <div class="square5_no_reservation" th:unless="${reservationlist != null}">
                         <i class="far fa-calendar-times"></i>
                         <p>현재 예약 내역이 없습니다.</p>
                         <a href="/mung/resv" class="btn btn-primary">예약하러 가기</a>
@@ -66,30 +52,39 @@
                             </thead>
                             <tbody>
                             <tr th:each="resv:${reservationlist}">
-                                <td th:text="${resv.resvNum}"></td>
-                                <td th:text="${resv.branchName}"></td>
-                                <td th:text="${resv.formattedResvDate}+' '+${resv.formattedStartTime}+' '+${resv.formattedEndTime}"></td>
-                                <td th:text="${resv.status}">상태</td>
-                                <!-- 조건에 따라 버튼 표시 -->
-                                <td>
-<!--                                    <button th:if="${#dates.parse('yyyy-MM-dd', resv.formattedResvDate).after(#dates.createNow())}"-->
-<!--                                            class="btn btn-danger"-->
-<!--                                            th:onclick="'confirmCancel('+${resv.resvNum}+')'">-->
-<!--                                        취소-->
-<!--                                    </button>-->
-                                    <button class="btn btn-danger"
-                                            th:attr="data-resv-date=${resv.formattedResvDate},data-resv-num=${resv.resvNum}">
-                                        취소
-                                    </button>
+                                        <td th:text="${resv.resvNum}"></td>
+                                        <td th:text="${resv.branchName}"></td>
+                                        <td th:text="${resv.formattedResvDate}+' '+${resv.formattedStartTime}+' '+${resv.formattedEndTime}"></td>
+                                        <td th:text="${resv.status}">상태</td>
+                                        <!-- 조건에 따라 버튼 표시 -->
+                                        <td>
+                                            <button class="btn btn-danger"
+                                                    th:attr="data-resv-date=${resv.formattedResvDate},data-resv-num=${resv.resvNum}">
+                                                취소
+                                            </button>
 
-                                </td>
-
+                                        </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-
+                <div>
+                <h2><i class="fas fa-calendar-check"></i> 예약 상세</h2>
+                <div class="square5_reservation_card">
+                    <div class="square5_reservation_info">
+                        <p><i class="fas fa-ticket-alt"></i> 예약번호:
+                        <p id="currentResvNum"></p>
+                        </p>
+                        <p><i class="fas fa-map-marker-alt"></i> 예약장소:
+                        <p id="currentResvBranchName"></p>
+                        </p>
+                        <p><i class="far fa-clock"></i> 예약일시:
+                        <p id="currentResvDateNTime"></p>
+                        </p>
+                    </div>
+                </div>
+                </div>
 
                 <div class="square5_mypage_dogs">
                     <h2><i class="fas fa-paw"></i> 나의 반려견</h2>
@@ -102,7 +97,8 @@
                                    th:onclick="loadDogInfo(this.getAttribute('data-dog-id'))">
                                     <!--                                this.getAttribute('data-dog-id')-->
                                     <div class="square5_dog_image">
-                                        <img th:alt="${dog.name}">
+                                        <img th:src="@{/mypage/}+${dog.imageUrl}" width="50">
+
                                     </div>
                                     <div class="square5_dog_name">
                                         <span th:text="${dog.name}">반려견명</span>
@@ -130,12 +126,13 @@
                                 </h2>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
-                                <a href="/dog/edit" class="square5_edit_btn"><i class="fas fa-edit"></i> 프로필 수정</a>
                             </div>
                             <div class="modal-body">
                                 <div class="square5_dog_image">
-                                    <img alt="반려견 이미지" class="square5_profile_img">
+                                    <!--<img th:src="@{/mypage/+${dog.imageUrl}}" width="50" alt="반려견 이미지" class="square5_profile_img">-->
+                                    <img src="" width="100%" alt="반려견 이미지" class="square5_profile_img" id="dogProfileImage">
                                 </div>
+                                <span id="test"></span>
                                 <!--th:src="@{/mypage/}+${dog.imageUrl}"-->
                                 <div class="square5_dog_info">
                                     <div class="square5_info_item">
@@ -178,6 +175,7 @@
 
                             </div>
                             <div class="modal-footer">
+                                <a href="#" class="square5_edit_btn" data-bs-dismiss="modal"><i class="fas fa-edit"></i> 프로필 수정</a>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
                             </div>
@@ -202,11 +200,10 @@
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    dogRegisterModal
                                     <div class="square5_dog_register_content">
                                         <div class="square5_dog_image_upload">
                                             <div class="square5_image_preview">
-                                                <img id="preview" src="/images/logo.png"
+                                                <img id="preview" src="/mung/images/logo.png"
                                                      alt="반려견 이미지 미리보기">
                                             </div>
                                             <label for="dogImage" class="square5_upload_btn">
@@ -291,7 +288,7 @@
             </div>
 
             <div class="square5_mypage_actions">
-                <a href="/profile/edit" class="btn btn-primary"><i class="fas fa-user-edit"></i> 프로필 수정</a>
+                <a href="/mung/mypage/profile/edit" class="btn btn-primary"><i class="fas fa-user-edit"></i> 프로필 수정</a>
             </div>
         </div>
     </div>
