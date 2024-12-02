@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderCreateForm {
+    private int resvNum;
     private String name;
     private int totalPrice;
 }
