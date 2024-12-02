@@ -1,3 +1,5 @@
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f7f7f7;
@@ -10,18 +12,18 @@ body {
     flex-direction: column; /* 헤더와 폼을 세로로 정렬 */
 }
 
+
 .contents {
     display: flex;
 }
 
 .container {
-    width: 100%;
-    max-width: 1080px;
+    width: 80vw;
     padding: 20px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin: 120px 0; /* 헤더가 고정되어 있기 때문에 폼이 겹치지 않도록 여백을 줍니다 */
+    margin: 400px auto 50px; /* 헤더가 고정되어 있기 때문에 폼이 겹치지 않도록 여백을 줍니다 */
 }
 
 .form-container {
@@ -107,4 +109,28 @@ li.time_item.half button.btn_time {
 
 li.time_item.half.selected button.btn_time {
     background-color: greenyellow;
+}
+
+button.time-move {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    opacity: 0.4;
+    position: absolute;
+    top: 30px;
+    z-index: 3;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    /*font-weight: bolder;*/
+}
+
+button.time-move.time-left {
+    left: 0px;
+}
+
+button.time-move.time-right {
+    right: 0px;
 }
