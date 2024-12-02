@@ -17,5 +17,5 @@ public interface MyPageService {
     void insertDog(DogDTO dog);
     String uploadImage(MultipartFile file) throws IOException;
     void profileupdate(UserDTO user);
-    void updateDog(DogDTO dog);
+    boolean updateDog(String dogId,DogDTO dog);
 }

@@ -19,13 +19,15 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping("/login")
-    public String login(LoginDTO login, Model model, HttpSession session) {
+    public String login(LoginDTO login, Model model) {
         System.out.println("스프링이 제공하는 로그인---------------------------------------");
         UserDTO user = loginService.login(login);
+        if (user != null) {
+            model.addAttribute("user", user);
+        } else {
+            System.out.println("로그인 실패");
+        }
 
-        session.setAttribute("userId", user.getUserId());
-
-        model.addAttribute("user", user);
         return "redirect:/";
     }
 
