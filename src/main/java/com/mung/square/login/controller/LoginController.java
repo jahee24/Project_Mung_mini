@@ -23,15 +23,14 @@ public class LoginController {
         // 로그인 페이지 렌더링
         return "redirect:/"; // login.html 템플릿을 반환
     }
+
     @PostMapping("/login")
-    public String login(LoginDTO login, Model model) {
+    public String login(LoginDTO login, Model model, HttpSession session) {
         System.out.println("스프링이 제공하는 로그인---------------------------------------");
         UserDTO user = loginService.login(login);
-        if (user != null) {
-            model.addAttribute("user", user);
-        } else {
-            System.out.println("로그인 실패");
-        }
+
+        session.setAttribute("userId", user.getUserId());
+        model.addAttribute("user", user);
         return "redirect:/";
     }
 
