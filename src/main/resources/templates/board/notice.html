@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/mung/common/style/main_style.css">
+
     <link rel="stylesheet" href="/mung/common/style/notice_style.css">
 
     <!-- 외부 라이브러리 (Bootstrap, FontAwesome) -->
@@ -16,7 +17,7 @@
 
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="/mung/common/script/main_script.js" defer></script>
+    <script src="/mung/common/script/main_script.js"></script>
 
     <title>공지사항 & 이달의 회원</title>
 </head>
@@ -42,11 +43,18 @@
             <div class="notice-review-section">
                 <!-- 검색 영역 -->
                 <div class="notice-search-bar">
-                    <button id="testNotice-openDetailWindow" class="notice-new"
-                            onclick="openDetailWindow('/mung/newPost', '새 글 작성')">새 글 쓰기
+
+                    <button id="newPostButton" onclick="window.location.href='/mung/support/notice/NewPost'">
+                        새 글 작성
                     </button>
-                    <input type="text" id="notice-search-input" placeholder="검색어를 입력하세요">
-                    <button onclick="searchNotices()">검색</button>
+                    <!-- 검색 영역 -->
+                    <div class="notice-search-bar">
+
+                        <input type="text" id="notice-search-input" placeholder="검색어를 입력하세요">
+
+                        <button onclick="searchNotices()">검색</button>
+                    </div>
+
                 </div>
                 <!-- 공지사항 테이블 -->
                 <table class="notice-table">
@@ -65,14 +73,34 @@
                         <th>조회수</th>
                     </tr>
                     </thead>
-                    <tbody id="notice-table-body">
-                    <!-- JavaScript로 데이터 동적 추가 -->
+                    <tbody>
+                    <tr th:each="post, iterStat : ${posts}">
+                        <td th:text="${iterStat.index + 1}"></td>
+                        <td><a th:href="@{/support/notice/viewpost/{postId}(postId=${post.postId})}" th:text="${post.postTitle}"></a></td>
+
+                        <td th:text="${post.postAuthor}"></td>
+                        <td th:text="${post.postViews}"></td>
+
+
+                    </tr>
                     </tbody>
                 </table>
                 <!-- 페이지네이션 -->
                 <div id="testNotice-pagination" class="notice-pagination"></div>
+
+
             </div>
         </div>
+        <script>
+        // 서버에서 전달된 member_no 값을 JavaScript로 가져오기
+        var memberNo = /*[[${memberNo}]]*/ "default";  // 서버에서 member_no를 Thymeleaf로 전달
+
+        // 확인용 알림창
+        alert("세션 member_no 값: " + memberNo);
+
+
+        }
+    </script>
         <script src="/mung/common/script/notice_script.js" defer></script>
     </div>
 </body>

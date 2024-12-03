@@ -1,31 +1,60 @@
-// 댓글 기능 관련
+// 댓글 관련 요소들
 const viewPostCommentList = document.getElementById("viewPost-comment-list");
 const viewPostCommentInput = document.getElementById("viewPost-comment-input");
 const viewPostAddCommentBtn = document.getElementById("viewPost-add-comment");
 
 // 댓글 추가 기능
-viewPostAddCommentBtn.addEventListener("click", () => {
+viewPostAddCommentBtn.addEventListener("click", async () => {
     const commentText = viewPostCommentInput.value.trim();
     if (commentText === "") {
         alert("댓글 내용을 입력해주세요.");
         return;
     }
 
-    const commentItem = document.createElement("li");
-    commentItem.className = "viewPost-comment-item";
-    commentItem.innerHTML = `
-        <span>${commentText}</span>
-        <button class="viewPost-delete-comment">삭제</button>
-    `;
-    viewPostCommentList.appendChild(commentItem);
-    viewPostCommentInput.value = "";
+    try {
+        // 서버로 댓글 추가 요청 (POST 요청)
+        const response = await fetch('/mung/comments/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                postId: postId,  // 게시글 ID (게시글에 해당하는 댓글을 달기 위한)
+                content: commentText,  // 댓글 내용
+            }),
+        });
 
-    // 댓글 삭제 이벤트 추가
-    commentItem.querySelector(".viewPost-delete-comment").addEventListener("click", () => {
-        if (confirm("이 댓글을 삭제하시겠습니까?")) {
-            commentItem.remove();
+        if (!response.ok) {
+            throw new Error('댓글 추가 실패');
         }
-    });
+
+        // 댓글을 추가 후 화면에 표시
+        const newComment = await response.json();  // 서버에서 반환된 댓글 객체
+        const commentItem = document.createElement("li");
+        commentItem.className = "viewPost-comment-item";
+        commentItem.innerHTML = `
+            <span>${newComment.content}</span>
+            <button class="viewPost-delete-comment" data-comment-id="${newComment.id}">삭제</button>
+        `;
+        viewPostCommentList.appendChild(commentItem);
+        viewPostCommentInput.value = "";
+
+        // 댓글 삭제 이벤트 추가
+        commentItem.querySelector(".viewPost-delete-comment").addEventListener("click", async () => {
+            if (confirm("이 댓글을 삭제하시겠습니까?")) {
+                try {
+                    const commentId = commentItem.querySelector(".viewPost-delete-comment").getAttribute('data-comment-id');
+                    const deleteResponse = await fetch(`/mung/comments/delete/${commentId}`, { method: 'DELETE' });
+                    if (!deleteResponse.ok) throw new Error('댓글 삭제 실패');
+                    commentItem.remove(); // 댓글 삭제 후 UI에서 제거
+                } catch (error) {
+                    alert('댓글 삭제 중 오류 발생');
+                }
+            }
+        });
+    } catch (error) {
+        alert('댓글 추가 중 오류 발생');
+    }
 });
 
 // 게시물 관련 기능
@@ -38,9 +67,17 @@ viewPostEditButton.addEventListener("click", () => {
 });
 
 // 게시물 삭제 기능
-viewPostDeleteButton.addEventListener("click", () => {
+viewPostDeleteButton.addEventListener("click", async () => {
     if (confirm("이 게시물을 삭제하시겠습니까?")) {
-        alert("게시물이 삭제되었습니다.");
-        // 실제 삭제 로직은 구현 필요
+        try {
+            // 서버로 게시글 삭제 요청 (DELETE 요청)
+            const response = await fetch(`/mung/posts/delete/${postId}`, { method: 'DELETE' });
+            if (!response.ok) throw new Error('게시물 삭제 실패');
+            alert("게시물이 삭제되었습니다.");
+            // 삭제 후 페이지 리다이렉트 (예: 게시판 목록 페이지로)
+            window.location.href = "/mung/support/notice";
+        } catch (error) {
+            alert('게시물 삭제 중 오류 발생');
+        }
     }
 });
