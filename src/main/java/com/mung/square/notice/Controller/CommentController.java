@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/mung/comments")
+@RequestMapping("/comments")
 public class CommentController {
 
     @Autowired
@@ -25,6 +25,8 @@ public class CommentController {
         }
     }
 
+
+
     // 댓글 삭제
     @DeleteMapping("/delete/{commentId}")
     public ResponseEntity<Void> deleteComment(@PathVariable int commentId) {
@@ -35,4 +37,9 @@ public class CommentController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);  // 오류 처리
         }
     }
+
+
+
+
+
 }

@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//@MapperScan("com.mung.square.notice.mapper")
+
 public class ProjectMungMiniApplication {
 
     public static void main(String[] args) {

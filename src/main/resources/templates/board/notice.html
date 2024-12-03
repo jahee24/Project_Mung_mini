@@ -39,14 +39,14 @@
 
         <!-- 공지사항 섹션 -->
         <div class="notice-section-container">
-            <h2 class="notice-section-title">공지&게시판</h2>
+            <h2 class="notice-section-title">공지사항</h2>
             <div class="notice-review-section">
                 <!-- 검색 영역 -->
                 <div class="notice-search-bar">
-
-                    <button id="newPostButton" onclick="window.location.href='/mung/support/notice/NewPost'">
+                    <button id="newPostButton" onclick="openNewPost()">
                         새 글 작성
                     </button>
+
                     <!-- 검색 영역 -->
                     <div class="notice-search-bar">
 
@@ -61,8 +61,9 @@
                     <!-- 열 크기 설정 -->
                     <colgroup>
                         <col style="width: 5%;"> <!-- 순번 열 -->
-                        <col style="width: 80%;"> <!-- 제목 열 -->
-                        <col style="width: 10%;"> <!-- 등록자명 열 -->
+                        <col style="width: 60%;"> <!-- 제목 열 -->
+                        <col style="width: 10%;"><!-- 등록자명 열 -->
+                        <col style="width: 20%;"> <!-- 작성시간 열 -->
                         <col style="width: 5%;"> <!-- 조회수 열 -->
                     </colgroup>
                     <thead>
@@ -70,18 +71,20 @@
                         <th>순번</th>
                         <th>제목</th>
                         <th>등록자명</th>
+                        <th>작성시간</th>
                         <th>조회수</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="post, iterStat : ${posts}">
                         <td th:text="${iterStat.index + 1}"></td>
-                        <td><a th:href="@{/support/notice/viewpost/{postId}(postId=${post.postId})}" th:text="${post.postTitle}"></a></td>
-
-                        <td th:text="${post.postAuthor}"></td>
+                        <td>
+                            <a th:href="@{/support/notice/viewpost/{postId}(postId=${post.postId})}"
+                               th:text="${post.postTitle}"></a>
+                        </td>
+                        <td th:text="${post.authorName}"></td>
+                        <td th:text="${post.postCreatedAt}"></td> <!-- 작성 시간 열 추가 -->
                         <td th:text="${post.postViews}"></td>
-
-
                     </tr>
                     </tbody>
                 </table>
