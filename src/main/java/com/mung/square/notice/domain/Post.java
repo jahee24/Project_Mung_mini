@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 
 @Getter
 @Setter
+
 public class Post {
     private int postId;
     private String postTitle;

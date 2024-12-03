@@ -32,6 +32,7 @@ public class LoginController {
         session.setAttribute("userId", user.getUserId());
         session.setAttribute("member_no",user.getMemberNo());
         session.setAttribute("name", user.getName());
+
         model.addAttribute("user", user);
         return "redirect:/";
     }

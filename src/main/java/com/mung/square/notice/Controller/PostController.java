@@ -20,6 +20,7 @@ public class PostController {
 
 
     // 게시글 작성
+
     @PostMapping("/submitNewPost")  // 경로 수정
     public String createPost(@RequestParam String title, @RequestParam String content , HttpSession session) {
         String authorName = (String) session.getAttribute("name");
@@ -28,7 +29,9 @@ public class PostController {
             // 작성자 ID가 세션에서 가져오지 못했을 경우, 에러 페이지로 리다이렉트
             return "redirect:/error";
         }
+
         Post newPost = new Post();
+        System.out.println(newPost);
         newPost.setPostTitle(title);
         newPost.setPostContent(content);
         newPost.setPostAuthorId(postAuthorId);
