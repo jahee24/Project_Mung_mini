@@ -55,7 +55,8 @@ public class MyPageDAOImple implements MyPageDAO {
 
     @Override
     public void updateDog(DogDTO dog) {
-        mapper.updatedog(dog);
+        int result = mapper.updatedog(dog);
+        System.out.println("DAO" + result);
     }
 
 }

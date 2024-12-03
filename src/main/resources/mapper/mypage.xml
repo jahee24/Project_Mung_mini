@@ -62,16 +62,8 @@
     </insert>
     <update id="profileupdate" parameterType="user">
         update user
-        set (
-        <if test="id != null">id=#{id},</if>
-        <if test="name != null">name=#{name},</if>
-        <if test="birthDate != null">birth_date=#{birthDate},</if>
-        <if test="breed != null">breed,</if>
-        <if test="weight != null">weight,</if>
-        <if test="gender != null">gender,</if>
-        <if test="imageUrl != null">image_url,</if>
-        <if test="userId != null">user_id</if>
-        )where user_id=#{userId}
+        set password=#{password},email=#{email},name=#{name},phone_number=#{phoneNumber}
+        where user_id=#{userId}
     </update>
     <update id="updatedog" parameterType="dog">
         update dog

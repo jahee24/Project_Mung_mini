@@ -62,6 +62,7 @@ public class MyPageController {
                 String storedFileName = service.uploadImage(file);
                 dog.setImageUrl(storedFileName); // 업로드된 파일명을 DTO에 설정
             }
+            System.out.println("====>"+dog);
             service.updateDog(dog.getId(), dog); // DB 업데이트
             System.out.println("반려견 정보 수정 성공: " + dog);
 
