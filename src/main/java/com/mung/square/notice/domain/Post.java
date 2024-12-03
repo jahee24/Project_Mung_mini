@@ -1,14 +1,13 @@
 package com.mung.square.notice.domain;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
-@Data
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Post {
     private int postId;
     private String postTitle;
@@ -17,4 +16,6 @@ public class Post {
     private int postViews;
     private String postAuthorId; // 변경된 타입: String (user_id와 일치)
     private Timestamp postCreatedAt;
+    private String authorName;
+
 }

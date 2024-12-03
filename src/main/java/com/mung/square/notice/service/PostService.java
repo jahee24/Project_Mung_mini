@@ -1,13 +1,12 @@
+
 package com.mung.square.notice.service;
 
 import com.mung.square.notice.domain.Post;
+import com.mung.square.notice.domain.Comment;
 import com.mung.square.notice.mapper.PostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import com.mung.square.notice.domain.Post;
-import com.mung.square.notice.domain.Comment;
-
 import java.util.List;
 
 @Service
@@ -40,6 +39,7 @@ public class PostService {
             return post;
         }, postId);
     }
+
     // 새 게시글 작성
     public void createPost(Post post) {
         postMapper.createPost(post);  // 게시글 생성
@@ -51,23 +51,29 @@ public class PostService {
         postMapper.updatePost(post);  // 게시글 수정
     }
 
-
-
     // 게시글 삭제
     public void deletePost(int postId) {
         postMapper.deletePost(postId);
     }
 
-
     // 댓글 추가
     public void addComment(int postId, Comment comment) {
-        // 댓글을 DB에 추가하는 로직
         postMapper.addComment(postId, comment);
     }
 
     // 댓글 삭제
     public void deleteComment(int commentId) {
-        // 댓글을 DB에서 삭제하는 로직
         postMapper.deleteComment(commentId);
     }
+    //검색 기능
+    public List<Post> searchPosts(String keyword, int page, int size) {
+        int offset = (page - 1) * size;
+        return postMapper.searchPosts(keyword, offset, size);
+    }
+
+
+
+
+
+
 }

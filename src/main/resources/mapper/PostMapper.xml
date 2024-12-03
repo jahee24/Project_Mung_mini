@@ -8,6 +8,7 @@
     <select id="getAllPosts" resultType="com.mung.square.notice.domain.Post">
         SELECT * FROM post_table
         LIMIT #{size} OFFSET #{offset}
+
     </select>
 
     <!-- 게시글 상세 조회 -->
@@ -36,5 +37,15 @@
     <delete id="deletePost" parameterType="int">
         DELETE FROM post_table WHERE post_id = #{postId}
     </delete>
+
+    <!-- 게시글 검색 -->
+    <select id="searchPosts" resultType="com.mung.square.notice.domain.Post">
+        SELECT * FROM post_table
+        WHERE post_title LIKE CONCAT('%', #{keyword}, '%')
+        OR post_content LIKE CONCAT('%', #{keyword}, '%')
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+
 
 </mapper>

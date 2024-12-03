@@ -7,21 +7,22 @@
     <title>새 글 작성</title>
 </head>
 <body>
-    <div class="newpost-container">
-        <h1 class="newpost-title">새 글 작성</h1>
-        <form action="/mung/support/notice/newPost" method="post">
-            <input type="text" name="title" placeholder="제목" required>
-            <textarea name="content" placeholder="내용" required></textarea>
-            <input type="text" name="author" value="/*[[${loggedInUser.name}]]*/" readonly>
-            <!-- 자동으로 로그인된 사용자 이름 입력 -->
-            <button type="submit">게시글 작성</button>
-        </form>
+<div class="newpost-container">
+  <h1 class="newpost-title">새 글 작성</h1>
+  <form class="newpost-form" action="/mung/support/posts/submitNewPost" method="post">
+    <input class="newpost-input" type="text" name="title" placeholder="제목" required>
+    <textarea class="newpost-textarea" name="content" placeholder="내용" required></textarea>
+    <input class="newpost-input" type="text" name="author" th:value="${userName}" readonly>
 
-        <!-- 성공 메시지 -->
-        <div id="success-message" style="display:none;">
-            새 글이 성공적으로 작성되었습니다!
-        </div>
-    </div>
+    <!-- 자동으로 로그인된 사용자 이름 입력 -->
+    <button class="newpost-button" type="submit">게시글 작성</button>
+  </form>
+
+  <!-- 성공 메시지 -->
+  <div id="success-message" style="display:none;">
+    새 글이 성공적으로 작성되었습니다!
+  </div>
+</div>
 
 </body>
 </html>

@@ -7,13 +7,12 @@ const notices = [
     { title: " ", description: " ", image: "/mung/images/notice/image3.jpg" },
 ];
 
-// 공지사항 테이블 렌더링 함수
-function renderNoticeTable() {
+// 업데이트된 공지사항 테이블 렌더링 함수
+async function renderNoticeTable(notices) {
     const tableBody = document.getElementById('notice-table-body');
     tableBody.innerHTML = ''; // 기존 내용 초기화
 
-    // 테스트 데이터를 순회하며 테이블 행 추가
-    testNotices.forEach((notice, index) => {
+    notices.forEach((notice, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${index + 1}</td> <!-- 순번 -->

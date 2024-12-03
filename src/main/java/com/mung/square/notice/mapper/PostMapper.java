@@ -21,9 +21,10 @@ public interface PostMapper {
     void updatePost(Post post);
 
     void deletePost(int postId);
-
-
-
+    // 검색 기능
+    List<Post> searchPosts(@Param("keyword") String keyword,
+                           @Param("offset") int offset,
+                           @Param("size") int size);
 
 
     // 댓글 추가
@@ -34,5 +35,4 @@ public interface PostMapper {
     // 댓글 삭제
     @Delete("DELETE FROM post_comment WHERE post_comment_id = #{commentId}")
     void deleteComment(@Param("commentId") int commentId);
-
 }

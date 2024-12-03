@@ -20,6 +20,8 @@
   <div class="viewpost-author">
     <span>작성자: <span th:text="${post.postAuthor}">작성자</span></span>
     <span>작성일: <span th:text="${post.postCreatedAt}">작성일</span></span>
+    <!-- 조회수 표시 -->
+    <span>조회수: <span th:text="${post.postViews}">0</span></span>
   </div>
 
   <!-- 게시글 수정 및 삭제 버튼 -->
@@ -29,9 +31,6 @@
             th:onclick="'deletePost(\'/mung/support/notice/deletePost/' + ${post.postId} + '\')'">
       삭제
     </button>
-
-
-
   </div>
 
   <!-- 댓글 섹션 -->
@@ -47,7 +46,6 @@
   </div>
 </div>
 <a href="/mung/support/notice" class="back-btn">목록으로 돌아가기</a>
-
 
 <script>
   function deletePost(url) {
@@ -69,9 +67,6 @@
     }
   }
 </script>
-
-
-
 
 <!-- 댓글 처리 및 게시글 삭제, 수정 관련 스크립트 -->
 <script src="/mung/viewpost/viewpost_script.js"></script> <!-- 자바스크립트 파일 연결 -->
