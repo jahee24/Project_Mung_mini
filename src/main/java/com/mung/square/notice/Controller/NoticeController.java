@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/mung/support/notice")
+@RequestMapping("/support/notice")
 public class NoticeController {
     @Autowired
     private PostService postService;
@@ -75,7 +75,7 @@ public class NoticeController {
         if (memberNo != null && memberNo.startsWith("m")) {
             return "board/NewPost";  // 매니저인 경우 글쓰기 페이지로 이동
         } else {
-            return "redirect:/mung/support/notice";  // 비회원은 게시판으로 리다이렉트
+            return "redirect:/support/notice";  // 비회원은 게시판으로 리다이렉트
         }
     }
 }

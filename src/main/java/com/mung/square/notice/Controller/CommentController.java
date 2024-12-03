@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/mung/comments")
+@RequestMapping("/comments")
 public class CommentController {
 
     @Autowired

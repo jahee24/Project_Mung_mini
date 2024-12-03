@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/support/notice/posts") // 경로 수정
+@RequestMapping("/support/notice") // 경로 수정
 public class PostController {
 
     @Autowired
@@ -18,9 +18,10 @@ public class PostController {
 
 
     // 게시글 작성
-    @PostMapping("/submitNewPost")  // 경로 수정
+    @PostMapping("/newPost")  // 경로 수정
     public String createPost(@RequestParam String title, @RequestParam String content) {
         Post newPost = new Post();
+        System.out.println(newPost);
         newPost.setPostTitle(title);
         newPost.setPostContent(content);
         postService.createPost(newPost);

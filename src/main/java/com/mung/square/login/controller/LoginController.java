@@ -30,6 +30,7 @@ public class LoginController {
         UserDTO user = loginService.login(login);
 
         session.setAttribute("userId", user.getUserId());
+        session.setAttribute("member_no", user.getMemberNo());
         model.addAttribute("user", user);
         return "redirect:/";
     }

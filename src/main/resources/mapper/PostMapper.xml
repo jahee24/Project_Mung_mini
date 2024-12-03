@@ -23,6 +23,8 @@
         VALUES (#{postTitle}, #{postContent}, #{postAuthorId})
     </insert>
 
+
+
     <!-- 게시글 수정 -->
     <update id="updatePost" parameterType="com.mung.square.notice.domain.Post">
         UPDATE post_table
