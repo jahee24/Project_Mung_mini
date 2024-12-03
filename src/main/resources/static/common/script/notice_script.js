@@ -1,33 +1,12 @@
 let currentNoticePage = 1; // 현재 페이지를 추적
 
-//리뷰 카드 테스트 데이터 db연결시 삭제 예정
+//리뷰 카드
 const notices = [
     { title: " ", description: " ", image: "/mung/images/notice/image1.jpg" },
     { title: " ", description: " ", image: "/mung/images/notice/image2.jpg" },
     { title: " ", description: " ", image: "/mung/images/notice/image3.jpg" },
-
 ];
 
-//공지사항 데이터 테스트 추후 db연결시 삭제 예정
-const testNotices = [
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-    { id: 1, title: "첫 번째 공지사항", author: "관리자", views: 50 },
-];
 // 공지사항 테이블 렌더링 함수
 function renderNoticeTable() {
     const tableBody = document.getElementById('notice-table-body');
@@ -152,12 +131,6 @@ function renderFilteredNotices(filteredNotices) {
 }
 
 
-// 공통 상세보기 창 열기 함수
-function openDetailWindow(url, title) {
-    const fullUrl = `${url}?title=${encodeURIComponent(title)}`;
-    window.open(fullUrl, '_blank', 'width=800,height=600,scrollbars=yes');
-}
-
 /*페이지 개 효과*/
 const dog = document.querySelector('.animated-dog');
 
@@ -234,6 +207,20 @@ function renderNoticePagination() {
         paginationContainer.appendChild(button);
     }
 }
+
+// 게시글 상세보기 창 열기 함수
+function openDetailWindow(postId) {
+    const url = `/mung/support/notice/viewPost/${postId}`;  // 해당 게시글의 상세 URL
+    window.open(url, '_blank', 'width=800,height=600,scrollbars=yes');  // 새 창으로 열기
+}
+// 새 글 작성 창 열기 함수
+function openNewPost() {
+    const url = `/mung/support/notice/newPost`;  // 새 글 작성 페이지 URL
+    window.open(url, '_blank', 'width=800,height=600,scrollbars=yes');  // 새 창으로 열기
+}
+
+
+
 
 
 //메인 페이지 통합 랜더링

@@ -4,19 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>게시글 보기</title>
-  <link rel="stylesheet" href="/mung/common/style/viewpost_style.css">
-
+  <link rel="stylesheet" href="/mung/common/style/viewpost_style.css"> <!-- CSS 링크 -->
 </head>
 <body>
 <div class="viewpost-container">
-  <h1 class="viewpost-title">게시글 제목</h1>
-  <div class="viewpost-content">
+  <!-- 게시글 제목 -->
+  <h1 class="viewpost-title" th:text="${post.postTitle}">게시글 제목</h1>
+
+  <!-- 게시글 내용 -->
+  <div class="viewpost-content" th:text="${post.postContent}">
     게시글 내용이 여기에 표시됩니다.
   </div>
+
+  <!-- 게시글 작성자 및 작성일 -->
+  <div class="viewpost-author">
+    <span>작성자: <span th:text="${post.postAuthor}">작성자</span></span>
+    <span>작성일: <span th:text="${post.postCreatedAt}">작성일</span></span>
+  </div>
+
+  <!-- 게시글 수정 및 삭제 버튼 -->
   <div class="viewpost-actions">
     <button id="edit-post" class="viewpost-action-button">수정</button>
-    <button id="delete-post" class="viewpost-action-button">삭제</button>
+    <button id="delete-post" class="viewpost-action-button"
+            th:onclick="'deletePost(\'/mung/support/notice/deletePost/' + ${post.postId} + '\')'">
+      삭제
+    </button>
+
+
+
   </div>
+
+  <!-- 댓글 섹션 -->
   <div class="viewpost-comments">
     <h2 class="viewpost-comments-title">댓글</h2>
     <ul id="comment-list" class="viewpost-comment-list">
@@ -28,6 +46,34 @@
     </div>
   </div>
 </div>
-<script src="/mung/viewpost/viewpost_script.js"></script>
+<a href="/mung/support/notice" class="back-btn">목록으로 돌아가기</a>
+
+
+<script>
+  function deletePost(url) {
+    if (confirm("이 게시물을 삭제하시겠습니까?")) {
+      fetch(url, {
+        method: 'DELETE',
+      })
+              .then(response => {
+                if (response.ok) {
+                  window.location.href = "/mung/support/notice"; // 삭제 후 게시판으로 리다이렉트
+                } else {
+                  alert("게시물 삭제 실패");
+                }
+              })
+              .catch(error => {
+                alert("삭제 요청 실패");
+                console.error(error);
+              });
+    }
+  }
+</script>
+
+
+
+
+<!-- 댓글 처리 및 게시글 삭제, 수정 관련 스크립트 -->
+<script src="/mung/viewpost/viewpost_script.js"></script> <!-- 자바스크립트 파일 연결 -->
 </body>
 </html>
