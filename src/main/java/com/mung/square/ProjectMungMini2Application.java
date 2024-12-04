@@ -4,10 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProjectMungMiniApplication {
-
+public class ProjectMungMini2Application {
     public static void main(String[] args) {
-        SpringApplication.run(ProjectMungMiniApplication.class, args);
+        SpringApplication.run(ProjectMungMini2Application.class, args);
     }
-
 }

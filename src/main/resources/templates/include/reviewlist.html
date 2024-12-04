@@ -84,8 +84,8 @@
                  <tr th:each="review : ${reviewlist}">
                      <td th:text="${review.reviewNo}"></td>
                      <td>
-                         <img th:if="${!#lists.isEmpty(review.files)}"
-                              th:src="@{${review.files[0].fileUrl}}"
+                         <img th:if="${!#lists.isEmpty(review.fileMetadata)}"
+                              th:src="@{/fullstack7/downloads/}+${review.fileMetadata[0].storeFilename}"
                               alt="미리보기 이미지" style="width: 100px; height: 100px;"/>
                      </td>
                      <td>

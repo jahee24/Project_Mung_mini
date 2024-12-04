@@ -2,14 +2,13 @@ package com.mung.square.review;
 
 import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
+import com.mung.square.dto.ReviewResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-//DB를 액세스하기 위한 계층
-//Mapper의 메소드를 호출
 
 @Repository
 @RequiredArgsConstructor
@@ -22,7 +21,7 @@ public class ReviewDAOImpl implements ReviewDAO {
     }
 
     @Override
-    public List<ReviewDTO> reviewList() {
+    public List<ReviewResponseDTO> reviewList() {
         return mapper.selectall();
     }
 
@@ -38,42 +37,57 @@ public class ReviewDAOImpl implements ReviewDAO {
 
     @Override
     public int delete(String review_no) {
-        return mapper.delete(review_no); // 매퍼 호출
+        return mapper.delete(review_no);
     }
 
     @Override
-    public List<ReviewDTO> search(String data) {
-        return List.of();
+    public List<ReviewResponseDTO> search(String tag, String data) {
+        Map<String, String> map = new HashMap<>();
+        map.put("tag", tag);
+        map.put("data", data);
+        return mapper.dynamicsearch(map); // Mapper 호출로 수정
     }
 
     @Override
-    public List<ReviewDTO> search(String tag, String data) {
-        List<ReviewDTO> list = null;//결과를 저장할 변수
-        Map<String,String> map = new HashMap<>();
-        map.put("tag",tag);
-        map.put("data",data);
-        list = mapper.dynamicsearch(map);
-        return list;
-    }
-
-    @Override
-    public List<ReviewDTO> findByCategory(String category) {
+    public List<ReviewResponseDTO> findByCategory(String category) {
         return mapper.categorySelect(category);
     }
 
     @Override
+    public int insertFile(ReviewFileDTO reviewFileDTO) {
+        return mapper.fileinsert(reviewFileDTO);
+    }
+
+    @Override
     public int insertFile(List<ReviewFileDTO> reviewfiledtolist) {
-        System.out.println(reviewfiledtolist);
-        return mapper.fileinsert(reviewfiledtolist);
+        int result = 0;
+        for (ReviewFileDTO file : reviewfiledtolist) {
+            if (file.getReviewNo() == null) {
+                System.err.println("ReviewNo is missing for file: " + file);
+                continue;
+            }
+            result += insertFile(file);
+        }
+        return result;
     }
 
     @Override
     public List<ReviewFileDTO> getFileList(String reviewno) {
-        return List.of();
+        return mapper.getFileList(reviewno); // Mapper 호출로 수정
     }
 
     @Override
     public ReviewFileDTO getFile(String reviewFileno) {
-        return null;
+        return mapper.getFile(reviewFileno); // Mapper 호출로 수정
     }
+
+    @Override
+    public List<ReviewFileDTO> getFileListByReviewNo(String reviewno) {
+        return mapper.getFileListByReviewNo(reviewno); // Mapper 호출로 수정
+    }
+    @Override
+    public List<String> getStoreFilenamesByReviewNo(String reviewNo) {
+        return mapper.getStoreFilenamesByReviewNo(reviewNo);
+    }
+
 }
