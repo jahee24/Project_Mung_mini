@@ -1,5 +1,6 @@
 package com.mung.square.dto;
 
+
 public class Reservation {
     private String id;
     private String name;

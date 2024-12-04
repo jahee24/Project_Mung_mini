@@ -3,26 +3,38 @@ package com.mung.square.review;
 import com.mung.square.dto.ReservationForMypageDTO;
 import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
+import com.mung.square.dto.ReviewResponseDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
 
-//xml mapper 파일의 statement를 호출하는 역할
-//=> 인터페이스로 만들어 놓으면 스프링내부에서 ReviewMapper를 구현하는 구현체를 만들어서 코드를 자동생성
-//=> 자동으로 코드를 생성해주려면 @Mapper를 선언해야한다.
-//=> 메소드명은 xml파일의 statement에 선언한 id명과 동일해야 한다.
 @Mapper
 public interface ReviewMapper {
-    //xml에 정의된 id가 insert인 sql을 실행
+    // 기존 메소드 유지
     int insert(ReviewDTO review);
-    List<ReviewDTO> selectall();
-    List<ReviewDTO> categorySelect(String category);
-    List<ReviewDTO> dynamicsearch(Map<String,String> map);
+
+    List<ReviewResponseDTO> selectall();
+
     ReviewDTO read(String reviewNo);
+
     int update(ReviewDTO review);
+
     int delete(String review_no);
-    //파일insert
-    int fileinsert(List<ReviewFileDTO> reviewFileDTOList);
-    List<ReservationForMypageDTO> needreviewresvlist(String userId);
+
+
+    int fileinsert(ReviewFileDTO file);
+
+    // 새로 추가된 메소드
+    List<ReviewFileDTO> getFileList(String reviewno); // 특정 게시글의 파일 목록 조회
+
+    ReviewFileDTO getFile(String reviewFileno); // 특정 파일 정보 조회
+
+    List<ReviewFileDTO> getFileListByReviewNo(String reviewno); // 특정 게시글의 파일 리스트 조회
+
+    List<ReviewResponseDTO> dynamicsearch(Map<String, String> map);
+
+    List<ReviewResponseDTO> categorySelect(String category);
+
+    List<String> getStoreFilenamesByReviewNo(String reviewNo);
 }

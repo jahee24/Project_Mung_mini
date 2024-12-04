@@ -3,20 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>게시글 보기</title>
-  <link rel="stylesheet" href="/mung/common/style/viewpost_style.css">
-
+  <title>멍 스퀘어</title>
+  <link rel="icon" href="/mung/images/logo.png">
+  <link rel="stylesheet" href="/mung/common/style/viewpost_style.css"> <!-- CSS 링크 -->
 </head>
 <body>
 <div class="viewpost-container">
-  <h1 class="viewpost-title">게시글 제목</h1>
-  <div class="viewpost-content">
+  <!-- 게시글 제목 -->
+  <h1 class="viewpost-title" th:text="${post.postTitle}">게시글 제목</h1>
+
+  <!-- 게시글 내용 -->
+  <div class="viewpost-content" th:text="${post.postContent}">
     게시글 내용이 여기에 표시됩니다.
   </div>
+
+  <!-- 게시글 작성자 및 작성일 -->
+  <div class="viewpost-author">
+    <span>작성자: <span th:text="${post.postAuthor}">작성자</span></span>
+    <span>작성일: <span th:text="${post.postCreatedAt}">작성일</span></span>
+    <!-- 조회수 표시 -->
+    <span>조회수: <span th:text="${post.postViews}">0</span></span>
+  </div>
+
+  <!-- 게시글 수정 및 삭제 버튼 -->
   <div class="viewpost-actions">
     <button id="edit-post" class="viewpost-action-button">수정</button>
-    <button id="delete-post" class="viewpost-action-button">삭제</button>
+    <form th:action="@{/support/notice/deletePost/{postId}(postId=${post.postId})}" method="post" onsubmit="return confirm('정말로 삭제하시겠습니까?');">
+      <button type="submit" class="viewpost-action-button">삭제</button>
+    </form>
   </div>
+
+  <!-- 수정 폼 -->
+  <div id="edit-form" style="display: none;">
+    <form th:action="@{/support/notice/updatePost/{postId}(postId=${post.postId})}" method="post">
+      <label for="edit-title">제목:</label>
+      <input type="text" id="edit-title" name="title" th:value="${post.postTitle}">
+      <br>
+      <label for="edit-content">내용:</label>
+      <textarea id="edit-content" name="content" rows="5" cols="30" th:text="${post.postContent}"></textarea>
+      <br>
+      <button type="submit">수정 완료</button>
+    </form>
+  </div>
+
+
+
+  <!-- 댓글 섹션 -->
   <div class="viewpost-comments">
     <h2 class="viewpost-comments-title">댓글</h2>
     <ul id="comment-list" class="viewpost-comment-list">
@@ -28,6 +60,37 @@
     </div>
   </div>
 </div>
-<script src="/mung/viewpost/viewpost_script.js"></script>
+<a href="/mung/support/notice" class="back-btn">목록으로 돌아가기</a>
+
+<script>
+  document.getElementById("edit-post").addEventListener("click", () => {
+    document.getElementById("edit-form").style.display = "block";
+  });
+</script>
+
+
+<script>
+  function deletePost(url) {
+    if (confirm("이 게시물을 삭제하시겠습니까?")) {
+      fetch(url, {
+        method: 'DELETE',
+      })
+              .then(response => {
+                if (response.ok) {
+                  window.location.href = "/mung/support/notice"; // 삭제 후 게시판으로 리다이렉트
+                } else {
+                  alert("게시물 삭제 실패");
+                }
+              })
+              .catch(error => {
+                alert("삭제 요청 실패");
+                console.error(error);
+              });
+    }
+  }
+</script>
+
+<!-- 댓글 처리 및 게시글 삭제, 수정 관련 스크립트 -->
+<script src="/mung/viewpost/viewpost_script.js"></script> <!-- 자바스크립트 파일 연결 -->
 </body>
 </html>

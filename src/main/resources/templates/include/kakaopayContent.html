@@ -49,6 +49,30 @@
                         }
                     });
                 });
+                function formatTime(timeString) {
+                    let date = new Date(timeString);
+                    let hours = date.getHours().toString().padStart(2, '0');
+                    let minutes = date.getMinutes().toString().padStart(2, '0');
+                    let seconds = date.getSeconds().toString().padStart(2, '0');
+                    return `${hours}:${minutes}:${seconds}`;
+                }
+
+                function formatTime2(timeString) {
+                    let date = new Date(timeString);
+                    let year = date.getFullYear();
+                    let month = date.getMonth() + 1;
+                    let day = date.getDate();
+                    return `${year}/${month}/${day}`
+                }
+
+
+                let resvDate = formatTime2([[${resv.resvDate}]]);
+                let startTime = formatTime([[${resv.startTime}]]);
+                let endTime = formatTime([[${resv.endTime}]]);
+
+                $(".resv_date").html(resvDate);
+                $(".start_time").html(startTime);
+                $(".end_time").html(endTime);
             });
         </script>
 
@@ -76,15 +100,15 @@
             </div>
             <div class="order-info-item">
                 <span class="order-info-label">예약 날짜:</span>
-                <span th:text="${resv.resvDate}"></span>
+                <span class="resv_date"></span>
             </div>
             <div class="order-info-item">
-                <span class="order-info-label">예약 받은 시작 시간:</span>
-                <span th:text="${resv.startTime}"></span>
+                <span class="order-info-label">예약 시작 시간:</span>
+                <span class="start_time"></span>
             </div>
             <div class="order-info-item">
-                <span class="order-info-label">예약 받은 종료 시간:</span>
-                <span th:text="${resv.endTime}"></span>
+                <span class="order-info-label">예약 종료 시간:</span>
+                <span class="end_time"></span>
             </div>
         </div>
         <button class="btn-primary confirm-button" id="btn-pay-ready">결제하기</button>

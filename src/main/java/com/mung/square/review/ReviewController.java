@@ -5,6 +5,7 @@ import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
 import com.mung.square.dto.UserDTO;
 import com.mung.square.mypage.service.MyPageService;
+import com.mung.square.dto.ReviewResponseDTO;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,11 +28,15 @@ public class ReviewController {
     //전체목록보기와 카테고리별로 조회하는 작업은 비슷한 작업이므로 컨트롤러를 같이 사용
     @GetMapping("/list")
     public String list(Model model, String category, @SessionAttribute(value = "user", required = false) UserDTO user) {
+        if (category == null || category.isEmpty()) {
+            category = "all"; // 기본값 설정
+            }
         if (user != null) {
             String userId = user.getUserId(); // 세션에서 로그인 사용자 ID 가져오기
             List<ReservationForMypageDTO> reservationForMypageDTO = service.needReviewResvList(userId);
             model.addAttribute("simpleResv", reservationForMypageDTO);
         } else {
+           
             System.out.println("category=>" + category);
             //1. service의 메소드를 호출(비지니스메소드호출)
             List<ReviewDTO> reviewlist = service.findByCategory(category);
@@ -67,10 +72,10 @@ public class ReviewController {
         model.addAttribute("reviewlist", reviewlist);
         model.addAttribute("category", category);
         System.out.println(reviewlist);
+
         return "include/reviewlist";
     }
 
-    //게시글등록폼을 forward 메소드
     @GetMapping("/write")
     public String writePage(Model model, HttpSession session) {
         String userId = (String) session.getAttribute("userId"); // 세션에서 로그인 사용자 ID 가져오기
@@ -82,72 +87,69 @@ public class ReviewController {
         return "review/review_write";
     }
 
-    //입력한 데이터를 db에 저장하기
     @PostMapping("/write")
     public String insert(ReviewDTO review, HttpSession session) throws IOException {
-        String userId = (String) session.getAttribute("userId"); // 세션에서 사용자 ID 가져오기
-        review.setId(userId); // DTO에 작성자 설정
-        //DTO에 담긴 MultipartFile객체들을 추출
-        List<MultipartFile> file = new ArrayList<>();
-        if (review.getFiles() != null) {
-            for (ReviewFileDTO reviewFile : review.getFiles()) {
-                // 필요 시 MultipartFile로 변환 (여기선 필요하지 않다면 단순히 처리)
-                System.out.println("File URL: " + reviewFile.getFileUrl());
+        String userId = (String) session.getAttribute("userId");
+        review.setId(userId);
+
+        int result = service.insertReview(review);
+        String reviewNo = review.getReviewNo();
+
+        List<MultipartFile> files = review.getFiles();
+        if (files != null && !files.isEmpty()) {
+            List<ReviewFileDTO> reviewFileList = new ArrayList<>();
+            for (MultipartFile file : files) {
+                if (file.isEmpty()) {
+                    continue;
+                }
+                ReviewFileDTO fileDTO = fileUploadService.uploadFile(file);
+                fileDTO.setReviewNo(reviewNo);
+                reviewFileList.add(fileDTO);
             }
+            service.saveReviewFiles(reviewFileList);
         }
-        List<ReviewFileDTO> reviewfilelist = fileUploadService.uploadFiles(file);
-        System.out.println(reviewfilelist);
-        service.insert(review, reviewfilelist);
-        //뷰로 forward하지 않고 글쓰기가 완료되면 목록보기로 가기 위해서 컨트롤러로 redirect
-        //reviewlist.html파일에 출력할 데이터는 컨트롤러를 거쳐야 발생하는 데이터이므로 무조건
-        //컨트롤러를 실행한다.
         return "redirect:/support/review/list?category=all";
     }
 
-    //동적쿼리를 테스트
-    //사용자가 select에서 어떤 option을 선택하고 작업하냐에 따라 다른 sql문이 만들어진다.
-    //                                                       -------
-    //                                                      where절
     @PostMapping("/search")
     public String search(String tag, String search, Model model) {
-        System.out.println(tag + "-------" + search);
-        List<ReviewDTO> reviewList = service.search(tag, search);
+        if (tag == null || tag.isEmpty() || search == null || search.isEmpty()) {
+            model.addAttribute("error", "검색 조건을 입력해주세요.");
+            return "include/reviewlist";
+        }
+
+        List<ReviewResponseDTO> reviewList = service.search(tag, search);
         model.addAttribute("reviewlist", reviewList);
         return "include/reviewlist";
     }
 
-    @GetMapping("/search")
-    public String showSearchPage(Model model) {
-        // 초기 검색 페이지 렌더링
-        return "searchPage";
-    }
-
     @GetMapping("/read")
     public String read(String reviewNo, String action, Model model) {
-        //1. 비지니스메소드 호출
         ReviewDTO review = service.getReviewInfo(reviewNo);
-        System.out.println("==============================");
-        System.out.println(review);
-        String view = "";
-        //2. 데이터공유
-        model.addAttribute("review", review);
-        //3. action에 따라서 뷰를 다르게 정의
-        if (action.equals("READ")) {
-            view = "review/review_read";
-        } else {
-            view = "review/review_update";
+        // SQL을 통해 store_filename 가져오기
+        List<String> storeFilenames = service.getStoreFilenamesByReviewNo(reviewNo);
+
+        // 파일 경로 생성
+        List<String> fileUrls = new ArrayList<>();
+        for (String storeFilename : storeFilenames) {
+            fileUrls.add("/fullstack7/downloads/" + storeFilename);
         }
-        return view;
+        model.addAttribute("review", review);
+        model.addAttribute("fileUrls", fileUrls);
+        if ("READ".equals(action)) {
+            System.out.println(review.getFileMetadata());
+            return "review/review_read";
+        } else {
+            return "review/review_update";
+        }
     }
 
-    //업데이트
     @PostMapping("/update")
     public String update(ReviewDTO review) {
-        System.out.println(review);
         service.update(review);
-        //수정이 끝나면 게시글목록보기
         return "redirect:/support/review/list?category=all";
     }
+
 
     @GetMapping("/update")
     public String showUpdateForm(String reviewNo, Model model) {
@@ -166,6 +168,6 @@ public class ReviewController {
     @GetMapping("/delete")
     public String showDeleteErrorPage() {
         return "errorPage"; // 에러 페이지 또는 경고 메시지 표시
-    }
 
+    }
 }

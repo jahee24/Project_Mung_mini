@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mung.square.notice.mapper.CommentMapper">
+
+    <!-- 댓글 작성 -->
+    <insert id="createComment" parameterType="com.mung.square.notice.domain.Comment">
+        INSERT INTO post_comment (post_comment_post_id, post_comment_content, post_comment_author_id)
+        VALUES (#{postId}, #{content}, #{authorId})
+    </insert>
+
+    <!-- 댓글 삭제 -->
+    <delete id="deleteComment">
+        DELETE FROM post_comment WHERE post_comment_id = #{commentId}
+    </delete>
+
+</mapper>

@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/mung/common/style/main_style.css">
+
     <link rel="stylesheet" href="/mung/common/style/notice_style.css">
 
     <!-- 외부 라이브러리 (Bootstrap, FontAwesome) -->
@@ -16,9 +17,10 @@
 
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="/mung/common/script/main_script.js" defer></script>
+    <script src="/mung/common/script/main_script.js"></script>
 
-    <title>공지사항 & 이달의 회원</title>
+    <title>멍 스퀘어</title>
+    <link rel="icon" href="/mung/images/logo.png">
 </head>
 <body>
 
@@ -38,23 +40,32 @@
 
         <!-- 공지사항 섹션 -->
         <div class="notice-section-container">
-            <h2 class="notice-section-title">공지&게시판</h2>
+            <h2 class="notice-section-title">공지사항</h2>
             <div class="notice-review-section">
                 <!-- 검색 영역 -->
                 <div class="notice-search-bar">
-                    <button id="testNotice-openDetailWindow" class="notice-new"
-                            onclick="openDetailWindow('/mung/newPost', '새 글 작성')">새 글 쓰기
+                    <button id="newPostButton" onclick="openNewPost()">
+
+                        새 글 작성
                     </button>
-                    <input type="text" id="notice-search-input" placeholder="검색어를 입력하세요">
-                    <button onclick="searchNotices()">검색</button>
-                </div>
-                <!-- 공지사항 테이블 -->
+
+                    <!-- 검색 영역 -->
+                    <div class="notice-search-bar">
+                        <form th:action="@{/support/notice/search}" method="get">
+                            <input type="text" name="keyword" id="notice-search-input" placeholder="검색어를 입력하세요"
+                                   th:value="${keyword}">
+                            <button type="submit">검색</button>
+                        </form>
+                    </div>
+
+                    <!-- 공지사항 테이블 -->
                 <table class="notice-table">
                     <!-- 열 크기 설정 -->
                     <colgroup>
                         <col style="width: 5%;"> <!-- 순번 열 -->
-                        <col style="width: 80%;"> <!-- 제목 열 -->
-                        <col style="width: 10%;"> <!-- 등록자명 열 -->
+                        <col style="width: 60%;"> <!-- 제목 열 -->
+                        <col style="width: 10%;"><!-- 등록자명 열 -->
+                        <col style="width: 20%;"> <!-- 작성시간 열 -->
                         <col style="width: 5%;"> <!-- 조회수 열 -->
                     </colgroup>
                     <thead>
@@ -62,17 +73,43 @@
                         <th>순번</th>
                         <th>제목</th>
                         <th>등록자명</th>
+                        <th>작성시간</th>
                         <th>조회수</th>
                     </tr>
                     </thead>
-                    <tbody id="notice-table-body">
-                    <!-- JavaScript로 데이터 동적 추가 -->
+                    <tbody>
+                    <tr th:each="post, iterStat : ${posts}">
+                        <td th:text="${iterStat.index + 1}"></td>
+                        <td>
+                            <a th:href="@{/support/notice/viewpost/{postId}(postId=${post.postId})}"
+                               th:text="${post.postTitle}"></a>
+                        </td>
+                        <td th:text="${post.authorName}"></td>
+                        <td th:text="${post.postCreatedAt}"></td> <!-- 작성 시간 열 추가 -->
+                        <td th:text="${post.postViews}"></td>
+                    </tr>
                     </tbody>
                 </table>
-                <!-- 페이지네이션 -->
-                <div id="testNotice-pagination" class="notice-pagination"></div>
-            </div>
+                    <div class="notice-pagination">
+                        <a th:if="${currentPage > 1}" th:href="@{/support/notice(page=${currentPage - 1}, size=${pageSize})}">이전</a>
+                        <span th:text="'Page ' + ${currentPage}"></span>
+                        <a th:if="${posts.size() == pageSize}" th:href="@{/support/notice(page=${currentPage + 1}, size=${pageSize})}">다음</a>
+                    </div>
+
+
+
+                </div>
         </div>
+        <script>
+        // 서버에서 전달된 member_no 값을 JavaScript로 가져오기
+        var memberNo = /*[[${memberNo}]]*/ "default";  // 서버에서 member_no를 Thymeleaf로 전달
+
+        // 확인용 알림창
+        alert("세션 member_no 값: " + memberNo);
+
+
+        }
+    </script>
         <script src="/mung/common/script/notice_script.js" defer></script>
     </div>
 </body>

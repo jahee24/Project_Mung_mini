@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Alias("review")
+//request용dto
 public class ReviewDTO {
 	String reviewNo;
 	String id;
@@ -21,5 +22,6 @@ public class ReviewDTO {
 	String title;
 	String content;
 	String category;
-	List<ReviewFileDTO> files;
+	List<MultipartFile> files; // 타입 변경
+	List<ReviewFileDTO> fileMetadata;
 }
