@@ -21,17 +21,10 @@
 <!--        </foreach>-->
 <!--    </insert>-->
 
-    <insert id="fileinsert" parameterType="java.util.List">
-        insert into review_file values
-        <foreach collection="list" item="file" separator=",">
-            (#{file.reviewFileNo},last_insert_id(),#{file.originalFilename},#{file.storeFilename})
-        </foreach>
-
-    </insert>
-    <select id="selectall" resultType="review">
+    <select id="selectall" resultType="com.mung.square.dto.ReviewResponseDTO">
         select * from tbreview
     </select>
-    <select id="categorySelect" parameterType="String" resultType="review">
+    <select id="categorySelect" parameterType="String" resultType="com.mung.square.dto.ReviewResponseDTO">
         select * from tbreview where category = #{category}
     </select>
     <!--where절이 동적으로 생성
@@ -81,4 +74,19 @@
         DELETE FROM tbreview WHERE review_no = #{reviewNo}
     </delete>
 
+    <insert id="fileinsert" parameterType="com.mung.square.dto.ReviewFileDTO">
+        INSERT INTO review_files (file_id, review_no, original_filename, store_filename, file_url)
+        VALUES (#{fileId}, last_insert_id(), #{originalFilename}, #{storeFilename}, #{fileUrl})
+    </insert>
+
+    <select id="getFileListByReviewNo" parameterType="String" resultType="com.mung.square.dto.ReviewFileDTO">
+        SELECT file_id, review_no, original_filename, store_filename, file_url
+        FROM review_files
+        WHERE review_no = #{reviewNo}
+    </select>
+    <select id="getStoreFilenamesByReviewNo" parameterType="String" resultType="String">
+        SELECT store_filename
+        FROM review_files
+        WHERE review_no = #{reviewNo}
+    </select>
 </mapper>

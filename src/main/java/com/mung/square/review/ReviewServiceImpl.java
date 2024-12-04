@@ -2,32 +2,25 @@ package com.mung.square.review;
 
 import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
+import com.mung.square.dto.ReviewResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-//ReviewDAO의 메소드를 호출
-//컨트롤러에서 받은 데이터를 가공해서 DAO로 넘기거나 DAO에서 받은 데이터를 가공해서 컨트롤러로 넘기는 작업
-//비지니스로직
-//트랜잭션처리
+
 @Service
 @RequiredArgsConstructor
-//@RequiredArgsConstructor는 private final멤버들을 이용해서 생성자를 만들어서 제공
-//빈을 찾아서 주입해주는 것까지 자동으로 처리
 public class ReviewServiceImpl implements ReviewService {
     private final ReviewDAO reviewDAO;
-    //파일업로드와 게시글이 함께 insert되는 게시글 등록서비스
-    //메소드 하나에서 여러 개의 DAO메소드를 호출하는 경우 트랜잭션처리 해야한다.
 
     @Override
     public int insert(ReviewDTO review, List<ReviewFileDTO> reviewfiledtolist) {
-        if (reviewfiledtolist.size() == 0) {
-            reviewDAO.insert(review);
-        }else {
-            reviewDAO.insert(review);//게시글등록
-            reviewDAO.insertFile(reviewfiledtolist);//첨부파일등록
+        if (reviewfiledtolist == null || reviewfiledtolist.isEmpty()) {
+            return reviewDAO.insert(review);
+        } else {
+            reviewDAO.insert(review); // 게시글 등록
+            return reviewDAO.insertFile(reviewfiledtolist); // 첨부파일 등록
         }
-        return 0;
     }
 
     @Override
@@ -36,8 +29,17 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<ReviewDTO> reviewList() {
-        return reviewDAO.reviewList();
+    public List<ReviewResponseDTO> reviewList() {
+        List<ReviewResponseDTO> reviews = reviewDAO.reviewList(); // 게시글 목록 조회
+        for (ReviewResponseDTO review : reviews) {
+            List<ReviewFileDTO> files = reviewDAO.getFileListByReviewNo(review.getReviewNo());
+            for (ReviewFileDTO file : files) {
+                // store_filename을 기반으로 fileUrl 생성
+                file.setFileUrl("/fullstack7/downloads/" + file.getStoreFilename());
+            }
+            review.setFileMetadata(files); // 파일 정보 설정
+        }
+        return reviews;
     }
 
     @Override
@@ -52,41 +54,46 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public int delete(String review_no) {
-        return reviewDAO.delete(review_no); // DAO 계층 호출
+        return reviewDAO.delete(review_no);
     }
 
     @Override
-    public List<ReviewDTO> search(String data) {
-        return List.of();
+    public List<ReviewResponseDTO> search(String tag, String data) {
+        return reviewDAO.search(tag, data); // DAO 호출로 수정
     }
 
     @Override
-    public List<ReviewDTO> search(String tag, String data) {
-
-        return reviewDAO.search(tag, data);
-    }
-
-    @Override
-    public List<ReviewDTO> findByCategory(String category) {
-        //category값을 판단해서 dao의 적절한 메소드를 호출
-        List<ReviewDTO> list = null;
-        if(category != null) {
-            if(category.equals("all")) {
-                list = reviewDAO.reviewList();
-            }else{
-                list = reviewDAO.findByCategory(category);
-            }
+    public List<ReviewResponseDTO> findByCategory(String category) {
+        if (category == null || category.equalsIgnoreCase("all")) {
+            return reviewDAO.reviewList(); // 모든 게시글 반환
+        } else {
+            return reviewDAO.findByCategory(category); // 특정 카테고리 반환
         }
-        return list;
     }
 
     @Override
     public List<ReviewFileDTO> getFileList(String reviewno) {
-        return List.of();
+        return reviewDAO.getFileListByReviewNo(reviewno);
     }
 
     @Override
     public ReviewFileDTO getFile(String reviewFileno) {
-        return null;
+        return reviewDAO.getFile(reviewFileno);
+    }
+
+    @Override
+    public int insertReview(ReviewDTO review) {
+        return reviewDAO.insert(review);
+    }
+    @Override
+    public List<String> getStoreFilenamesByReviewNo(String reviewNo) {
+        return reviewDAO.getStoreFilenamesByReviewNo(reviewNo);
+    }
+
+    @Override
+    public void saveReviewFiles(List<ReviewFileDTO> reviewFileList) {
+        for (ReviewFileDTO fileDTO : reviewFileList) {
+            reviewDAO.insertFile(fileDTO);
+        }
     }
 }
