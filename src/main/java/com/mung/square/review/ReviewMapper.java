@@ -1,5 +1,6 @@
 package com.mung.square.review;
 
+import com.mung.square.dto.ReservationForMypageDTO;
 import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
 import com.mung.square.dto.ReviewResponseDTO;
@@ -20,6 +21,7 @@ public interface ReviewMapper {
     int update(ReviewDTO review);
 
     int delete(String review_no);
+
 
     int fileinsert(ReviewFileDTO file);
 

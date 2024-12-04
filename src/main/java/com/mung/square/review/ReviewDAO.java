@@ -1,5 +1,8 @@
 package com.mung.square.review;
 
+
+import com.mung.square.dto.ReservationForMypageDTO;
+
 import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
 import com.mung.square.dto.ReviewResponseDTO;
@@ -35,6 +38,7 @@ public interface ReviewDAO {
 
 	// 여러 개의 첨부파일 저장
 	int insertFile(List<ReviewFileDTO> reviewfiledtolist);
+
 
 	// 특정 게시글의 모든 첨부파일 조회 (게시글 번호 기준)
 	List<ReviewFileDTO> getFileList(String reviewNo);

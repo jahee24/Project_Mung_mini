@@ -21,7 +21,20 @@
 <!--        </foreach>-->
 <!--    </insert>-->
 
+    <insert id="fileinsert" parameterType="java.util.List">
+        insert into review_file values
+        <foreach collection="list" item="file" separator=",">
+            (#{file.reviewFileNo},last_insert_id(),#{file.originalFilename},#{file.storeFilename})
+        </foreach>
+
+    </insert>
+    <select id="needreviewresvlist" parameterType="String" resultType="reservationformypage">
+        select r.* from user u inner join reservations r using (user_id)
+        where r.user_id = #{userId} and r.status ='예약완료' and r.end_time = DATE_ADD(NOW(), INTERVAL -10 YEAR) and r.resv_num not in (select resv_num from tbreview);
+    </select>
+
     <select id="selectall" resultType="com.mung.square.dto.ReviewResponseDTO">
+
         select * from tbreview
     </select>
     <select id="categorySelect" parameterType="String" resultType="com.mung.square.dto.ReviewResponseDTO">

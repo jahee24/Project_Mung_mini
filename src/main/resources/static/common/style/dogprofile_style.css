@@ -60,9 +60,9 @@ body {
 }
 
 .square5_dog_image img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 30%;
     object-fit: cover;
     border: 4px solid var(--light-green);
 }
@@ -154,4 +154,4 @@ body {
     .square5_dog_profile_header h2 {
         font-size: 1.8rem;
     }
-} 
+}

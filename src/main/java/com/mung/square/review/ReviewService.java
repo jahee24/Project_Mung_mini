@@ -1,5 +1,8 @@
 package com.mung.square.review;
 
+
+import com.mung.square.dto.ReservationForMypageDTO;
+
 import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
 import com.mung.square.dto.ReviewResponseDTO;
@@ -19,6 +22,7 @@ public interface ReviewService {
 
 	int delete(String review_no);
 
+
 	List<ReviewResponseDTO> search(String tag, String data);
 
 	List<ReviewResponseDTO> findByCategory(String category);
@@ -26,6 +30,9 @@ public interface ReviewService {
 	List<ReviewFileDTO> getFileList(String reviewno);
 
 	ReviewFileDTO getFile(String reviewFileno);
+
+    List<ReservationForMypageDTO> needReviewResvList(String userId);
+
 
 	int insertReview(ReviewDTO review);
 

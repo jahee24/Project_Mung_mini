@@ -2,8 +2,10 @@ package com.mung.square.mypage.controller;
 
 import com.mung.square.dto.DogDTO;
 import com.mung.square.dto.ReservationForMypageDTO;
+import com.mung.square.dto.ReviewNReservationDTO;
 import com.mung.square.dto.UserDTO;
 import com.mung.square.mypage.service.MyPageService;
+import com.mung.square.review.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ import java.util.List;
 @SessionAttributes("user")
 public class MyPageController {
     private final MyPageService service;
+    private final ReviewService reviewService;
+
     @Value("${mypage.upload.dir}")
     private String uploadDir;
 
@@ -35,11 +39,21 @@ public class MyPageController {
             if (reservationList == null) {
                 reservationList = new ArrayList<>(); // 빈 리스트로 초기화
             }
-
+            List<ReservationForMypageDTO> reservationForMypageDTO = reviewService.needReviewResvList(user.getUserId());
+            model.addAttribute("simpleResv",reservationForMypageDTO);
+            boolean show;
+            if (reservationForMypageDTO == null) {
+                show = false;
+            }else{
+                show = true;
+            }
+            List<ReviewNReservationDTO> rNrlist = service.getRNR(user);
+            System.out.println(show);
+            model.addAttribute("reviewlist",rNrlist);
+            model.addAttribute("show", show);
             model.addAttribute("doglist", dog);
             model.addAttribute("reservationlist", reservationList);
             return "include/mypageContent";
-
         }
     }
 
@@ -62,6 +76,7 @@ public class MyPageController {
                 String storedFileName = service.uploadImage(file);
                 dog.setImageUrl(storedFileName); // 업로드된 파일명을 DTO에 설정
             }
+            System.out.println("====>"+dog);
             service.updateDog(dog.getId(), dog); // DB 업데이트
             System.out.println("반려견 정보 수정 성공: " + dog);
 

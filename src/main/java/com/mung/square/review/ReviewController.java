@@ -1,15 +1,16 @@
 package com.mung.square.review;
 
+import com.mung.square.dto.ReservationForMypageDTO;
 import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
+import com.mung.square.dto.UserDTO;
+import com.mung.square.mypage.service.MyPageService;
 import com.mung.square.dto.ReviewResponseDTO;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -23,29 +24,64 @@ public class ReviewController {
     private final ReviewService service;
     private final FileUploadService fileUploadService;
 
+    //데이터베이스에서 조회한 게시글 목록을 출력
+    //전체목록보기와 카테고리별로 조회하는 작업은 비슷한 작업이므로 컨트롤러를 같이 사용
     @GetMapping("/list")
-    public String list(Model model, String category) {
+    public String list(Model model, String category, @SessionAttribute(value = "user", required = false) UserDTO user) {
         if (category == null || category.isEmpty()) {
             category = "all"; // 기본값 설정
+            }
+        if (user != null) {
+            String userId = user.getUserId(); // 세션에서 로그인 사용자 ID 가져오기
+            List<ReservationForMypageDTO> reservationForMypageDTO = service.needReviewResvList(userId);
+            model.addAttribute("simpleResv", reservationForMypageDTO);
+        } else {
+           
+            System.out.println("category=>" + category);
+            //1. service의 메소드를 호출(비지니스메소드호출)
+            List<ReviewDTO> reviewlist = service.findByCategory(category);
+            //2. select작업은 db에서 받은 결과를 뷰로 넘겨주어야 하므로 데이터를 공유
+            for (ReviewDTO review : reviewlist) {
+                List<ReviewFileDTO> files = service.getFileList(review.getReviewNo());
+                if (files != null) {
+                    for (ReviewFileDTO file : files) {
+                        file.setFileUrl("/uploads/" + file.getStoreFilename());
+                    }
+                }
+                review.setFiles(files);
+            }
+            model.addAttribute("reviewlist", reviewlist);
+            model.addAttribute("category", category);
+            System.out.println(reviewlist);
+
+            return "include/reviewlist";
         }
-
-        List<ReviewResponseDTO> reviewlist = service.findByCategory(category);
-
-        for (ReviewResponseDTO review : reviewlist) {
-            List<ReviewFileDTO> reviewFileList = service.getFileList(review.getReviewNo());
-            review.setFileMetadata(reviewFileList);
+        System.out.println("category=>" + category);
+        //1. service의 메소드를 호출(비지니스메소드호출)
+        List<ReviewDTO> reviewlist = service.findByCategory(category);
+        //2. select작업은 db에서 받은 결과를 뷰로 넘겨주어야 하므로 데이터를 공유
+        for (ReviewDTO review : reviewlist) {
+            List<ReviewFileDTO> files = service.getFileList(review.getReviewNo());
+            if (files != null) {
+                for (ReviewFileDTO file : files) {
+                    file.setFileUrl("/uploads/" + file.getStoreFilename());
+                }
+            }
+            review.setFiles(files);
         }
-
         model.addAttribute("reviewlist", reviewlist);
         model.addAttribute("category", category);
+        System.out.println(reviewlist);
+
         return "include/reviewlist";
     }
 
     @GetMapping("/write")
     public String writePage(Model model, HttpSession session) {
-        String userId = (String) session.getAttribute("userId");
-        if (userId == null) {
-            return "redirect:/login";
+        String userId = (String) session.getAttribute("userId"); // 세션에서 로그인 사용자 ID 가져오기
+        List<ReservationForMypageDTO> simpleResv = service.needReviewResvList(userId);
+        if (simpleResv.size()==0) {
+            return "redirect:/support/review/list?category=all"; // 로그인 페이지로 리다이렉트
         }
         model.addAttribute("username", userId);
         return "review/review_write";
@@ -72,7 +108,6 @@ public class ReviewController {
             }
             service.saveReviewFiles(reviewFileList);
         }
-
         return "redirect:/support/review/list?category=all";
     }
 
@@ -115,9 +150,24 @@ public class ReviewController {
         return "redirect:/support/review/list?category=all";
     }
 
+
+    @GetMapping("/update")
+    public String showUpdateForm(String reviewNo, Model model) {
+        ReviewDTO review = service.getReviewInfo(reviewNo);
+        model.addAttribute("review", review);
+        return "review/review_update";
+    }
+
     @PostMapping("/delete")
     public String delete(String reviewNo) {
-        service.delete(reviewNo);
-        return "redirect:/support/review/list?category=all";
+        System.out.println("Deleting review with reviewNo: " + reviewNo);
+        service.delete(reviewNo); // 서비스 계층 호출
+        return "redirect:/support/review/list?category=all"; // 목록 페이지로 리다이렉트
+    }
+
+    @GetMapping("/delete")
+    public String showDeleteErrorPage() {
+        return "errorPage"; // 에러 페이지 또는 경고 메시지 표시
+
     }
 }

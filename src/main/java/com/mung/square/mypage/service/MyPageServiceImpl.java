@@ -2,6 +2,7 @@ package com.mung.square.mypage.service;
 
 import com.mung.square.dto.DogDTO;
 import com.mung.square.dto.ReservationForMypageDTO;
+import com.mung.square.dto.ReviewNReservationDTO;
 import com.mung.square.dto.UserDTO;
 import com.mung.square.mypage.dao.MyPageDAO;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -115,6 +115,11 @@ public class MyPageServiceImpl implements MyPageService {
         }
         System.out.println("false");
         return false; // 해당 ID의 반려견이 없을 경우
+    }
+
+    @Override
+    public List<ReviewNReservationDTO> getRNR(UserDTO user) {
+        return myPageDAO.getRNR(user);
     }
 
 }

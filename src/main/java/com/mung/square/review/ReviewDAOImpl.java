@@ -1,5 +1,6 @@
 package com.mung.square.review;
 
+import com.mung.square.dto.ReservationForMypageDTO;
 import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
 import com.mung.square.dto.ReviewResponseDTO;
@@ -89,5 +90,6 @@ public class ReviewDAOImpl implements ReviewDAO {
     public List<String> getStoreFilenamesByReviewNo(String reviewNo) {
         return mapper.getStoreFilenamesByReviewNo(reviewNo);
     }
+
 
 }

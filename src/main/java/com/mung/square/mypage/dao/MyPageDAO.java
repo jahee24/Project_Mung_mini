@@ -2,6 +2,7 @@ package com.mung.square.mypage.dao;
 
 import com.mung.square.dto.DogDTO;
 import com.mung.square.dto.ReservationForMypageDTO;
+import com.mung.square.dto.ReviewNReservationDTO;
 import com.mung.square.dto.UserDTO;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public interface MyPageDAO {
     void profileupdate(UserDTO user);
     void updateDog(DogDTO dog);
 
+    List<ReviewNReservationDTO> getRNR(UserDTO user);
 }

@@ -1,5 +1,6 @@
 package com.mung.square.review;
 
+import com.mung.square.dto.ReservationForMypageDTO;
 import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
 import com.mung.square.dto.ReviewResponseDTO;
@@ -95,5 +96,10 @@ public class ReviewServiceImpl implements ReviewService {
         for (ReviewFileDTO fileDTO : reviewFileList) {
             reviewDAO.insertFile(fileDTO);
         }
+    }
+
+    @Override
+    public List<ReservationForMypageDTO> needReviewResvList(String userId) {
+        return reviewDAO.needReviewResvList(userId);
     }
 }

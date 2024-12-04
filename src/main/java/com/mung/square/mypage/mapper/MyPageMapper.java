@@ -2,6 +2,7 @@ package com.mung.square.mypage.mapper;
 
 import com.mung.square.dto.DogDTO;
 import com.mung.square.dto.ReservationForMypageDTO;
+import com.mung.square.dto.ReviewNReservationDTO;
 import com.mung.square.dto.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,5 +17,7 @@ public interface MyPageMapper {
     List<ReservationForMypageDTO> getresv(String id);
     ReservationForMypageDTO getresvbyid(String id);
     void profileupdate(UserDTO user);
-    void updatedog(DogDTO dog);
+    int updatedog(DogDTO dog);
+
+    List<ReviewNReservationDTO> getrnr(UserDTO user);
 }
