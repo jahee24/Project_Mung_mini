@@ -1,6 +1,7 @@
 package com.mung.square.review;
 
 
+import com.mung.square.dto.ReservationForMypageDTO;
 import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
 
@@ -25,8 +26,8 @@ public interface ReviewService {
 	List<ReviewDTO> search(String tag, String data);
 	//category별로 검색하기
 	List<ReviewDTO> findByCategory(String category);
-	
 	//게시글을 상세보기한 경우 보여질 업로드한 파일의 목록 조회
 	List<ReviewFileDTO> getFileList(String reviewno);
 	ReviewFileDTO getFile(String reviewFileno);
+    List<ReservationForMypageDTO> needReviewResvList(String userId);
 }

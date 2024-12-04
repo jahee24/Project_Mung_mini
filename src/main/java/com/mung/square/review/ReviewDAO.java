@@ -1,6 +1,7 @@
 package com.mung.square.review;
 
 
+import com.mung.square.dto.ReservationForMypageDTO;
 import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
 
@@ -33,6 +34,7 @@ public interface ReviewDAO {
 	List<ReviewFileDTO> getFileList(String reviewno);
 	//파일정보를 리턴
 	ReviewFileDTO getFile(String reviewFileno);
+    List<ReservationForMypageDTO> needReviewResvList(String userId);
 }
 
 

@@ -74,12 +74,10 @@
                             </div>
                             <div class="modal-body">
                                 <div class="square5_dog_image">
-                                    <!--<img th:src="@{/mypage/+${dog.imageUrl}}" width="50" alt="반려견 이미지" class="square5_profile_img">-->
-                                    <img src="" width="100%" alt="반려견 이미지" class="square5_profile_img"
+                                    <img src="" alt="반려견 이미지" class="square5_profile_img"
                                          id="dogProfileImage">
                                 </div>
                                 <span id="test"></span>
-                                <!--th:src="@{/mypage/}+${dog.imageUrl}"-->
                                 <div class="square5_dog_info">
                                     <div class="square5_info_item">
                                         <i class="fas fa-id-card"></i>
@@ -288,11 +286,6 @@
 
 
                 <div class="square5_mypage_reservation">
-                    <div class="square5_no_reservation" th:unless="${reservationlist != null}">
-                        <i class="far fa-calendar-times"></i>
-                        <p>현재 예약 내역이 없습니다.</p>
-                        <a href="/mung/resv" class="btn btn-primary">예약하러 가기</a>
-                    </div>
                     <div class="square5_reservated">
                         <h2>예약내역</h2>
                         <div class="square5_reservated_table"></div>
@@ -325,6 +318,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="square5_no_reservation" th:if="${reservationlist.size()==0}">
+                        <i class="far fa-calendar-times"></i>
+                        <p>현재 예약 내역이 없습니다.</p>
+                        <a href="/mung/resv" class="btn btn-primary">예약하러 가기</a>
+                    </div>
                 </div>
 
                 <div class="square5_mypage_reviews">
@@ -333,17 +331,19 @@
                         함께한
                         순간들</h2>
                     <div class="square5_reviews_grid">
-                        <div class="square5_review_card">
-                            <div class="square5_review_image">
-                                <img src="" alt="리뷰 이미지">
-                            </div>.jpg
-                            <p class="square5_review_date">2024.03.15</p>
-                        </div>
-                        <div class="square5_add_review_card">
-                            <a href="support/review/write">
-                                <i class="fas fa-plus"></i>
-                                <p>추가할 수 있는 순간이 더 있어요. 추가하시겠어요?</p>
-                            </a>
+                        <div th:each="review:${reviewlist}">
+                            <div class="square5_review_card">
+                                <div class="square5_review_image">
+                                    <img src="" alt="리뷰 이미지" th:src="@{/fullstack7/downloads/}+${review.fileURL}">
+                                </div>
+                                <p class="square5_review_date">2024.03.15</p>
+                            </div>
+                            <div class="square5_add_review_card">
+                                <a href="support/review/write">
+                                    <i class="fas fa-plus"></i>
+                                    <p>추가할 수 있는 순간이 더 있어요. 추가하시겠어요?</p>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

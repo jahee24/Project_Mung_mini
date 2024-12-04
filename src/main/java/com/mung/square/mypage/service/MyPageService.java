@@ -2,6 +2,7 @@ package com.mung.square.mypage.service;
 
 import com.mung.square.dto.DogDTO;
 import com.mung.square.dto.ReservationForMypageDTO;
+import com.mung.square.dto.ReviewNReservationDTO;
 import com.mung.square.dto.UserDTO;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,4 +19,5 @@ public interface MyPageService {
     String uploadImage(MultipartFile file) throws IOException;
     void profileupdate(UserDTO user);
     boolean updateDog(String dogId,DogDTO dog);
+    List<ReviewNReservationDTO> getRNR(UserDTO user);
 }

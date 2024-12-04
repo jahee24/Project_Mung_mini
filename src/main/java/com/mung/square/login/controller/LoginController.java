@@ -29,6 +29,7 @@ public class LoginController {
         System.out.println("스프링이 제공하는 로그인---------------------------------------");
         UserDTO user = loginService.login(login);
 
+
         session.setAttribute("userId", user.getUserId());
         model.addAttribute("user", user);
         return "redirect:/";

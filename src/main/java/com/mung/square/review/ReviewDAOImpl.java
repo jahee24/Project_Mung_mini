@@ -1,5 +1,6 @@
 package com.mung.square.review;
 
+import com.mung.square.dto.ReservationForMypageDTO;
 import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
 import lombok.RequiredArgsConstructor;
@@ -75,5 +76,10 @@ public class ReviewDAOImpl implements ReviewDAO {
     @Override
     public ReviewFileDTO getFile(String reviewFileno) {
         return null;
+    }
+
+    @Override
+    public List<ReservationForMypageDTO> needReviewResvList(String userId) {
+        return mapper.needreviewresvlist(userId);
     }
 }

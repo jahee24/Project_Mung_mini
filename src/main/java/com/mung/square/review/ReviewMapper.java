@@ -1,5 +1,6 @@
 package com.mung.square.review;
 
+import com.mung.square.dto.ReservationForMypageDTO;
 import com.mung.square.dto.ReviewDTO;
 import com.mung.square.dto.ReviewFileDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,5 +24,5 @@ public interface ReviewMapper {
     int delete(String review_no);
     //파일insert
     int fileinsert(List<ReviewFileDTO> reviewFileDTOList);
-
+    List<ReservationForMypageDTO> needreviewresvlist(String userId);
 }

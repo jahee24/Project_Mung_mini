@@ -2,6 +2,7 @@ package com.mung.square.mypage.dao;
 
 import com.mung.square.dto.DogDTO;
 import com.mung.square.dto.ReservationForMypageDTO;
+import com.mung.square.dto.ReviewNReservationDTO;
 import com.mung.square.dto.UserDTO;
 import com.mung.square.mypage.mapper.MyPageMapper;
 import lombok.RequiredArgsConstructor;
@@ -57,6 +58,11 @@ public class MyPageDAOImple implements MyPageDAO {
     public void updateDog(DogDTO dog) {
         int result = mapper.updatedog(dog);
         System.out.println("DAO" + result);
+    }
+
+    @Override
+    public List<ReviewNReservationDTO> getRNR(UserDTO user) {
+        return mapper.getrnr(user);
     }
 
 }
