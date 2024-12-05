@@ -91,5 +91,10 @@ public class ReviewDAOImpl implements ReviewDAO {
         return mapper.getStoreFilenamesByReviewNo(reviewNo);
     }
 
+    @Override
+    public List<ReservationForMypageDTO> needReviewResvList(String userId) {
+        return mapper.needreviewresvlist(userId);
+    }
+
 
 }

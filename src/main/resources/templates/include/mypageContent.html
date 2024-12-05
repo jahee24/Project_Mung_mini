@@ -338,12 +338,13 @@
                                 </div>
                                 <p class="square5_review_date">2024.03.15</p>
                             </div>
-                            <div class="square5_add_review_card">
-                                <a href="support/review/write">
-                                    <i class="fas fa-plus"></i>
-                                    <p>추가할 수 있는 순간이 더 있어요. 추가하시겠어요?</p>
-                                </a>
-                            </div>
+<!--                            <div class="square5_add_review_card" th:if="${simpleResv != null and simpleResv.size() == 0}">-->
+                        </div>
+                        <div class="square5_add_review_card" th:if="${simpleResv != null and simpleResv.size() == 0}">
+                            <a href="support/review/write">
+                                <i class="fas fa-plus"></i>
+                                <p>추가할 수 있는 순간이 더 있어요. 추가하시겠어요?</p>
+                            </a>
                         </div>
                     </div>
                 </div>

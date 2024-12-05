@@ -39,16 +39,15 @@ public class ReviewController {
            
             System.out.println("category=>" + category);
             //1. service의 메소드를 호출(비지니스메소드호출)
-            List<ReviewDTO> reviewlist = service.findByCategory(category);
+            List<ReviewResponseDTO> reviewlist = service.findByCategory(category);
             //2. select작업은 db에서 받은 결과를 뷰로 넘겨주어야 하므로 데이터를 공유
-            for (ReviewDTO review : reviewlist) {
+            for (ReviewResponseDTO review : reviewlist) {
                 List<ReviewFileDTO> files = service.getFileList(review.getReviewNo());
                 if (files != null) {
                     for (ReviewFileDTO file : files) {
                         file.setFileUrl("/uploads/" + file.getStoreFilename());
                     }
                 }
-                review.setFiles(files);
             }
             model.addAttribute("reviewlist", reviewlist);
             model.addAttribute("category", category);
@@ -58,16 +57,15 @@ public class ReviewController {
         }
         System.out.println("category=>" + category);
         //1. service의 메소드를 호출(비지니스메소드호출)
-        List<ReviewDTO> reviewlist = service.findByCategory(category);
+        List<ReviewResponseDTO> reviewlist = service.findByCategory(category);
         //2. select작업은 db에서 받은 결과를 뷰로 넘겨주어야 하므로 데이터를 공유
-        for (ReviewDTO review : reviewlist) {
+        for (ReviewResponseDTO review : reviewlist) {
             List<ReviewFileDTO> files = service.getFileList(review.getReviewNo());
             if (files != null) {
                 for (ReviewFileDTO file : files) {
                     file.setFileUrl("/uploads/" + file.getStoreFilename());
                 }
             }
-            review.setFiles(files);
         }
         model.addAttribute("reviewlist", reviewlist);
         model.addAttribute("category", category);
