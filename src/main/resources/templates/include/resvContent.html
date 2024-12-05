@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/mainLayout}">
 <head>
@@ -30,17 +31,49 @@
                     url: "/mung/map",
                     type: "get",
                     success: function (result) {
-                        result.foreach(function (branch){
-                            document.querySelector('.location').innerHTML =`
-                            <option>${branch.branchName}</option>`
-                        })
+                        let selectElement = document.getElementById('location');
+                        let branchImageMap = {}; // Initialize outside loop
 
+                        result.forEach(function (branch, index) {
+                            let option = document.createElement('option');
+                            option.value = branch.branchName;
+                            option.text = branch.branchName;
+                            selectElement.appendChild(option);
+
+
+                            branchImageMap[branch.branchName] = `/mung/images/modal/image${index + 1}.png`; // Assign image paths here
+
+                        });
+
+                        // Define changeImage() within the success callback. Make sure it's after branchImageMap is populated
+                        function changeImage() {
+                            let selectedBranch = document.getElementById('location').value;
+                            if (selectedBranch) {
+                                let imagePath = branchImageMap[selectedBranch];
+
+                                // Use jQuery to efficiently find and update the image element
+                                $('#location-image').attr('src', imagePath).show();
+                            }
+                        }
+
+                        // Ensure the image is hidden initially
+                        $('#location-image').hide();
+
+                        // Attach the change listener *after* the branchImageMap is created
+                        $('#location').on('change', changeImage);
+
+                        $('#location-image').css({
+                            'max-width': '100%',
+                            'max-height': '100%',
+                            'width': 'auto',
+                            'height': 'auto'
+                        });
                     },
                     error: function (xhr, status, error) {
                         console.error('데이터 로드에 실패했습니다:', error);
                     }
-                })
-            })
+                });
+            });
         </script>
 
         <div class="resv_container">
@@ -52,11 +85,9 @@
                     <div class="location-container">
                         <h3 style="text-align: start;">지점 선택</h3>
                         <form>
-                            <select id="location" name="location" onchange="changeImage()">
-                                ...
-                            </select>
+                            <select id="location" name="location" onchange="changeImage()"></select>
                         </form>
-                        <img alt="로고 이미지" id="location-image" src="/mung/images/logo.png">
+                        <img id="location-image">
                     </div>
                     <!-- 예약 폼 -->
                     <div class="form-container">
@@ -64,12 +95,12 @@
                         <form id="reservation-form">
                             <div class="form-group">
                                 <label for="resv_name"><h3>예약자명</h3></label>
-                                <input id="resv_name" name="name" placeholder="예약자명을 입력하세요" required type="text">
+                                <input id="resv_name" name="name" required type="text" th:value="${user.name}" readonly style="background-color: #f1f1f1;">
                             </div>
 
                             <div class="form-group">
                                 <label for="phone"><h3>연락처</h3></label>
-                                <input id="phone" name="phone" placeholder="연락처를 입력하세요" required type="tel">
+                                <input id="phone" name="phone" required type="tel" th:value="${user.phoneNumber}" readonly style="background-color: #f1f1f1;">
                             </div>
 
                             <div class="form-group">
@@ -91,7 +122,7 @@
         </div>
 
         <!-- 시간선택 바 스크립트-->
-        <script type="text/javascript">
+        <script type="text/javascript" th:inline="javascript">
             let selectedHours = {
                 start: -1,
                 startIndex: -1,
@@ -106,6 +137,18 @@
                 const date = document.getElementById('date').value;
                 const loc = document.getElementById('location').value;
 
+                console.log(times[selectedDate])
+                console.log(times[selectedHours.startIndex].realHour)
+                console.log(times[selectedHours.endIndex].realHour)
+                console.log(selectedHours.start)
+                console.log(selectedHours.end)
+                console.log(selectedHours.startIndex)
+                console.log(selectedHours.endIndex)
+                console.log(selectedDate)
+                console.log(date)
+                console.log(loc)
+
+
                 if (name && phone && date && loc) {
 
                     //ajax -> 데이터 전송
@@ -114,14 +157,28 @@
                     // -> post mapping 컨트롤러 작동
                     // 컨트롤러에서 insert 문 작동되도록 하고
 
+                    let data = {
+                        userId: [[${user.userId}]],
+                        branchName: loc,
+                        status: "예약완료",
+                        resvDate: date,
+                        startTime: Math.round(times[selectedHours.startIndex].realHour),
+                        endTime: Math.round(times[selectedHours.endIndex].realHour),
+                        barcount: selectedHours.endIndex - selectedHours.startIndex + 1
+                    }
 
-                    location.href = "/mung/kakaopay";
-
-                    /*alert(`예약완료! \n예약자명: ${name} \n연락처: ${phone} \n예약날짜: ${date} \n예약지점: ${loc}
-                \n예약시간: ${times[selectedHours.startIndex].time} `);*/
-
-
-
+                    $.ajax({
+                        url: "/mung/resv/reserve",
+                        type: "post",
+                        contentType: 'application/json', // Correct Content-Type for JSON
+                        data: JSON.stringify(data),
+                        success: function (result) {
+                            location.href = "/mung/kakaopay";
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('데이터 로드에 실패했습니다:', error);
+                        }
+                    });
                 } else {
                     alert('모든 필드를 입력해 주세요.');
                 }
@@ -363,6 +420,7 @@
                 indexRange[1]--;
                 renderTimeList(...indexRange);
             })
+
 
         </script>
         <!-- 날짜 달력기능 스크립트 -->
