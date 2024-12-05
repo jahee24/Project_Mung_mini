@@ -37,4 +37,6 @@ public interface ReviewMapper {
     List<ReviewResponseDTO> categorySelect(String category);
 
     List<String> getStoreFilenamesByReviewNo(String reviewNo);
+
+    List<ReservationForMypageDTO> needreviewresvlist(String userId);
 }

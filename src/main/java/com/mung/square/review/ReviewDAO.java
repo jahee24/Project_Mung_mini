@@ -50,4 +50,5 @@ public interface ReviewDAO {
 	List<ReviewFileDTO> getFileListByReviewNo(String reviewno);
 	List<String> getStoreFilenamesByReviewNo(String reviewNo);
 
+    List<ReservationForMypageDTO> needReviewResvList(String userId);
 }

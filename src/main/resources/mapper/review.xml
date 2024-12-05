@@ -14,12 +14,12 @@
     <!--첨부파일이 여러 개가 insert
     last_insert_id()는 현재 auto_increment된 값을 가져온다.
     -->
-<!--    <insert id="fileinsert" parameterType="java.util.List">-->
-<!--        insert into board_file values-->
-<!--        <foreach collection="list" item="file" separator=",">-->
-<!--            (#{file.boardFileNo},last_insert_id(),#{file.boardNo},#{file.originalFilename},#{file.storeFilename})-->
-<!--        </foreach>-->
-<!--    </insert>-->
+    <!--    <insert id="fileinsert" parameterType="java.util.List">-->
+    <!--        insert into board_file values-->
+    <!--        <foreach collection="list" item="file" separator=",">-->
+    <!--            (#{file.boardFileNo},last_insert_id(),#{file.boardNo},#{file.originalFilename},#{file.storeFilename})-->
+    <!--        </foreach>-->
+    <!--    </insert>-->
 
     <insert id="fileinsert" parameterType="java.util.List">
         insert into review_file values
@@ -37,7 +37,7 @@
 
         select * from tbreview
     </select>
-    <select id="categorySelect" parameterType="String" resultType="com.mung.square.dto.ReviewResponseDTO">
+    <select id="categorySelect" parameterType="String" resultType="review">
         select * from tbreview where category = #{category}
     </select>
     <!--where절이 동적으로 생성
@@ -57,8 +57,8 @@
                 id like concat('%',#{data},'%')
             </if>
             <if test="tag.equals('content') and data!=''">
-            <!--조건이 만족하면 실행할 sql문을 정의-->
-            id like concat('%',#{data},'%')
+                <!--조건이 만족하면 실행할 sql문을 정의-->
+                id like concat('%',#{data},'%')
             </if>
 
             <if test="tag=='write_data'and data!=''">
@@ -76,7 +76,7 @@
         </where>
     </select>
     <select id="read" resultType="review" parameterType="String">
-            select * from tbreview where review_no = #{review_no}
+        select * from tbreview where review_no = #{review_no}
     </select>
     <update id="update" parameterType="review">
         update tbreview
@@ -87,19 +87,4 @@
         DELETE FROM tbreview WHERE review_no = #{reviewNo}
     </delete>
 
-    <insert id="fileinsert" parameterType="com.mung.square.dto.ReviewFileDTO">
-        INSERT INTO review_files (file_id, review_no, original_filename, store_filename, file_url)
-        VALUES (#{fileId}, last_insert_id(), #{originalFilename}, #{storeFilename}, #{fileUrl})
-    </insert>
-
-    <select id="getFileListByReviewNo" parameterType="String" resultType="com.mung.square.dto.ReviewFileDTO">
-        SELECT file_id, review_no, original_filename, store_filename, file_url
-        FROM review_files
-        WHERE review_no = #{reviewNo}
-    </select>
-    <select id="getStoreFilenamesByReviewNo" parameterType="String" resultType="String">
-        SELECT store_filename
-        FROM review_files
-        WHERE review_no = #{reviewNo}
-    </select>
 </mapper>
