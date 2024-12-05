@@ -11,6 +11,5 @@ public interface ResvMapper {
     // 예약 중복을 처리하는 쿼리 메소드
     Integer checkOverlap(ResvDTO resvDTO);
 
-    // 예약 입력을 받아주는 메소드
-    void insertReservation(ResvDTO resvDTO);
+    int insertReservation(ResvDTO resvDTO);
 }

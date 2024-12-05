@@ -29,15 +29,13 @@ public class ResvDTO {
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- 예약 수정 시간
     barcount INT,                                   -- 바 수 (바 선택 갯수)
     */
-    private int resv_num;
-    private String user_id;
-    private String branch_name;
+    private String userId;
+    private String branchName;
     private String status;
-    private String resv_date;
-    private Timestamp created_at;
-    private Timestamp start_time;
-    private Timestamp end_time;
-    private int barcount;
+    private String resvDate;  // Make sure this field exists in your DTO
+    private Timestamp startTime;
+    private Timestamp endTime;
+    private int barCount;
     /*
      * resv_num INT PRIMARY KEY,
     user_id VARCHAR(50) NOT NULL,
