@@ -21,6 +21,28 @@
 <body>
     <div class="resv_wrap" layout:fragment="content">
 
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+                integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <!-- jQuery -->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.ajax({
+                    url: "/mung/map",
+                    type: "get",
+                    success: function (result) {
+                        result.foreach(function (branch){
+                            document.querySelector('.location').innerHTML =`
+                            <option>${branch.branchName}</option>`
+                        })
+
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('데이터 로드에 실패했습니다:', error);
+                    }
+                })
+            })
+        </script>
+
         <div class="resv_container">
             <div class="wrap">
                 <div>
@@ -31,11 +53,7 @@
                         <h3 style="text-align: start;">지점 선택</h3>
                         <form>
                             <select id="location" name="location" onchange="changeImage()">
-                                <option value="김포">김포</option>
-                                <option value="용인">용인</option>
-                                <option value="양주옥정">양주옥정</option>
-                                <option value="화성">화성</option>
-                                <option value="일산">일산</option>
+                                ...
                             </select>
                         </form>
                         <img alt="로고 이미지" id="location-image" src="/mung/images/logo.png">
@@ -360,7 +378,7 @@
             document.getElementById('date').setAttribute('min', formattedDate);
         </script>
         <!--지점설정 스크립트 -->
-        <script>
+        <script type="text/javascript" th:inline="javascript">
             function changeImage() {
                 var selectedLocation = document.getElementById("location").value;
                 var imagePath = "";

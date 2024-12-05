@@ -1,5 +1,6 @@
 package com.mung.square.resv.controller;
 
+import com.mung.square.dto.MapDTO;
 import com.mung.square.dto.ResvDTO;
 import com.mung.square.map.service.MapService;
 import com.mung.square.resv.service.ResvService;
@@ -9,12 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/resv")
 @RequiredArgsConstructor
 public class ResvController {
-    private final MapService mapService;
     private final ResvService resvService;
 
 
