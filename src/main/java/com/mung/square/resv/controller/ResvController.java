@@ -47,7 +47,7 @@ public class ResvController {
         String resvDate = resvDTO.getResvDate();
         Timestamp startTime = resvDTO.getStartTime();
         Timestamp endTime = resvDTO.getEndTime();
-        int barcount = resvDTO.getBarCount();
+        int barCount = resvDTO.getBarCount();
 
         resvService.createReservation(resvDTO);
         return resvDTO;

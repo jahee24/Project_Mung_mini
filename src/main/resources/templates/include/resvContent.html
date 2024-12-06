@@ -87,7 +87,7 @@
                         <form>
                             <select id="location" name="location" onchange="changeImage()"></select>
                         </form>
-                        <img id="location-image">
+                        <img id="location-image" src="/mung/images/modal/image1.png">
                     </div>
                     <!-- 예약 폼 -->
                     <div class="form-container">
@@ -130,61 +130,6 @@
                 endIndex: -1,
             };
             let selectedDate = new Date();
-            document.getElementById('reservation-form').addEventListener('submit', function (event) {
-                event.preventDefault();
-                const name = document.getElementById('resv_name').value;
-                const phone = document.getElementById('phone').value;
-                const date = document.getElementById('date').value;
-                const loc = document.getElementById('location').value;
-
-                console.log(times[selectedDate])
-                console.log(times[selectedHours.startIndex].realHour)
-                console.log(times[selectedHours.endIndex].realHour)
-                console.log(selectedHours.start)
-                console.log(selectedHours.end)
-                console.log(selectedHours.startIndex)
-                console.log(selectedHours.endIndex)
-                console.log(selectedDate)
-                console.log(date)
-                console.log(loc)
-
-
-                if (name && phone && date && loc) {
-
-                    //ajax -> 데이터 전송
-                    //type : post
-                    // success
-                    // -> post mapping 컨트롤러 작동
-                    // 컨트롤러에서 insert 문 작동되도록 하고
-
-                    let data = {
-                        userId: [[${user.userId}]],
-                        branchName: loc,
-                        status: "예약완료",
-                        resvDate: date,
-                        startTime: Math.round(times[selectedHours.startIndex].realHour),
-                        endTime: Math.round(times[selectedHours.endIndex].realHour),
-                        barcount: selectedHours.endIndex - selectedHours.startIndex + 1
-                    }
-
-                    $.ajax({
-                        url: "/mung/resv/reserve",
-                        type: "post",
-                        contentType: 'application/json', // Correct Content-Type for JSON
-                        data: JSON.stringify(data),
-                        success: function (result) {
-                            location.href = "/mung/kakaopay";
-                        },
-                        error: function (xhr, status, error) {
-                            console.error('데이터 로드에 실패했습니다:', error);
-                        }
-                    });
-                } else {
-                    alert('모든 필드를 입력해 주세요.');
-                }
-
-
-            });
 
             // 시간 선택 테이블 동적 생성
             const timeTable = document.createElement("ul");
@@ -420,6 +365,59 @@
                 indexRange[1]--;
                 renderTimeList(...indexRange);
             })
+
+            document.getElementById('reservation-form').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const name = document.getElementById('resv_name').value;
+                const phone = document.getElementById('phone').value;
+                const date = document.getElementById('date').value;
+                const loc = document.getElementById('location').value;
+
+                console.log(Math.round(times[selectedHours.startIndex].realHour));
+                console.log(Math.round(times[selectedHours.endIndex].realHour));
+                console.log(selectedHours.endIndex - selectedHours.startIndex + 1);
+
+                let startTime = Math.round(times[selectedHours.startIndex].realHour);
+                let endTime = Math.round(times[selectedHours.endIndex].realHour);
+                let barcount = selectedHours.endIndex - selectedHours.startIndex + 1;
+
+
+                if (name && phone && date && loc) {
+
+                    //ajax -> 데이터 전송
+                    //type : post
+                    // success
+                    // -> post mapping 컨트롤러 작동
+                    // 컨트롤러에서 insert 문 작동되도록 하고
+
+                    let data = {
+                        userId: [[${user.userId}]],
+                        branchName: loc,
+                        status: "예약완료",
+                        resvDate: date,
+                        startTime: startTime,
+                        endTime: endTime,
+                        barCount: barcount
+                    }
+
+                    $.ajax({
+                        url: "/mung/resv/reserve",
+                        type: "post",
+                        contentType: 'application/json', // Correct Content-Type for JSON
+                        data: JSON.stringify(data),
+                        success: function (result) {
+                            location.href = "/mung/kakaopay";
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('데이터 로드에 실패했습니다:', error);
+                        }
+                    });
+                } else {
+                    alert('모든 필드를 입력해 주세요.');
+                }
+
+
+            });
 
 
         </script>
