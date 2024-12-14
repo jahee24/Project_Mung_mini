@@ -13,7 +13,7 @@ import java.util.List;
 @Alias("reviewnreservation")
 public class ReviewNReservationDTO {
     private String reviewNo;
-    private String id;
+    private String userId;
     private List<ReviewFileDTO> files;
     private String reviewFileNo;//식별할 수 있는 번호
     private String fileUrl; // 이미지 접근용 URL 추가

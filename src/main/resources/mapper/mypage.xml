@@ -71,11 +71,17 @@
         where id=#{id}
     </update>
     <select id="getrnr" parameterType="user" resultType="reviewnreservation">
-        select r.review_no,r.id,f.file_id,f.file_url from tbreview r inner join review_files f using (review_no) where id = #{userId}
+        SELECT r.review_no, r.user_id, f.file_id, f.file_url
+        FROM tbreview r, review_files f
+        WHERE 1=1
+        and r.review_no = f.review_no
+        and r.user_id = #{userId}
     </select>
 
 
-    <!--resv_num, reservation_date, branch_name, start_time, end_time from reservations where user_id = #{id}
+    <!--        select r.review_no,r.user_id,f.file_id,f.file_url from tbreview r inner join review_files f using (review_no) where user_id = #{userId}
+
+resv_num, reservation_date, branch_name, start_time, end_time from reservations where user_id = #{id}
             SELECT
             -->
     <!--    <insert id="doginsert" parameterType="dog">-->

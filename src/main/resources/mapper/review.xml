@@ -8,8 +8,8 @@
     -->
     <!--게시글 insert-->
     <insert id="insert" parameterType="review">
-        insert into tbreview
-        values(null,#{id},sysdate(),#{title},#{content},#{category})
+        insert into tbreview(review_no,user_id,write_date,title,content, category)
+        values(null,#{userId},sysdate(),#{title},#{content},#{category})
     </insert>
     <!--첨부파일이 여러 개가 insert
     last_insert_id()는 현재 auto_increment된 값을 가져온다.
@@ -29,8 +29,15 @@
 
     </insert>
     <select id="needreviewresvlist" parameterType="String" resultType="reservationformypage">
-        select r.* from user u inner join reservations r using (user_id)
-        where r.user_id = #{userId} and r.status ='예약완료' and r.end_time = DATE_ADD(NOW(), INTERVAL -10 YEAR) and r.resv_num not in (select resv_num from tbreview);
+        SELECT r.*
+        FROM reservations r
+        WHERE NOT EXISTS (
+        SELECT 1
+        FROM tbreview t
+        WHERE t.resv_num = r.resv_num
+        )
+        AND r.user_id = #{userId}
+        AND r.status = '예약완료';
     </select>
 
     <select id="selectall" resultType="com.mung.square.dto.ReviewResponseDTO">
@@ -47,7 +54,7 @@
         select * from tbreview
 
         <where>
-            <if test="tag.equals('id') and data!=''">
+            <if test="tag.equals('userId') and data!=''">
 
                 <!--조건이 만족하면 실행할 sql문을 정의-->
                 id like concat('%',#{data},'%')
@@ -86,5 +93,15 @@
     <delete id="delete" parameterType="String">
         DELETE FROM tbreview WHERE review_no = #{reviewNo}
     </delete>
+    <select id="getFileListByReviewNo" parameterType="String" resultType="reviewFile">
+        SELECT store_filename
+        FROM review_files
+        WHERE review_no = #{reviewNo}
+    </select>
+    <select id="getStoreFilenamesByReviewNo" parameterType="String" resultType="String">
+        SELECT store_filename
+        FROM review_files
+        WHERE review_no = #{reviewNo}
+    </select>
 
 </mapper>
