@@ -27,14 +27,14 @@
         <div class="square5_mypage_container">
             <div class="square5_mypage_welcome">
                 <h1>마이페이지</h1>
-                <h2>안녕하세요, <span th:each="dog:${doglist}"><span th:text="${dog.name}+' '"></span></span>견주님!</h2>
+                <h2>안녕하세요, <span th:if="${doglist.size()}!=0" th:each="dog:${doglist}"><span th:text="${dog.name}+' '"></span></span>견주님!</h2>
             </div>
 
             <div class="square5_mypage_content">
                 <div class="square5_mypage_dogs">
                     <h2><i class="fas fa-paw"></i> 나의 반려견</h2>
                     <div class="square5_dogs_grid">
-                        <div th:each="dog:${doglist}">
+                        <div th:if="${doglist.size()}!=0" th:each="dog:${doglist}">
 
                             <div class="square5_dog_card">
                                 <a href="#" id="modalbtn" data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -42,7 +42,7 @@
                                    th:onclick="loadDogInfo(this.getAttribute('data-dog-id'))">
                                     <!--                                this.getAttribute('data-dog-id')-->
                                     <div class="square5_dog_image">
-                                        <img th:src="@{/mypage/}+${dog.imageUrl}" width="50">
+                                        <img th:src="@{/fullstack7/downloads/}+${dog.imageUrl}" width="50">
 
                                     </div>
                                     <div class="square5_dog_name">
@@ -300,7 +300,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="resv:${reservationlist}">
+                            <tr  th:each="resv:${reservationlist}">
                                 <td class="tdcontent" th:text="${resv.resvNum}"></td>
                                 <td class="tdcontent" th:text="${resv.branchName}"></td>
                                 <td class="tdcontent"
@@ -309,7 +309,7 @@
                                 <!-- 조건에 따라 버튼 표시 -->
                                 <td>
                                     <button class="btn btn-danger"
-                                            th:attr="data-resv-date=${resv.formattedResvDate},data-resv-num=${resv.resvNum}">
+                                            th:attr="data-resv-date=${resv.formattedResvDate},data-resv-num=${resv.resvNum}" th:if="${resv.status=='예약완료'}">
                                         예약 취소
                                     </button>
 
@@ -318,9 +318,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="square5_no_reservation" th:if="${reservationlist.size()==0}">
+                    <div class="square5_no_reservation">
                         <i class="far fa-calendar-times"></i>
-                        <p>현재 예약 내역이 없습니다.</p>
+                        <p> <span th:each="dog:${doglist}"><span th:text="${dog.name}+' '"></span></span>와 더 많은 추억을 만들어보세요.</p>
                         <a href="/mung/resv" class="btn btn-primary">예약하러 가기</a>
                     </div>
                 </div>
@@ -334,13 +334,13 @@
                         <div th:each="review:${reviewlist}">
                             <div class="square5_review_card">
                                 <div class="square5_review_image">
-                                    <img src="" alt="리뷰 이미지" th:src="@{/fullstack7/downloads/}+${review.fileURL}">
+                                    <img src="" alt="리뷰 이미지" th:src="@{/fullstack7/downloads/}+${review.fileUrl}">
                                 </div>
                                 <p class="square5_review_date">2024.03.15</p>
                             </div>
 <!--                            <div class="square5_add_review_card" th:if="${simpleResv != null and simpleResv.size() == 0}">-->
                         </div>
-                        <div class="square5_add_review_card" th:if="${simpleResv != null and simpleResv.size() == 0}">
+                        <div class="square5_add_review_card" th:if="${simpleResv != null and simpleResv.size() != 0}">
                             <a href="support/review/write">
                                 <i class="fas fa-plus"></i>
                                 <p>추가할 수 있는 순간이 더 있어요. 추가하시겠어요?</p>

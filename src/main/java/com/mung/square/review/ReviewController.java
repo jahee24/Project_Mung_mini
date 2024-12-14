@@ -35,43 +35,32 @@ public class ReviewController {
             String userId = user.getUserId(); // 세션에서 로그인 사용자 ID 가져오기
             List<ReservationForMypageDTO> reservationForMypageDTO = service.needReviewResvList(userId);
             model.addAttribute("simpleResv", reservationForMypageDTO);
-        } else {
-           
+        }
+
             System.out.println("category=>" + category);
             //1. service의 메소드를 호출(비지니스메소드호출)
             List<ReviewResponseDTO> reviewlist = service.findByCategory(category);
             //2. select작업은 db에서 받은 결과를 뷰로 넘겨주어야 하므로 데이터를 공유
-            for (ReviewResponseDTO review : reviewlist) {
-                List<ReviewFileDTO> files = service.getFileList(review.getReviewNo());
-                if (files != null) {
-                    for (ReviewFileDTO file : files) {
-                        file.setFileUrl("/uploads/" + file.getStoreFilename());
-                    }
+        for (ReviewResponseDTO review : reviewlist) {
+            List<ReviewFileDTO> files = service.getFileList(review.getReviewNo());
+            if (files != null && !files.isEmpty()) {
+                review.setFileMetadata(files);
+                for (ReviewFileDTO file : files) {
+                    file.setFileUrl("/fullstack7/downloads/"+file.getStoreFilename());
+                    System.out.println("File URL: " + file.getFileUrl());
                 }
+            } else {
+                review.setFileMetadata(new ArrayList<>());
+                System.out.println("No files found for review: " + review.getReviewNo());
             }
+
+    }
             model.addAttribute("reviewlist", reviewlist);
             model.addAttribute("category", category);
             System.out.println(reviewlist);
 
             return "include/reviewlist";
-        }
-        System.out.println("category=>" + category);
-        //1. service의 메소드를 호출(비지니스메소드호출)
-        List<ReviewResponseDTO> reviewlist = service.findByCategory(category);
-        //2. select작업은 db에서 받은 결과를 뷰로 넘겨주어야 하므로 데이터를 공유
-        for (ReviewResponseDTO review : reviewlist) {
-            List<ReviewFileDTO> files = service.getFileList(review.getReviewNo());
-            if (files != null) {
-                for (ReviewFileDTO file : files) {
-                    file.setFileUrl("/uploads/" + file.getStoreFilename());
-                }
-            }
-        }
-        model.addAttribute("reviewlist", reviewlist);
-        model.addAttribute("category", category);
-        System.out.println(reviewlist);
 
-        return "include/reviewlist";
     }
 
     @GetMapping("/write")
@@ -81,14 +70,14 @@ public class ReviewController {
         if (simpleResv.size()==0) {
             return "redirect:/support/review/list?category=all"; // 로그인 페이지로 리다이렉트
         }
-        model.addAttribute("username", userId);
+        model.addAttribute("userId", userId);
         return "review/review_write";
     }
 
     @PostMapping("/write")
     public String insert(ReviewDTO review, HttpSession session) throws IOException {
         String userId = (String) session.getAttribute("userId");
-        review.setId(userId);
+        review.setUserId(userId);
 
         int result = service.insertReview(review);
         String reviewNo = review.getReviewNo();
@@ -122,25 +111,33 @@ public class ReviewController {
     }
 
     @GetMapping("/read")
-    public String read(String reviewNo, String action, Model model) {
-        ReviewDTO review = service.getReviewInfo(reviewNo);
-        // SQL을 통해 store_filename 가져오기
-        List<String> storeFilenames = service.getStoreFilenamesByReviewNo(reviewNo);
+    public String read(@RequestParam("reviewNo") String reviewNo, @RequestParam("action") String action, Model model) {
+        System.out.println("Received reviewNo: " + reviewNo);
 
-        // 파일 경로 생성
-        List<String> fileUrls = new ArrayList<>();
-        for (String storeFilename : storeFilenames) {
-            fileUrls.add("/fullstack7/downloads/" + storeFilename);
+        // 리뷰 정보 조회
+        ReviewDTO review = service.getReviewInfo(reviewNo);
+
+        // 첨부 파일 정보 조회
+        List<ReviewFileDTO> files = service.getFileList(reviewNo);
+        if (files != null && !files.isEmpty()) {
+            review.setFileMetadata(files);
+            for (ReviewFileDTO file : files) {
+                file.setFileUrl("/fullstack7/downloads/" + file.getStoreFilename());
+                System.out.println("Generated File URL: " + file.getFileUrl());
+            }
+        } else {
+            review.setFileMetadata(new ArrayList<>());
+            System.out.println("No files found for review: " + reviewNo);
         }
+
         model.addAttribute("review", review);
-        model.addAttribute("fileUrls", fileUrls);
         if ("READ".equals(action)) {
-            System.out.println(review.getFileMetadata());
             return "review/review_read";
         } else {
             return "review/review_update";
         }
     }
+
 
     @PostMapping("/update")
     public String update(ReviewDTO review) {

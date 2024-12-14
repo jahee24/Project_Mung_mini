@@ -6,12 +6,16 @@ $(document).ready(function () {
     });
 
     // 모든 .square5_edit_btn 요소에 클릭 이벤트 리스너 추가
-
     const today = new Date();
+// 날짜 단위만 비교하기 위해 시간을 00:00:00으로 설정
+    const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
     document.querySelectorAll("button[data-resv-date]").forEach(button => {
         const resvDate = new Date(button.getAttribute("data-resv-date"));
-        if (resvDate <= today) {
-            button.style.display = "none";
+        const resvDateStart = new Date(resvDate.getFullYear(), resvDate.getMonth(), resvDate.getDate());
+
+        if (resvDateStart < todayStart) {
+            button.style.display = "none"; // 오늘 이전의 날짜는 숨김
         } else {
             button.addEventListener("click", () => {
                 if (confirm("예약을 취소하시겠습니까?")) {
@@ -205,7 +209,7 @@ function loadDogInfo(dogId) {
 
             document.getElementById('test').textContent = dog.imageUrl;
 
-            document.querySelector('#dogProfileImage').src = "/mung/mypage/" + dog.imageUrl || '/default-image.png'; // 기본 이미지 처리
+            document.querySelector('#dogProfileImage').src = "/mung/fullstack7/downloads/" + dog.imageUrl || '/default-image.png'; // 기본 이미지 처리
 
             const myModalEl = document.getElementById('dogProfileEditModal')
             myModalEl.addEventListener('shown.bs.modal', event => {

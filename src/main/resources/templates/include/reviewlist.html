@@ -96,16 +96,16 @@
                          <a th:href="@{/support/review/read(reviewNo=${review.reviewNo},action=READ)}"><span
                                  th:text="${review.title}"></span></a>
                      </td>
-                     <td th:text="${review.id}"></td>
+                     <td th:text="${review.userId}"></td>
                      <td th:text="${review.writeDate}"></td>
                      <td>
                          <form th:action="@{/support/review/delete}" method="post">
                              <input type="hidden" name="reviewNo" th:value="${review.reviewNo}">
                              <button type="submit" class="btn btn-sm btn-danger"
-                                        th:if="${session.user!=null and session.user.userId==review.id}">삭제
+                                        th:if="${session.user!=null and session.user.userId==review.userId}">삭제
                                 </button>
                                 <button type="submit" style="background-color: lightgray" class="btn btn-sm btn-danger"
-                                        th:if="${session.user==null or session.user.userId!=review.id}" disabled>삭제
+                                        th:if="${session.user==null or session.user.userId!=review.userId}" disabled>삭제
                                 </button>
                          </form>
                      </td>

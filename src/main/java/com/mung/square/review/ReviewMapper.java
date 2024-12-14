@@ -20,17 +20,17 @@ public interface ReviewMapper {
 
     int update(ReviewDTO review);
 
-    int delete(String review_no);
+    int delete(String reviewNo);
 
 
     int fileinsert(ReviewFileDTO file);
 
     // 새로 추가된 메소드
-    List<ReviewFileDTO> getFileList(String reviewno); // 특정 게시글의 파일 목록 조회
+    List<ReviewFileDTO> getFileList(String reviewNo); // 특정 게시글의 파일 목록 조회
 
-    ReviewFileDTO getFile(String reviewFileno); // 특정 파일 정보 조회
+    ReviewFileDTO getFile(String reviewFileNo); // 특정 파일 정보 조회
 
-    List<ReviewFileDTO> getFileListByReviewNo(String reviewno); // 특정 게시글의 파일 리스트 조회
+    List<ReviewFileDTO> getFileListByReviewNo(String reviewNo); // 특정 게시글의 파일 리스트 조회
 
     List<ReviewResponseDTO> dynamicsearch(Map<String, String> map);
 

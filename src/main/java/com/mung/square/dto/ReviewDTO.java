@@ -17,11 +17,12 @@ import java.util.List;
 //request용dto
 public class ReviewDTO {
 	String reviewNo;
-	String id;
+	String userId;
 	Date writeDate;
 	String title;
 	String content;
 	String category;
+	String resvNum;
 	List<MultipartFile> files; // 타입 변경
 	List<ReviewFileDTO> fileMetadata;
 }
