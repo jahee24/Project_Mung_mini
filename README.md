@@ -1,3 +1,5 @@
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=24&pause=1000&color=F7EC07&random=false&width=435&lines=6CanDoIt!)](https://git.io/typing-svg)
+
 # 🌟 프로젝트 이름
 
 > **한 줄 소개**: 프로젝트의 간략한 설명을 한 줄로 작성합니다.
