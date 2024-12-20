@@ -60,29 +60,30 @@
 ---
 
 ## 📋 기능 명세서
-[MungSquare_mini - 기능 명세서.pdf](https://github.com/user-attachments/files/18206367/MungSquare_mini.-.pdf)
+![MungSquare_mini - 기능 명세서-1](https://github.com/user-attachments/assets/4065e587-8251-4141-bdd1-c1da0814de4a)
 
-https://docs.google.com/spreadsheets/d/e/2PACX-1vSWoHA4nmU86HYttUlFMYSAqTCfjeqHoQ6vAlKPMWjt0p00xv-XVWKRyiy-sP5wllB-TiiIqHtplwGy/pubhtml?gid=1406005631&single=true
+##### [MungSquare_mini - 기능 명세서](https://docs.google.com/spreadsheets/d/e/2PACX-1vSWoHA4nmU86HYttUlFMYSAqTCfjeqHoQ6vAlKPMWjt0p00xv-XVWKRyiy-sP5wllB-TiiIqHtplwGy/pubhtml?gid=1406005631&single=true)
 
 ---
 
 ## 📋 요구사항 명세서
-[MungSquare_mini - 요구사항 명세서.pdf](https://github.com/user-attachments/files/18206368/MungSquare_mini.-.pdf)
+![MungSquare_mini - 요구사항 명세서-1](https://github.com/user-attachments/assets/f3878c88-b30b-44d6-80fd-0e63f32215a8)
 
-https://docs.google.com/spreadsheets/d/e/2PACX-1vSWoHA4nmU86HYttUlFMYSAqTCfjeqHoQ6vAlKPMWjt0p00xv-XVWKRyiy-sP5wllB-TiiIqHtplwGy/pubhtml?gid=0&single=true
+##### [MungSquare_mini - 요구사항 명세서](https://docs.google.com/spreadsheets/d/e/2PACX-1vSWoHA4nmU86HYttUlFMYSAqTCfjeqHoQ6vAlKPMWjt0p00xv-XVWKRyiy-sP5wllB-TiiIqHtplwGy/pubhtml?gid=0&single=true)
 
 ---
 
 ## ✅ 백엔드 테스트 케이스 명세서
-[MungSquare_mini - BE_테스트 명세서.pdf](https://github.com/user-attachments/files/18206379/MungSquare_mini.-.BE_.pdf)
+![MungSquare_mini - BE_테스트 명세서-1](https://github.com/user-attachments/assets/af4ac3ee-f25f-4d21-b03a-5fcc9607fe1b)
 
-https://docs.google.com/spreadsheets/d/e/2PACX-1vSWoHA4nmU86HYttUlFMYSAqTCfjeqHoQ6vAlKPMWjt0p00xv-XVWKRyiy-sP5wllB-TiiIqHtplwGy/pubhtml?gid=925008306&single=true
+
+##### [MungSquare_mini - BE_테스트 명세서](https://docs.google.com/spreadsheets/d/e/2PACX-1vSWoHA4nmU86HYttUlFMYSAqTCfjeqHoQ6vAlKPMWjt0p00xv-XVWKRyiy-sP5wllB-TiiIqHtplwGy/pubhtml?gid=925008306&single=true)
 
 ---
 ## ✅ 프론트엔드 테스트 케이스 명세서
-[MungSquare_mini - FE_테스트 명세서.pdf](https://github.com/user-attachments/files/18206374/MungSquare_mini.-.FE_.pdf)
+![MungSquare_mini - FE_테스트 명세서-1](https://github.com/user-attachments/assets/8c3a3d38-4958-46c0-86f2-fa98e27de233)
 
-https://docs.google.com/spreadsheets/d/e/2PACX-1vSWoHA4nmU86HYttUlFMYSAqTCfjeqHoQ6vAlKPMWjt0p00xv-XVWKRyiy-sP5wllB-TiiIqHtplwGy/pubhtml?gid=1708611788&single=true
+##### [MungSquare_mini - FE_테스트 명세서](https://docs.google.com/spreadsheets/d/e/2PACX-1vSWoHA4nmU86HYttUlFMYSAqTCfjeqHoQ6vAlKPMWjt0p00xv-XVWKRyiy-sP5wllB-TiiIqHtplwGy/pubhtml?gid=1708611788&single=true)
 
 ---
 ### 📌 스토리 보드
