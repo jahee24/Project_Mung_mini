@@ -90,23 +90,23 @@
    <details>
       <summary><b>Main Page</b>
       </summary>
-      ![MungSquare_메인페이지+(1) (1)](https://github.com/user-attachments/assets/5023721f-a42b-4dd9-a21f-f35e84f0b0af)
+      [MungSquare_메인페이지](https://github.com/user-attachments/assets/5023721f-a42b-4dd9-a21f-f35e84f0b0af)
    </details>
    <details>
       <summary><b>Log In/ Register</b></summary>
-     ![MungSquare_로그인_회원가입](https://github.com/user-attachments/assets/9b1f24c4-d18f-4eee-85c0-2f82772f4f30)
+     ![MungSquare_로그인/회원가입](https://github.com/user-attachments/assets/9b1f24c4-d18f-4eee-85c0-2f82772f4f30)
  </details>
    <details>
       <summary><b>Branch Map Page</b></summary>
-     ![MungSquare_맵+(1)](https://github.com/user-attachments/assets/b0e4c168-2ecf-4329-a539-30995b1cccf3)
+     ![MungSquare_맵](https://github.com/user-attachments/assets/b0e4c168-2ecf-4329-a539-30995b1cccf3)
  </details>
    <details>
       <summary><b>My Page</b></summary>
-      ![MungSquare_마이페이지+(1)](https://github.com/user-attachments/assets/8aff7814-d974-401f-aed6-d0586c8af235)
+      ![MungSquare_마이페이지](https://github.com/user-attachments/assets/8aff7814-d974-401f-aed6-d0586c8af235)
    </details>
    <details>
       <summary><b>Manager Page</b></summary>
-      ![MungSquare_Admin+(1)](https://github.com/user-attachments/assets/912d8595-a8c8-4820-ad13-959f99cd7a9a)
+      ![MungSquare_관리자페이지](https://github.com/user-attachments/assets/912d8595-a8c8-4820-ad13-959f99cd7a9a)
    </details>
    <details>
       <summary><b>Reservation Page</b></summary>
