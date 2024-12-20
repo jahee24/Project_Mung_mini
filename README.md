@@ -90,34 +90,42 @@
    <details>
       <summary><b>Main Page</b>
       </summary>
-      [MungSquare_메인페이지](https://github.com/user-attachments/assets/5023721f-a42b-4dd9-a21f-f35e84f0b0af)
+      ![MungSquare_메인페이지](https://github.com/jahee24/Project_Mung_mini/raw/develop/images/MungSquare_%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%80.gif)
    </details>
    <details>
       <summary><b>Log In/ Register</b></summary>
-     ![MungSquare_로그인/회원가입](https://github.com/user-attachments/assets/9b1f24c4-d18f-4eee-85c0-2f82772f4f30)
+     ![MungSquare_로그인/회원가입](https://github.com/jahee24/Project_Mung_mini/raw/develop/images/MungSquare_%EB%A1%9C%EA%B7%B8%EC%9D%B8_%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.gif)
  </details>
    <details>
       <summary><b>Branch Map Page</b></summary>
-     ![MungSquare_맵](https://github.com/user-attachments/assets/b0e4c168-2ecf-4329-a539-30995b1cccf3)
+     ![MungSquare_맵](https://github.com/jahee24/Project_Mung_mini/raw/develop/images/MungSquare_%EB%A7%B5.gif)
  </details>
    <details>
       <summary><b>My Page</b></summary>
-      ![MungSquare_마이페이지](https://github.com/user-attachments/assets/8aff7814-d974-401f-aed6-d0586c8af235)
+      ![MungSquare_마이페이지](https://github.com/jahee24/Project_Mung_mini/raw/develop/images/MungSquare_%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80.gif)
    </details>
    <details>
       <summary><b>Manager Page</b></summary>
-      ![MungSquare_관리자페이지](https://github.com/user-attachments/assets/912d8595-a8c8-4820-ad13-959f99cd7a9a)
+      ![MungSquare_관리자페이지](https://github.com/jahee24/Project_Mung_mini/raw/develop/images/MungSquare_Admin.gif)
    </details>
    <details>
       <summary><b>Reservation Page</b></summary>
-      ![MungSquare_예약](https://github.com/user-attachments/assets/024b9da2-a413-4e56-a025-4a9129363b08)
+      ![MungSquare_예약](https://github.com/jahee24/Project_Mung_mini/raw/develop/images/MungSquare_%EC%98%88%EC%95%BD.gif)
    </details>
    <details>
       <summary><b>Payment Page</b></summary>
-     ![MungSquare_결제](https://github.com/user-attachments/assets/ba2b2909-77da-45fc-8e69-7d8102a98f96)
+     ![MungSquare_결제](https://github.com/jahee24/Project_Mung_mini/raw/develop/images/MungSquare_%EA%B2%B0%EC%A0%9C.gif)
  </details>
    <details>
       <summary><b>Review Page</b></summary>
-      ![MungSquare_리뷰](https://github.com/user-attachments/assets/e14e27f8-c20b-4d24-8d53-d71efa9c347c)
+      ![MungSquare_리뷰](https://github.com/jahee24/Project_Mung_mini/raw/develop/images/MungSquare_%EB%A6%AC%EB%B7%B0.gif)
+   </details>
+   <details>
+      <summary><b>FAQ Page</b></summary>
+      ![MungSquare_FAQ](https://github.com/jahee24/Project_Mung_mini/raw/develop/images/MungSquare_FAQ.gif)
+   </details>
+   <details>
+      <summary><b>Notice Page</b></summary>
+      ![MungSquare_Notice](https://github.com/jahee24/Project_Mung_mini/raw/develop/images/MungSquare_%EA%B2%8C%EC%8B%9C%ED%8C%90.gif)
    </details>
    
