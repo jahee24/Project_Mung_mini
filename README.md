@@ -15,10 +15,10 @@
 ## 👥 팀원
 | 이름       | GitHub                                  |
 |------------|-----------------------------------------|
-| 김재희     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/CoderJDan) |
+| 김재희     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/jahee24) |
 | 지현준     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/mini-xi) |
 | 유준모     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/mini-xi) |
-| 장현진     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/mini-xi) |
+| 장현진     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/CoderJDan) |
 | 박가현     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/mini-xi) |
 
 ---
@@ -44,67 +44,79 @@
 |---------------------|---------------------------|------------------------------------|
 | Main Page           | Log In / Log Out          | 사용자 로그인 및 로그아웃 페이지  |
 |                     | Branch Map Page           | 운동장 위치 확인 페이지           |
-|                     |                           |                                   |
 | Branch Map Page     | Reservation Page          | 예약 진행 페이지                  |
 |                     | Payment Page              | 예약 결제 페이지                   |
 |                     | Review Page               | 후기 작성 페이지                   |
 | My Page             | Reservation History       | 사용자 예약 내역 관리             |
 |                     | User Profile              | 사용자 프로필 관리                |
+|                     | Review Page               | 후기 작성 페이지                   |
 | Manager Page        | Manage Reservations       | 관리자 예약 관리                  |
 |                     | Payment Management        | 결제 상태 확인 및 관리            |
-|                     | Branch Reviews            | 운동장 리뷰 관리                  |
 
-### 📌 스토리 보드
-   <details>
-      <summary><b>Main Page</b></summary>
-   </details>
-   <details>
-      <summary><b>Log In/ Log Out</b></summary>
-   </details>
-   <details>
-      <summary><b>Branch Map Page</b></summary>
-   </details>
-   <details>
-      <summary><b>My Page</b></summary>
-   </details>
-   <details>
-      <summary><b>Manager Page</b></summary>
-   </details>
-   <details>
-      <summary><b>Reservation Page</b></summary>
-   </details>
-   <details>
-      <summary><b>Payment Page</b></summary>
-   </details>
-   <details>
-      <summary><b>Review Page</b></summary>
-   </details>
-   
+---
+### 📌 ERD
+![ERD_proj_mung](https://github.com/user-attachments/assets/3ad41c78-b320-4486-aa43-021fd83f2345)
 
 ---
 
 ## 📋 기능 명세서
-| 기능         | 설명                               | 담당자  |
-|--------------|------------------------------------|---------|
-| 회원 가입    | 사용자 등록 및 인증 기능 구현      | 김철수  |
-| 데이터 시각화 | 차트 및 통계 데이터 렌더링        | 한예림  |
-| 알림 기능    | 실시간 알림 및 사용자 알림 관리    | 이영희  |
+[MungSquare_mini - 기능 명세서.pdf](https://github.com/user-attachments/files/18206367/MungSquare_mini.-.pdf)
+
+https://docs.google.com/spreadsheets/d/e/2PACX-1vSWoHA4nmU86HYttUlFMYSAqTCfjeqHoQ6vAlKPMWjt0p00xv-XVWKRyiy-sP5wllB-TiiIqHtplwGy/pubhtml?gid=1406005631&single=true
 
 ---
 
-## ✅ 테스트 케이스 정의서
-| 테스트 ID | 테스트 항목            | 기대 결과            | 실제 결과         | 상태   |
-|-----------|------------------------|----------------------|-------------------|--------|
-| TC_01     | 로그인 시도            | 성공적으로 로그인됨  |                   | 진행 중 |
-| TC_02     | 데이터 입력 검증       | 필수 항목 오류 표시  |                   | 미완료 |
-| TC_03     | 회원 탈퇴 요청         | 계정이 비활성화됨    |                   | 완료   |
+## 📋 요구사항 명세서
+[MungSquare_mini - 요구사항 명세서.pdf](https://github.com/user-attachments/files/18206368/MungSquare_mini.-.pdf)
+
+https://docs.google.com/spreadsheets/d/e/2PACX-1vSWoHA4nmU86HYttUlFMYSAqTCfjeqHoQ6vAlKPMWjt0p00xv-XVWKRyiy-sP5wllB-TiiIqHtplwGy/pubhtml?gid=0&single=true
 
 ---
 
-## 🤔 회고
-**프로젝트 회고**
-- **성과**: 프로젝트에서 얻은 성과와 배운 점.
-- **개선점**: 프로젝트 진행 중 개선할 점.
-- **팀원들의 한 마디**
-  - 김철수: "많이 배웠던 시간이었습니다."
-  - 이영희: "더 많은 협업 경험을 쌓게 되어 좋았습니다."
+## ✅ 백엔드 테스트 케이스 명세서
+[MungSquare_mini - BE_테스트 명세서.pdf](https://github.com/user-attachments/files/18206379/MungSquare_mini.-.BE_.pdf)
+
+https://docs.google.com/spreadsheets/d/e/2PACX-1vSWoHA4nmU86HYttUlFMYSAqTCfjeqHoQ6vAlKPMWjt0p00xv-XVWKRyiy-sP5wllB-TiiIqHtplwGy/pubhtml?gid=925008306&single=true
+
+---
+## ✅ 프론트엔드 테스트 케이스 명세서
+[MungSquare_mini - FE_테스트 명세서.pdf](https://github.com/user-attachments/files/18206374/MungSquare_mini.-.FE_.pdf)
+
+https://docs.google.com/spreadsheets/d/e/2PACX-1vSWoHA4nmU86HYttUlFMYSAqTCfjeqHoQ6vAlKPMWjt0p00xv-XVWKRyiy-sP5wllB-TiiIqHtplwGy/pubhtml?gid=1708611788&single=true
+
+---
+### 📌 스토리 보드
+   <details>
+      <summary><b>Main Page</b>
+      </summary>
+      ![MungSquare_메인페이지+(1) (1)](https://github.com/user-attachments/assets/5023721f-a42b-4dd9-a21f-f35e84f0b0af)
+   </details>
+   <details>
+      <summary><b>Log In/ Register</b></summary>
+     ![MungSquare_로그인_회원가입](https://github.com/user-attachments/assets/9b1f24c4-d18f-4eee-85c0-2f82772f4f30)
+ </details>
+   <details>
+      <summary><b>Branch Map Page</b></summary>
+     ![MungSquare_맵+(1)](https://github.com/user-attachments/assets/b0e4c168-2ecf-4329-a539-30995b1cccf3)
+ </details>
+   <details>
+      <summary><b>My Page</b></summary>
+      ![MungSquare_마이페이지+(1)](https://github.com/user-attachments/assets/8aff7814-d974-401f-aed6-d0586c8af235)
+   </details>
+   <details>
+      <summary><b>Manager Page</b></summary>
+      ![MungSquare_Admin+(1)](https://github.com/user-attachments/assets/912d8595-a8c8-4820-ad13-959f99cd7a9a)
+   </details>
+   <details>
+      <summary><b>Reservation Page</b></summary>
+      ![MungSquare_예약](https://github.com/user-attachments/assets/024b9da2-a413-4e56-a025-4a9129363b08)
+   </details>
+   <details>
+      <summary><b>Payment Page</b></summary>
+     ![MungSquare_결제](https://github.com/user-attachments/assets/ba2b2909-77da-45fc-8e69-7d8102a98f96)
+ </details>
+   <details>
+      <summary><b>Review Page</b></summary>
+      ![MungSquare_리뷰](https://github.com/user-attachments/assets/e14e27f8-c20b-4d24-8d53-d71efa9c347c)
+   </details>
+   
