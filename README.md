@@ -92,11 +92,11 @@
    </details>
    <details>
       <summary><b>Log In/ Register</b></summary>
-     ![MungSquare_로그인/회원가입](https://github.com/jahee24/Project_Mung_mini/blob/develop/images/MungSquare_%EB%A1%9C%EA%B7%B8%EC%9D%B8_%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.gif?raw=true)
+     ![MungSquare_로그인/회원가입](https://github.com/jahee24/Project_Mung_mini/develop/images/MungSquare_%EB%A1%9C%EA%B7%B8%EC%9D%B8_%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.gif?raw=true)
  </details>
    <details>
       <summary><b>Branch Map Page</b></summary>
-     ![MungSquare_맵](https://github.com/jahee24/Project_Mung_mini/blob/develop/images/MungSquare_%EB%A7%B5.gif?raw=true)
+     ![MungSquare_맵](https://github.com/jahee24/Project_Mung_mini/develop/images/MungSquare_%EB%A7%B5.gif?raw=true)
  </details>
    <details>
       <summary><b>My Page</b></summary>
