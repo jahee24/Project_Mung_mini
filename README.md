@@ -3,6 +3,17 @@
 
 ## 🌟 멍 스퀘어
 
+---
+ ## 나의 기여
+
+**나의 기여 및 이슈 - 기능 구현**
+![MungSquare 나의 기여 및 이슈 - 기능 구현](https://github.com/user-attachments/assets/f95963d8-cbc6-4ddb-b0b3-d1b0c95defd8)
+
+**나의 기여 및 이슈 - 오류 해결, 협업 경험**
+![MungSquare 나의 기여 및 이슈 - 오류 해결, 협업 경험](https://github.com/user-attachments/assets/5ee4ac15-246c-4dc7-b7b0-4fccc5e152d1)
+
+---
+
 **프로젝트 배경**
 > 멍 스퀘어는 반려견 보호자들의 편의성을 증진하고 체계적인 애견 운동장 관리 및 이용을 지원하기 위해 개발된 웹 애플리케이션입니다.
 >
