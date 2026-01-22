@@ -26,10 +26,10 @@
 | 이름       | GitHub                                  |
 |------------|-----------------------------------------|
 | 김재희     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/jahee24) |
-| 지현준     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/mini-xi) |
-| 유준모     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/mini-xi) |
+| 지현준     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/) |
+| 유준모     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/) |
 | 장현진     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/CoderJDan) |
-| 박가현     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/mini-xi) |
+| 박가현     | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/) |
 
 ---
 
